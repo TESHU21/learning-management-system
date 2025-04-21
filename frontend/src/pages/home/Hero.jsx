@@ -23,7 +23,7 @@ const Hero = () => {
           Industry-Leading Courses!
         </h3>
         <p className='w-[427px] '>"Join thousands of learners gaining real-world skills and advancing their careers. Our expert-led courses are designed to empower you to succeed."</p>
-        <Button className="w-[137px] h-[48px] rounded-md py-3 px-6 gap-3 bg-blue-primary text-white hover:bg-blue-700">Get started</Button>
+        <Button className="w-[137px] h-[48px]  cursor-pointer rounded-md py-3 px-6 gap-3 bg-blue-primary text-white hover:bg-blue-700 ">Get started</Button>
 
       </div>
     </div>
