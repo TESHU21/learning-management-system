@@ -10,7 +10,7 @@ export const solutions=[
         icon:SoftwareIcon,
         title:"Software Development",
         price:"350",
-        description:"Unlock your potential with comprehensive training in modern software development",
+        description:"Unlock your potential with comprehensive training in modern software development    ",
 },
     { 
         icon:DataScienceIcon,
@@ -33,6 +33,7 @@ export const steps = [
       description: [
         "Create your account quickly with just your email",
         "or social media login, then explore a wide range",
+        
       ],
     },
     {

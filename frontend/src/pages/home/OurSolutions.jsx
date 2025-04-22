@@ -22,23 +22,24 @@ const OurSolutions = () => {
             <h3 className=' font-lato font-bold text-[40px] leading-12 text-center'>Our solutions</h3>
             <p className=' font-inter md:text-center leading-6 text-center'>Create your account quickly with just your email or social media login, then explore a wide range </p>
         </div>
-        <div className="flex flex-col pt-[56px] md:flex-row  gap-7 justify-center items-center">
+        <div className="flex flex-col pt-[56px] md:flex-row gap-7 justify-center items-stretch">
   {solutions.map((item) => (
-    <div key={item.title} className="p-6 border shadow-lg rounded-lg   border-t-0">
-      <div className="flex flex-col gap-4 w-[325px]">
-        <img src={item.icon} alt="" className=" w-[86px] h-[86px] md:w-[81px] md:h-[81px]" />
+    <div key={item.title} className="w-[325px] p-6 border shadow-lg rounded-lg border-t-0 flex flex-col justify-between">
+      <div className="flex flex-col gap-4 flex-grow">
+        <img src={item.icon} alt="" className="w-[86px] h-[86px] md:w-[81px] md:h-[81px]" />
         <p className="font-semibold">{item.title}</p>
-        <p>{item.description}</p>
-        <div className="flex justify-between">
-          <p>${item.price}</p>
-          <Button className="bg-transparent shadow-none hover:bg-transparent text-blue-primary">
-            preview
-          </Button>
-        </div>
+        <p className=" text-justify">{item.description}</p>
+      </div>
+      <div className="flex justify-between mt-4">
+        <p>${item.price}</p>
+        <Button className="bg-transparent shadow-none hover:bg-transparent text-blue-primary">
+          preview
+        </Button>
       </div>
     </div>
   ))}
-          </div>
+</div>
+
 
            </div>
         {/*  What Will be our next step */}
