@@ -12,20 +12,17 @@ import {solutions} from "./components/data"
 
 
 
-
-
-
 const OurSolutions = () => {
 
   return (
     <div>
         {/* Our Solutions */}
-           <div className=' flex flex-col pt-[94px] pb-[133px] px-[190px]  gap-14'>
+           <div className=' flex flex-col md:pt-[94px]  md:pb-[133px] md:px-[190px]  md:gap-14'>
         <div className=' flex flex-col gap-3'>
             <h3 className=' font-lato font-bold text-[40px] leading-12 text-center'>Our solutions</h3>
-            <p className=' font-inter text-center leading-6'>Create your account quickly with just your email or social media login, then explore a wide range </p>
+            <p className=' font-inter md:text-center leading-6'>Create your account quickly with just your email or social media login, then explore a wide range </p>
         </div>
-        <div className="flex gap-7 justify-center">
+        <div className="flex   flex-col md:flex-row  gap-7 justify-center items-center">
   {solutions.map((item) => (
     <div key={item.title} className="p-6 border shadow-lg rounded-lg   border-t-0">
       <div className="flex flex-col gap-4 w-[325px]">
@@ -47,7 +44,7 @@ const OurSolutions = () => {
         {/*  What Will be our next step */}
         <div className='flex pt-8 bg-blue-primary h-[477px] rounded-md'>
             <div className='flex-1 flex flex-col gap-9 pl-[199px]'>
-                <div className=' flex flex-col gap-3  w-[539px] text-white'>
+                <div className=' flex flex-col gap-3  md:w-[539px] text-white'>
                     <h3 className=' text-[40px] font-lato font-bold  leading-[1.2]'>What will be next step</h3>
                     <p className='font-inter text-base leading-6'>Discover our diverse stack of solutions, including software development, data science, and cloud tools. Sign up today and kickstart your journey!</p>
                 </div>
@@ -56,8 +53,8 @@ const OurSolutions = () => {
                 </div>
             </div>
             {/*  */}
-            <div className='  relative flex-1 flex '>
-            <img src={IphoneImage} alt="Iphone Having Coding Background Image" className='mt-[182px] z-10'   />
+            <div className=' hidden relative flex-1 md:flex '>
+            <img src={IphoneImage} alt="Iphone Having Coding Background Image" className='md:mt-[182px] z-10'   />
                 <img src={MicrosoftSurface} alt="Microsoft Surface Desktop Screen" className='absolute left-[47px] mt-[30px]' />
        
 
@@ -65,7 +62,7 @@ const OurSolutions = () => {
 
         </div>
         {/* What are we proud of  */}
-        <div className="mt-[84px] pb-[95px]">
+        <div className="hidden md:flex flex-col mt-[84px] pb-[95px]">
   {/* Header */}
   <div className="px-[179px] flex flex-col gap-3 text-center">
     <h3 className="font-lato text-[40px] leading-12 font-bold">We are proud</h3>

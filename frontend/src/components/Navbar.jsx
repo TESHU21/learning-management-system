@@ -7,9 +7,9 @@ import{LogIn} from "lucide-react"
 
 const Navbar = () => {
   return (
-    <div>
+    <div >
         {/* Desktop Menu */}
-        <div className=" flex  justify-between px-[201px]  h-[80px] items-center bg-white ">
+        <div className=" hidden md:flex  justify-between px-[201px]  h-[80px] items-center bg-white ">
         <div className=' flex items-center gap-8   '>
             <div>
                 <img src={AzubiLogo} alt="Azubi Logo" className='h-10 w-auto' />
@@ -23,6 +23,7 @@ const Navbar = () => {
 
         </div>
         </div>
+        {/* Mobile Menu */}
     </div>
   )
 }

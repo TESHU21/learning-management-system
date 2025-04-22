@@ -12,8 +12,8 @@ import { FaArrowDownLong } from "react-icons/fa6";
 const GetStartedSection = () => {
   return (
     <div>
-    {/* time to sinvet section */}
-           <div className=' md:relative  md:h-[222px] bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url(${LaptopWithCodeImage})` }}>
+    {/* time to invet section */}
+           <div className='  hidden md:relative  md:h-[222px] bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url(${LaptopWithCodeImage})` }}>
         {/* Over Lay */}
         <div className=' flex absolute inset-0  bg-[rgba(1,88,154,0.8)]'>
             <div className='flex flex-col gap-2 ml-[198px] mt-[43px] text-white'>
@@ -30,7 +30,7 @@ const GetStartedSection = () => {
     </div>
     {/* Onboarding Process */}
     
-    <div className=' flex gap-6 mt-[131px] mx-[150px] '>
+    <div className='hidden md:flex gap-6 mt-[131px] pb-[254px] mx-[150px] '>
         {/* Left Side */}
         <div className="flex flex-col gap-[80px] flex-1">
   {steps.map((step, index) => (
@@ -40,9 +40,9 @@ const GetStartedSection = () => {
         <div className="flex gap-[30px]">
           <img src={step.icon} alt="" />
           <div className="flex flex-col gap-3">
-            <h5 className="font-bold font-lato leading-7">Sign Up and Choose Your Course</h5>
+            <h5 className="font-bold font-lato leading-7">{step.title}</h5>
             <p className="font-inter text-base">
-              Create your account quickly with just your email or social media login, then explore a wide range
+              {step.description}
             </p>
           </div>
         </div>
@@ -73,7 +73,7 @@ const GetStartedSection = () => {
           
           </div>
             {/* step 3 */}
-     <div className=' w-[140px] h-[45px] ml-[51px] mt-[40px] text-base'><
+     <div className=' w-[140px] h-[45px] ml-[51px]  text-base'><
       p className='text-center'>3</p>
       <p  className=' text-center'>Choose a course</p>
       </div>
@@ -81,7 +81,7 @@ const GetStartedSection = () => {
           <div className="flex gap-7 justify-center">
           {solutions.map((item) => (
             <div key={item.title} className="p-6 border shadow-lg rounded-lg   border-t-0">
-              <div className="flex flex-col gap-2 w-[127.8 px]">
+              <div className="flex flex-col gap-2 w-[127.8px]">
                 <img src={item.icon} alt="" className="w-[31.8px] h-[31.8px]" />
                 <p className="font-semibold text-[8px]">{item.title}</p>
                 <p className=' text-[6.3px] leading-[9.44px]'>{item.description}</p>
