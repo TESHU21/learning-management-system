@@ -17,16 +17,16 @@ const OurSolutions = () => {
   return (
     <div>
         {/* Our Solutions */}
-           <div className=' flex flex-col md:pt-[94px]  md:pb-[133px] md:px-[190px]  md:gap-14'>
+           <div className=' flex flex-col px-[33px] pt-5 md:pt-[94px]  md:pb-[133px] md:px-[190px]  md:gap-14'>
         <div className=' flex flex-col gap-3'>
             <h3 className=' font-lato font-bold text-[40px] leading-12 text-center'>Our solutions</h3>
-            <p className=' font-inter md:text-center leading-6'>Create your account quickly with just your email or social media login, then explore a wide range </p>
+            <p className=' font-inter md:text-center leading-6 text-center'>Create your account quickly with just your email or social media login, then explore a wide range </p>
         </div>
-        <div className="flex   flex-col md:flex-row  gap-7 justify-center items-center">
+        <div className="flex flex-col pt-[56px] md:flex-row  gap-7 justify-center items-center">
   {solutions.map((item) => (
     <div key={item.title} className="p-6 border shadow-lg rounded-lg   border-t-0">
       <div className="flex flex-col gap-4 w-[325px]">
-        <img src={item.icon} alt="" className="w-[81px] h-[81px]" />
+        <img src={item.icon} alt="" className=" w-[86px] h-[86px] md:w-[81px] md:h-[81px]" />
         <p className="font-semibold">{item.title}</p>
         <p>{item.description}</p>
         <div className="flex justify-between">
@@ -42,13 +42,13 @@ const OurSolutions = () => {
 
            </div>
         {/*  What Will be our next step */}
-        <div className='flex pt-8 bg-blue-primary h-[477px] rounded-md'>
-            <div className='flex-1 flex flex-col gap-9 pl-[199px]'>
-                <div className=' flex flex-col gap-3  md:w-[539px] text-white'>
-                    <h3 className=' text-[40px] font-lato font-bold  leading-[1.2]'>What will be next step</h3>
-                    <p className='font-inter text-base leading-6'>Discover our diverse stack of solutions, including software development, data science, and cloud tools. Sign up today and kickstart your journey!</p>
+        <div className='flex px:[-14px] md:px-0 pt-8 bg-blue-primary h-[597px] md:h-[477px] rounded-md'>
+            <div className='flex-1 flex flex-col gap-9 md:pl-[199px]'>
+                <div className=' flex flex-col gap-3 px-5 md:px-0 md:w-[539px] text-white'>
+                    <h3 className=' text-[40px] font-lato font-bold  leading-[1.2] text-center'>What will be next step</h3>
+                    <p className='font-inter text-base leading-6 text-center'>Discover our diverse stack of solutions, including software development, data science, and cloud tools. Sign up today and kickstart your journey!</p>
                 </div>
-                <div>
+                <div className='px-[33px] md:px-[33px]'>
                     <img src={Buttons} alt="" />
                 </div>
             </div>
