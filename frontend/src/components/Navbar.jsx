@@ -1,18 +1,42 @@
-import React from 'react'
+import React ,{useState,useEffect,useRef} from 'react'
 import AzubiLogo from "../assets/images/azubi-logo.png"
 import { NavLink } from 'react-router-dom'
 import { Button } from './ui/button'
-import{LogIn} from "lucide-react"
+import{LogIn,AlignJustify,X} from "lucide-react"
+import AzubiLogo2 from "../assets/svg/Azubi-Logo 2.svg"
+
 
 
 const Navbar = () => {
+  const [menuVisiblity,setMenuVisibility]=useState(false)
+  const menuRef = useRef(null);
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuVisibility(false);
+      }
+    };
+  
+    if (menuVisiblity) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    }
+  
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [menuVisiblity]);
+
+  const handleClick=()=>{
+    setMenuVisibility(!menuVisiblity)
+  }
   return (
-    <div >
+    <div className='relative' ref={menuRef}>
         {/* Desktop Menu */}
         <div className=" hidden md:flex  justify-between px-[201px]  h-[80px] items-center bg-white ">
         <div className=' flex items-center gap-8   '>
-            <div>
-                <img src={AzubiLogo} alt="Azubi Logo" className='h-10 w-auto' />
+            <div className=' flex gap-[2.72px] items-center'>
+                <img src={AzubiLogo2} alt="Azubi Logo" className='h-10 w-auto' />
+                <span className="font-lusitana text-[19px] font-bold leading-[100%] text-blue-primary ">CLient</span>
             </div>
             <NavLink to="/">Home</NavLink>
             <NavLink to="/courses">Courses</NavLink>
@@ -24,7 +48,27 @@ const Navbar = () => {
         </div>
         </div>
         {/* Mobile Menu */}
-        <div></div>
+        <div className='md:hidden flex justify-between p-[17px]  items-center'>
+          <div className='flex items-center text-blue-primary gap-[2.3px]'>         <img src={AzubiLogo2} alt=" Logo of Letter Cj" className='w-[20.6px] h-[19.1px]' />
+          <span className=' font-bold font-lusitana text-[16.54px] leading-[100%] '>CLient</span>
+          </div>
+         { menuVisiblity? (<X onClick={handleClick}/>) :(<AlignJustify onClick={handleClick}/>)}
+        
+
+        </div>
+
+        { menuVisiblity &&<div className='md:hidden fixed right-0 top-[56px] w-[269px]  min-h-screen z-50 shadow-md bg-white pl-[21px] pt-[25px]'>
+          <ul className='flex flex-col gap-4'>
+            <li>
+            <NavLink to="/">Home</NavLink>
+            
+            </li>
+            <li><NavLink to="/courses">Courses</NavLink></li>
+           
+          </ul>
+          <Button className=" bg-white  hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary mt-6 w-[127px] h-[48px] py-3 px-6">Login <span className='ml-1'><LogIn size={22}/></span></Button>
+          
+        </div>}
     </div>
   )
 }
