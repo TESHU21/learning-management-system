@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input"
 import { LucideSearch,LucideStar } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 
-import { course } from './data'
+import { course } from './components/data'
 
 
 const Courses = () => {
