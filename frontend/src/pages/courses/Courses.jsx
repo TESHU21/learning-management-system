@@ -17,6 +17,17 @@ const Courses = () => {
       placeholder="Search Course"
     />
   </div>
+  <div>
+    <h4 className='font-bold font-lato leading-8  ml-12 md:ml-[195px] mt-6 md:mt-[56px]'>Top Courses</h4>
+  </div>
+</div>
+<div className=' flex flex-col gap-6 w-[334px]'>
+  <img src="" alt="" className='w-[334px] h-[225px]' />
+  <div>
+    <p>Software Development</p>
+    <p>Unlock your potential with comprehensive training in modern software development</p>
+  </div>
+
 </div>
 
    
