@@ -2,11 +2,16 @@ import React from 'react'
 import { Input } from "@/components/ui/input"
 import { LucideSearch,LucideStar } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-
 import { course } from './components/data'
+import { useNavigate } from 'react-router-dom'
 
 
 const Courses = () => {
+  const navigate=useNavigate()
+  const handleNavigate=(item)=>{
+    navigate(`/courses/${item.id}`,{state:{course:item}})
+
+  }
   return (
     <div className=' mb-[200px]'>
       <div className='h-[80px] flex items-center justify-center w-full bg-blue-primary'>
@@ -43,7 +48,7 @@ const Courses = () => {
 
       <p className='font-inter text-base leading-6 text-center font-semibold'>Price:${item.price}</p>
       </div>
-      <Button className="bg-blue-primary py-4 px-6 h-12 cursor-pointer hover:bg-blue-700">Preview course</Button>
+      <Button className="bg-blue-primary py-4 px-6 h-12 cursor-pointer hover:bg-blue-700" onClick={()=>handleNavigate(item)}  >Preview course</Button>
       
    </div>
 
