@@ -35,6 +35,7 @@ export const course=[
 export const coursedetail=[
     {
     id:1,
+    name:"Software Development",
     image:SoftwareDevelopmentImage,
     title:"Software Development Track",
     description:"Unlock your potential with comprehensive training in modern software development.Become a Full-Stack Web Developer with a single comprehensive course coveringHTML, CSS, JavaScript, Node, React, PostgreSQL, Web3, and DApps.",
@@ -58,6 +59,7 @@ export const coursedetail=[
 },
     {
     id:2,
+    name:"Data Science",
     image:DataScienceImage,
     title:"Data Science Mastery Track",
     description:"Equip yourself with the skills to analyze, interpret, and leverage data, becoming an expert in data-driven decision-making. Gain hands-on experience with cutting-edge tools and techniques to extract meaningful insights, optimize processes, and drive business growth.",
@@ -79,6 +81,7 @@ export const coursedetail=[
 },
     {
     id:3,
+    name:"Cloud Computing",
     image:CloudComputingimage,
     title:"Cloud Computing Expertise",
     description:" Gain hands-on experience in cloud computing, preparing you to design, deploy, and manage scalable and secure cloud solutions. Learn to work with leading cloud platforms like AWS, Azure, and GCP, mastering key concepts such as infrastructure as code (IaC), serverless computing, containerization, and cloud security.",
