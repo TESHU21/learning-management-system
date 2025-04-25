@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { coursedetail } from "./data";
 import { LiaCircle } from "react-icons/lia";
+import { Clock, GraduationCap, User, Calendar } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -29,7 +32,7 @@ export default function CourseDetail() {
   }
 
   return (
-    <div className="w-full">
+    <div className=" relative w-full">
       {/* Header Section */}
       <div className="w-full h-[427px] bg-blue-primary text-white">
         {/* Breadcrumb Navigation */}
@@ -88,10 +91,11 @@ export default function CourseDetail() {
           </div>
         </div>
       </div>
-      {/* What We Learn Section */}
+      <div className=" flex ">
+         {/* What We Learn Section */}
       <div className="ml-[200px] mt-[30px] border border-[#E6E6E6] w-[632px] pl-[11px] pt-[33px]">
-  <p className="font-semibold">What you'll learn</p>
-  <div className="flex flex-col gap-3 pl-5">
+        <p className="font-semibold">What you'll learn</p>
+        <div className="flex flex-col gap-3 pl-5">
   {openedCourse.core_concepts.map((item, index) => (
     <p key={index} className="flex gap-[10px]  items-baseline text-base w-[578px] mt-2 leading-6">
       <span className="h-2 w-2 rounded-full bg-gray-300 flex-shrink-0"></span>
@@ -101,7 +105,45 @@ export default function CourseDetail() {
   </div>
 
       </div>
+      {/* Course Detail */}
+      <div className=" absolute top-[60px] left-[836px] w-[402px] bg-white">
+        <div className="mx-[20px] mt-[10px]">        
+          <img src={openedCourse.image} alt="" className="w-[363px] h-[298px] object-cover" />
+        </div>
+        <div className="pt-[20px] w-[329px] mx-[35px]">
+          <p className="font-semibold leding-8 text-[20px]">Course Details</p>
+          <hr className="my-[8px]"/>
+          <div className="px-6">
+            <div className="flex  justify-between">
+            <div className="flex gap-2 items-center"><Clock className="w-5 h-5 "/> <span className="leading-6 text-[16px]">Duration</span></div>
+            <span>12 weeks</span>
+            </div>
+            <hr className="my-[23px]"/>
+            <div className="flex  justify-between">
+            <div className="flex gap-2 items-center"><GraduationCap className="w-5 h-5 "/> <span className="leading-6 text-[16px]">Courses</span></div>
+            <span className="mr-4">5</span>
+            </div>
+            <hr className="my-[23px]"/>
+            <div className="flex  justify-between">
+            <div className="flex gap-2 items-center"><User className="w-5 h-5 "/> <span className="leading-6 text-[16px]">Instructor</span></div>
+            <span>John Doe</span>
+            </div>
+            <hr className="my-[23px]"/>
+            <div className="flex  justify-between">
+            <div className="flex gap-2 items-center">< Calendar   className="w-5 h-5 "/> <span className="leading-6 text-[16px]">Date</span></div>
+            <span>03/2025</span>
+            </div>
+            <hr className="my-[23px]"/>
+            <p className="font-semibold text-center py-[18px]">$350.00</p>
+            
+          </div>
+          <Button className=" w-full bg-blue-primary py-3 px-6  font-semibold hover:bg-blue-primary">Enroll</Button>
+         
+        </div>
+      </div>
 
+      </div>
+     
     </div>
   );
 }
