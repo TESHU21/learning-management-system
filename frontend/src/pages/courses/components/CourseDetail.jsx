@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { coursedetail } from "./data";
+import { LiaCircle } from "react-icons/lia";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -79,13 +80,28 @@ export default function CourseDetail() {
             <span className="">1 review</span>
             <div className="flex gap-1"> {[1,2,3,4,5].map((star)=>(
                       <LucideStar key={star} className={`w-6 h-6 cursor-pointer ${openedCourse.rating>=star? "text-yellow-600 fill-current":""} `}/>
-                    ))}</div>
+                    ))}
+            </div>
 
                
             </div>
           </div>
         </div>
       </div>
+      {/* What We Learn Section */}
+      <div className="ml-[200px] mt-[30px] border border-[#E6E6E6] w-[632px] pl-[11px] pt-[33px]">
+  <p className="font-semibold">What you'll learn</p>
+  <div className="flex flex-col gap-3 pl-5">
+  {openedCourse.core_concepts.map((item, index) => (
+    <p key={index} className="flex gap-[10px]  items-baseline text-base w-[578px] mt-2 leading-6">
+      <span className="h-2 w-2 rounded-full bg-gray-300 flex-shrink-0"></span>
+      {item}
+    </p>
+  ))}
+  </div>
+
+      </div>
+
     </div>
   );
 }
