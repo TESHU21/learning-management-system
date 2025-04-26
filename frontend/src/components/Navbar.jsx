@@ -59,7 +59,7 @@ const Navbar = () => {
         </div>
 
         {menuVisiblity && (
-  <div className="md:hidden fixed right-0 top-[56px] w-[269px] min-h-screen shadow-md bg-white pl-[21px] pt-[25px] flex flex-col">
+  <div className="md:hidden fixed right-0 top-[56px] z-50 w-[269px] min-h-screen shadow-md bg-white pl-[21px] pt-[25px] flex flex-col">
     <ul className="flex flex-col gap-4">
       <li>
         <NavLink to="/">Home</NavLink>
@@ -69,9 +69,9 @@ const Navbar = () => {
       </li>
     </ul>
     <div className="mt-6">
-      <NavLink to="/login"className="bg-white hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary w-[127px] h-[48px] py-3 px-6 cursor-pointer">
+      <Button  onClick={()=>navigate("/login")} className="bg-white hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary w-[127px] h-[48px] py-3 px-6 cursor-pointer">
         Login <span className="ml-1"><LogIn size={22} /></span>
-      </NavLink>
+      </Button>
     </div>
   </div>
 )}
