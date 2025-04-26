@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { coursedetail } from "./data";
+import { course, coursedetail } from "./data";
 import { LiaCircle } from "react-icons/lia";
 import { Clock, GraduationCap, User, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,10 +17,13 @@ import {LucideStar} from 'lucide-react'
 export default function CourseDetail() {
   const { id } = useParams();
   const [openedCourse, setOpenedCourse] = useState(null);
+  const [relatedCourse,setRelatedCourse]=useState(null)
 
   useEffect(() => {
     const foundCourse = coursedetail.find((course) => course.id === +id);
     setOpenedCourse(foundCourse);
+    const otherCourse=coursedetail.filter((course)=>course.id!==+id)
+    setRelatedCourse(otherCourse)
   }, [id]);
 
   if (!openedCourse) {
@@ -93,7 +96,7 @@ export default function CourseDetail() {
       </div>
       <div className=" flex ">
          {/* What We Learn Section */}
-      <div className="ml-[200px] mt-[30px] border border-[#E6E6E6] w-[632px] pl-[11px] pt-[33px]">
+      <div className="ml-[200px] mt-[30px] py-10 mb-[34px] border border-[#E6E6E6] w-[632px] pl-[11px] pt-[33px]">
         <p className="font-semibold">What you'll learn</p>
         <div className="flex flex-col gap-3 pl-5">
   {openedCourse.core_concepts.map((item, index) => (
@@ -143,6 +146,15 @@ export default function CourseDetail() {
       </div>
 
       </div>
+      {/* Explore Related Courses */}
+      {
+        relatedCourse.map((item)=>
+        
+    <div key={item.id}>
+      <img src={item.image} alt="" />
+    </div>
+        )
+      }
      
     </div>
   );
