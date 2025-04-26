@@ -4,6 +4,7 @@ import Layout from '@/layout/Layout'
 import Home from '@/pages/home/Home'
 import Courses from '@/pages/courses/Courses'
 import CourseDetail from '@/pages/courses/components/CourseDetail'
+import Login from '@/pages/login/Login'
 
 
 const AppRoutes = () => {
@@ -13,6 +14,7 @@ const AppRoutes = () => {
     <Route index element={<Home/>}/>
     <Route path='courses' element={<Courses/>}/>
     <Route path='/courses/:id' element={<CourseDetail/>}/>
+    <Route path='/login' element={<Login/>}/>
 
     </Route>
     </Routes>
