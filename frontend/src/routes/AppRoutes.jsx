@@ -14,7 +14,9 @@ const AppRoutes = () => {
         <Route path="courses" element={<Courses />} />
         <Route path="courses/:id" element={<CourseDetail />} />
         <Route path="login" element={<Login />} /> {/* <-- no slash here */}
+
       </Route>
+
     </Routes>
   );
 };

@@ -1,10 +1,9 @@
 import React ,{useState,useEffect,useRef} from 'react'
 import AzubiLogo from "../assets/images/azubi-logo.png"
-import { NavLink } from 'react-router-dom'
 import { Button } from './ui/button'
 import{LogIn,AlignJustify,X} from "lucide-react"
 import AzubiLogo2 from "../assets/svg/Azubi-Logo 2.svg"
-import { useNavigate } from "react-router-dom";
+import { useNavigate,NavLink } from "react-router-dom";
 
 
 
@@ -44,7 +43,7 @@ const Navbar = () => {
             <NavLink to="/courses">Courses</NavLink>
         </div>
         <div className=" flex gap-6">
-            <Button className="py-3 px-6 bg-white  hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary">Login <span className='ml-3'><LogIn size={22}/></span></Button>
+            <Button className="py-3 px-6 bg-white  hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary" onClick={()=>navigate("/login")}>Login <span className='ml-3'><LogIn size={22}/></span></Button>
             <Button className="py-3 px-6 bg-blue-primary  text-base leading-6 font-semibold text-white border rounded-md border-blue-primary">sign up <span className='ml-3'><LogIn size={22}/></span></Button>
 
         </div>
@@ -59,18 +58,24 @@ const Navbar = () => {
 
         </div>
 
-        { menuVisiblity &&<div className='md:hidden fixed right-0 top-[56px] w-[269px]  min-h-screen z-50 shadow-md bg-white pl-[21px] pt-[25px]'>
-          <ul className='flex flex-col gap-4'>
-            <li>
-            <NavLink to="/">Home</NavLink>
-            
-            </li>
-            <li><NavLink to="/courses">Courses</NavLink></li>
-           
-          </ul>
-          <Button className=" bg-white  hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary mt-6 w-[127px] h-[48px] py-3 px-6 cursor-pointer" onClick={()=>navigate("/login")}>Login <span className='ml-1'><LogIn size={22}/></span></Button>
-          
-        </div>}
+        {menuVisiblity && (
+  <div className="md:hidden fixed right-0 top-[56px] w-[269px] min-h-screen shadow-md bg-white pl-[21px] pt-[25px] flex flex-col">
+    <ul className="flex flex-col gap-4">
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/courses">Courses</NavLink>
+      </li>
+    </ul>
+    <div className="mt-6">
+      <NavLink to="/login"className="bg-white hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary w-[127px] h-[48px] py-3 px-6 cursor-pointer">
+        Login <span className="ml-1"><LogIn size={22} /></span>
+      </NavLink>
+    </div>
+  </div>
+)}
+
     </div>
   )
 }
