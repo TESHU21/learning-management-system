@@ -4,8 +4,10 @@ import { FcGoogle } from "react-icons/fc"; // "fc" = Flat Color icons
 import { Button } from '@/components/ui/button';
 
 import{SignInSchema,fields,initialValues} from "./components/data"
+import { useNavigate } from 'react-router-dom';
 import LoginImage from "../../assets/svg/Ellipse 32.svg"
 const Login = () => {
+  const navigate=useNavigate()
   return (
     <div className=' flex justify-center pb-10 md:pb-[300px]'>
         <div className='flex justify-center items-center gap-[49px]'>
@@ -20,6 +22,7 @@ const Login = () => {
                
 
             <FormComp schema={SignInSchema} fields={fields} initialValues={initialValues} submitBtnText={"Login"}  showForgotPassword ={true}/>
+            <p className=' text-center underline decoration-blue-primary'>Need to create an account ? <span className='text-blue-primary cursor-pointer' onClick={()=>navigate("/signup")}>signup</span></p>
             </div>
         
         </div>
