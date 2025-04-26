@@ -4,9 +4,11 @@ import FormComp from '@/components/FormComp'
 import { FcGoogle } from "react-icons/fc"; // "fc" = Flat Color icons
 import { Button } from '@/components/ui/button';
 import LoginImage from "../../assets/svg/Ellipse 32.svg"
+import { useNavigate } from 'react-router-dom';
 
 
 const SignUp = () => {
+    const navigate=useNavigate()
   return (
     <div className=' flex justify-center pb-10 md:pb-[300px]'>
     <div className='flex justify-center items-center gap-[49px]'>
@@ -21,6 +23,8 @@ const SignUp = () => {
            
 
         <FormComp schema={SignUpSchema} fields={fields} initialValues={initialValues} submitBtnText={"Sign Up"}  />
+        <p className=' text-center underline decoration-blue-primary'>Already have an account ? <span className='text-blue-primary cursor-pointer' onClick={()=>navigate("/login")}>log in</span></p>
+
         </div>
     
     </div>
