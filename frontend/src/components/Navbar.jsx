@@ -4,10 +4,12 @@ import { NavLink } from 'react-router-dom'
 import { Button } from './ui/button'
 import{LogIn,AlignJustify,X} from "lucide-react"
 import AzubiLogo2 from "../assets/svg/Azubi-Logo 2.svg"
+import { useNavigate } from "react-router-dom";
 
 
 
 const Navbar = () => {
+  const navigate=useNavigate();
   const [menuVisiblity,setMenuVisibility]=useState(false)
   const menuRef = useRef(null);
   useEffect(() => {
@@ -66,7 +68,7 @@ const Navbar = () => {
             <li><NavLink to="/courses">Courses</NavLink></li>
            
           </ul>
-          <Button className=" bg-white  hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary mt-6 w-[127px] h-[48px] py-3 px-6">Login <span className='ml-1'><LogIn size={22}/></span></Button>
+          <Button className=" bg-white  hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary mt-6 w-[127px] h-[48px] py-3 px-6 cursor-pointer" onClick={()=>navigate("/login")}>Login <span className='ml-1'><LogIn size={22}/></span></Button>
           
         </div>}
     </div>
