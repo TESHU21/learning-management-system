@@ -147,14 +147,26 @@ export default function CourseDetail() {
 
       </div>
       {/* Explore Related Courses */}
-      {
+      <div className="mx-[200px] mb-[187px]">
+        <p className=" font-semibold leading-[32px] text-[20px] font-inter">Explore related courses</p>
+        <div className=" flex  justify-center gap-6  mt-[62px]">
+        {
         relatedCourse.map((item)=>
         
-    <div key={item.id}>
-      <img src={item.image} alt="" />
+    <div key={item.id} className=" flex gap-[10px] w-[508px] p-6 shadow-lg shadow-black/15  rounded-lg">
+      <img src={item.image} alt="" className="w-[202px] h-[209.6px] object-cover" />
+      <div className=" flex flex-col gap-4 mt-[40px] ">
+        <p className=" font-semibold">{item.name}</p>
+        <span className="leading-6 text-base text-justify">{item.description.split('.')[0]}.</span>
+      </div>
     </div>
         )
       }
+
+        </div>
+      
+      </div>
+    
      
     </div>
   );
