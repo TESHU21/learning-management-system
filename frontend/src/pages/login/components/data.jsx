@@ -11,14 +11,14 @@ export const initialValues = {
   password: "",
 };
 export const fields = [
-  { label: "Email", name: "email",placeholder:"Email",icon:Mail, type: "email", className: "col-span-2" },
+  {  name: "email",placeholder:"Email",icon:Mail, type: "email", className: "col-span-2" },
   {
-    label: "Password",
+    
     name: "password",
     placeholder:"Password",
     icon:LockKeyhole,
     externalLink:true,
     type: "password",
-    className: "col-span-2",
+    className: "col-span-2 ",
   },
 ];

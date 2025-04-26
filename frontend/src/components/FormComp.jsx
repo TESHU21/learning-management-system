@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {ChevronRight} from "lucide-react"
 
 import {
   Form,
@@ -59,7 +60,7 @@ const FormComp = ({
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col items-center w-full"
         >
-          <div className="grid grid-cols-2 gap-3 w-full">
+          <div className="grid grid-cols-2 gap-4 w-full">
             {typeof errorMessage === "string" && errorMessage && (
               <p className="text-sm text-red-600 text-center col-span-2">
                 {errorMessage}
@@ -86,9 +87,9 @@ const FormComp = ({
                   control={form.control}
                   name={name}
                   render={({ field, fieldState: { error } }) => (
-                    <FormItem className={`${className} w-full`}>
+                    <FormItem className={`${className}  w-full`}>
                       <FormLabel>{label}</FormLabel>
-                      <FormControl>
+                      <FormControl >
                         {type === "select" ? (
                           <Select
                             onValueChange={(value) => {
@@ -120,7 +121,7 @@ const FormComp = ({
                             onChange={handleInputChange}
                             placeholder={placeholder}
                             type={type}
-                            className={` bg-gray-400 ${className}`}
+                            className={` bg-[#E6E6E6] ${className}`}
                           />
                         ) : (
                           <div className="relative">
@@ -183,7 +184,7 @@ const FormComp = ({
               type="submit"
               className="w-full h-[48px] px-6 bg-blue-primary hover:bg-blue-primary text-white py-3"
             >
-              {isLoading ? "Loading..." : submitBtnText}
+              {isLoading ? "Loading..." : submitBtnText} <ChevronRight size={22}/>
             </Button>
           </div>
         </form>
