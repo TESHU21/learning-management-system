@@ -44,7 +44,7 @@ const Navbar = () => {
         </div>
         <div className=" flex gap-6">
             <Button className="py-3 px-6 bg-white  hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary" onClick={()=>navigate("/login")}>Login <span className='ml-3'><LogIn size={22}/></span></Button>
-            <Button className="py-3 px-6 bg-blue-primary  text-base leading-6 font-semibold text-white border rounded-md border-blue-primary">sign up <span className='ml-3'><LogIn size={22}/></span></Button>
+            <Button className="py-3 px-6 bg-blue-primary  text-base leading-6 font-semibold text-white border rounded-md border-blue-primary" onClick={()=>navigate("/signup")}>sign up <span className='ml-3'><LogIn size={22}/></span></Button>
 
         </div>
         </div>
@@ -68,10 +68,12 @@ const Navbar = () => {
         <NavLink to="/courses">Courses</NavLink>
       </li>
     </ul>
-    <div className="mt-6">
+    <div className=" flex flex-col gap-4 mt-6">
       <Button  onClick={()=>navigate("/login")} className="bg-white hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary w-[127px] h-[48px] py-3 px-6 cursor-pointer">
         Login <span className="ml-1"><LogIn size={22} /></span>
       </Button>
+      <Button className="py-3 px-6 bg-blue-primary  text-base leading-6 font-semibold text-white border rounded-md border-blue-primary w-[127px] h-[48px] cursor-pointer" onClick={()=>navigate("/signup")}>sign up <span className='ml-3'><LogIn size={22}/></span></Button>
+
     </div>
   </div>
 )}
