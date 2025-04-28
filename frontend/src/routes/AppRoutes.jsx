@@ -8,6 +8,7 @@ import Login from '@/pages/login/Login';
 import SignUp from '@/pages/registration/SignUp';
 import ForgotPassword from '@/pages/login/forgotpassword/ForgotPassword';
 import { OtpVerification } from '@/pages/login/forgotpassword/OtpVerification';
+import ResetPassword from '@/pages/login/forgotpassword/ResetPassword';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -19,6 +20,7 @@ const AppRoutes = () => {
         <Route path='signup' element={<SignUp/>}/>
         <Route path="forogot_password" element={<ForgotPassword/>}/>
         <Route path="otp_verfication" element={<OtpVerification/>}/>
+        <Route path='reset_password' element={<ResetPassword/>}/>
 
 
       </Route>
