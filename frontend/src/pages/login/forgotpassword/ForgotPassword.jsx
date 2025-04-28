@@ -2,6 +2,7 @@ import React from 'react'
 import { z } from "zod";
 import FormComp from '@/components/FormComp';
 import HeroImage from "../../../assets/svg/Ellipse 32.svg"
+import { Mail } from 'lucide-react';
 
 const ForgotPassword = () => {
     const ForgotPasswordSchema = z.object({
@@ -13,6 +14,7 @@ const ForgotPassword = () => {
           label: "Email",
           name: "email",
           type: "email",
+          icon:Mail,
           className: "col-span-2",
           placeholder: "Enter email",
         },
