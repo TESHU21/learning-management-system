@@ -6,6 +6,7 @@ import Courses from '@/pages/courses/Courses';
 import CourseDetail from '@/pages/courses/components/CourseDetail';
 import Login from '@/pages/login/Login';
 import SignUp from '@/pages/registration/SignUp';
+import ForgotPassword from '@/pages/login/forgotpassword/ForgotPassword';
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,8 @@ const AppRoutes = () => {
         <Route path="courses/:id" element={<CourseDetail />} />
         <Route path="login" element={<Login />} /> {/* <-- no slash here */}
         <Route path='signup' element={<SignUp/>}/>
+        <Route path="forogot_password" element={<ForgotPassword/>}/>
+
 
       </Route>
 
