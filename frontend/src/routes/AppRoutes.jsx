@@ -7,7 +7,7 @@ import CourseDetail from '@/pages/courses/components/CourseDetail';
 import Login from '@/pages/login/Login';
 import SignUp from '@/pages/registration/SignUp';
 import ForgotPassword from '@/pages/login/forgotpassword/ForgotPassword';
-
+import { OtpVerification } from '@/pages/login/forgotpassword/OtpVerification';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -18,6 +18,7 @@ const AppRoutes = () => {
         <Route path="login" element={<Login />} /> {/* <-- no slash here */}
         <Route path='signup' element={<SignUp/>}/>
         <Route path="forogot_password" element={<ForgotPassword/>}/>
+        <Route path="otp_verfication" element={<OtpVerification/>}/>
 
 
       </Route>
