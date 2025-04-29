@@ -36,6 +36,7 @@ const FormComp = ({
   errorMessage,
   successMessage,
   showForgotPassword ,
+  hideButton,
   // optional callback
 }) => {
   const form = useForm({
@@ -87,7 +88,7 @@ const FormComp = ({
                   control={form.control}
                   name={name}
                   render={({ field, fieldState: { error } }) => (
-                    <FormItem className={`${className}  w-full`}>
+                    <FormItem className={`${className} w-full  `}>
                       <FormLabel>{label}</FormLabel>
                       <FormControl >
                         {type === "select" ? (
@@ -98,7 +99,7 @@ const FormComp = ({
                             }}
                             value={getValues(name) || ""}
                           >
-                            <SelectTrigger id={name}>
+                            <SelectTrigger id={name} className="w-full bg-[#F5F5F5]">
                               <SelectValue placeholder={placeholder || "Select"} />
                             </SelectTrigger>
                             <SelectContent>
@@ -115,6 +116,7 @@ const FormComp = ({
                             placeholder={placeholder}
                             id={name}
                             value={field.value || ""}
+                            className="bg-[#F5F5F5]"
                           />
                         ) : type === "file" ? (
                           <Input
@@ -179,13 +181,14 @@ const FormComp = ({
           )}
 
           <div className="w-full mt-6">
-            <Button
+            { !hideButton && <Button
               disabled={isLoading}
               type="submit"
               className="w-full h-[48px] px-6 bg-blue-primary hover:bg-blue-primary text-white py-3"
             >
               {isLoading ? "Loading..." : submitBtnText} <ChevronRight size={22}/>
-            </Button>
+            </Button>}
+           
           </div>
         </form>
       </Form>

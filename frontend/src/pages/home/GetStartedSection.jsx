@@ -13,7 +13,7 @@ const GetStartedSection = () => {
   return (
     <div>
     {/* time to invet section */}
-           <div className='  hidden md:relative  md:h-[222px] bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url(${LaptopWithCodeImage})` }}>
+           <div className='  hidden md:flex relative  md:h-[222px] bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url(${LaptopWithCodeImage})` }}>
         {/* Over Lay */}
         <div className=' flex absolute inset-0  bg-[rgba(1,88,154,0.8)]'>
             <div className='flex flex-col gap-2 ml-[198px] mt-[43px] text-white'>

@@ -43,8 +43,8 @@ const Navbar = () => {
             <NavLink to="/courses">Courses</NavLink>
         </div>
         <div className=" flex gap-6">
-            <Button className="py-3 px-6 bg-white  hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary" onClick={()=>navigate("/login")}>Login <span className='ml-3'><LogIn size={22}/></span></Button>
-            <Button className="py-3 px-6 bg-blue-primary  text-base leading-6 font-semibold text-white border rounded-md border-blue-primary" onClick={()=>navigate("/signup")}>sign up <span className='ml-3'><LogIn size={22}/></span></Button>
+            <Button className="py-3 px-6 bg-white  hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary cursor-pointer" onClick={()=>navigate("/login")}>Login <span className='ml-3'><LogIn size={22}/></span></Button>
+            <Button className="py-3 px-6 bg-blue-primary  text-base leading-6 font-semibold text-white border rounded-md border-blue-primary cursor-pointer hover:bg-blue-primary" onClick={()=>navigate("/signup")}>sign up <span className='ml-3'><LogIn size={22}/></span></Button>
 
         </div>
         </div>

@@ -3,7 +3,7 @@ import HeroImage from "../../../assets/svg/Ellipse 32.svg"
 import {z} from "zod"
 import FormComp from '@/components/FormComp'
 
-export const OtpVerification = () => {
+ const OtpVerification = () => {
     const otpSchema = z.object({
     otp: z.string()
       .length(6, "OTP must be exactly 6 digits")
@@ -33,3 +33,4 @@ export const OtpVerification = () => {
        </div>
   )
 }
+export default OtpVerification
