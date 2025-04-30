@@ -11,6 +11,7 @@ import  OtpVerification  from '@/pages/login/forgotpassword/OtpVerification';
 import ResetPassword from '@/pages/login/forgotpassword/ResetPassword';
 import ForgotPasswordFlow from '@/pages/login/forgotpassword/ForgotPasswordFlow';
 import Checkout from '@/pages/checkout/Checkout';
+import Dashboard from '@/pages/portal/dashboard/Dashboard';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -22,6 +23,7 @@ const AppRoutes = () => {
         <Route path='signup' element={<SignUp/>}/>
         <Route path='forgotpassword' element={<ForgotPasswordFlow/>}/>
         <Route path='checkout' element={<Checkout/>}/>
+        <Route path='dashboard' element={<Dashboard/>}/>
 
       </Route>
 
