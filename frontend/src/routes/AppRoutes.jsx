@@ -12,6 +12,7 @@ import ResetPassword from '@/pages/login/forgotpassword/ResetPassword';
 import ForgotPasswordFlow from '@/pages/login/forgotpassword/ForgotPasswordFlow';
 import Checkout from '@/pages/checkout/Checkout';
 import Dashboard from '@/pages/portal/dashboard/Dashboard';
+import Settings from '@/pages/portal/settings/Settings';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -24,6 +25,7 @@ const AppRoutes = () => {
         <Route path='forgotpassword' element={<ForgotPasswordFlow/>}/>
         <Route path='checkout' element={<Checkout/>}/>
         <Route path='dashboard' element={<Dashboard/>}/>
+        <Route path='settings' element={<Settings/>}/>
 
       </Route>
 
