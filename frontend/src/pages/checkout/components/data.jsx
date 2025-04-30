@@ -36,11 +36,20 @@ export const CheckoutSchema = z.object({
     {  name: "fullName",placeholder:"Full Name",icon:User, type: "text", className: "col-span-2" },
     {  name: "email",placeholder:"Email",icon:Mail, type: "text", className: "col-span-2" },
     {  name: "course",placeholder:"Course",icon:GraduationCap, type: "text", className: "col-span-2" },
-    {  name: "gender",placeholder:"Gender",icon:User, type: "select", className: "col-span-2" },
-    {  name: "phoneNumber",placeholder:"Phone Number",icon:Phone, type: "text", className: "col-span-2" },
+    {  name: "gender",placeholder:"Gender",icon:User, type: "select", className: "col-span-2" ,
+        options: [
+            { label: "Male", value: "male" },
+            { label: "Female", value: "female" },
+          ],
+    },
     {  name: "phoneNumber",placeholder:"Phone Number",icon:Phone, type: "text", className: "col-span-2" },
     {  name: "location",placeholder:"Location",icon:MapPin, type: "text", className: "col-span-2" },
-    {  name: "disabled",placeholder:"Disabled",icon:Users, type: "select", className: "col-span-2" },
+    {  name: "disabled",placeholder:"Disabled",icon:Users, type: "select", className: "col-span-2" ,
+        options: [
+            { label: "Yes", value: "yes" },
+            { label: "No", value: "no" },
+          ],
+    },
     {  name: "description",placeholder:"Description", type: "textarea", className: "col-span-2" },
 
 

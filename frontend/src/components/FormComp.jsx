@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {ChevronRight} from "lucide-react"
+import { forwardRef, useImperativeHandle } from "react";
+
 
 import {
   Form,
@@ -25,7 +27,7 @@ import {
 
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 
-const FormComp = ({
+const FormComp = forwardRef(({
   schema,
   initialValues,
   fields,
@@ -38,11 +40,14 @@ const FormComp = ({
   showForgotPassword ,
   hideButton,
   // optional callback
-}) => {
+},ref) => {
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: initialValues || {},
   });
+  useImperativeHandle(ref, () => ({
+    submit: () => form.handleSubmit(onSubmit)(),
+  }));
 
   const { setValue, getValues, trigger } = form;
 
@@ -194,6 +199,6 @@ const FormComp = ({
       </Form>
     </div>
   );
-};
+})
 
 export default FormComp;
