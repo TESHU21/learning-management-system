@@ -39,8 +39,8 @@ const Navbar = () => {
                 <img src={AzubiLogo2} alt="Azubi Logo" className='h-10 w-auto' />
                 <span className="font-lusitana text-[19px] font-bold leading-[100%] text-blue-primary ">CLient</span>
             </div>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/courses">Courses</NavLink>
+            <NavLink to="/" className={({isActive})=>isActive ? "text-blue-primary":""}>Home</NavLink>
+            <NavLink to="/courses" className={({isActive})=>isActive ? "text-blue-primary":""}>Courses</NavLink>
         </div>
         <div className=" flex gap-6">
             <Button className="py-3 px-6 bg-white  hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary cursor-pointer" onClick={()=>navigate("/login")}>Login <span className='ml-3'><LogIn size={22}/></span></Button>
