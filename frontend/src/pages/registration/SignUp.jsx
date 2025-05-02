@@ -1,14 +1,23 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import {SignUpSchema,fields,initialValues} from "./components/data"
 import FormComp from '@/components/FormComp'
 import { FcGoogle } from "react-icons/fc"; // "fc" = Flat Color icons
 import { Button } from '@/components/ui/button';
 import LoginImage from "../../assets/svg/Ellipse 32.svg"
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/authContext';
 
 
 const SignUp = () => {
     const navigate=useNavigate()
+    // const { signup } = useAuth();
+
+    const [isLoading,setIsLoading]=useState(false)
+    const [errorMessage, setErrorMessage] = useState("");
+    const handleSignUp=(data)=>{
+      console.log("Sign up Data",data)
+    }
+
   return (
     <div className=' flex justify-center pb-10 md:pb-[300px]'>
     <div className='flex justify-center items-center gap-[49px]'>
@@ -22,7 +31,7 @@ const SignUp = () => {
         <span className='h-6 text-center'>or</span>
            
 
-        <FormComp schema={SignUpSchema} fields={fields} initialValues={initialValues} submitBtnText={"Sign Up"}  />
+        <FormComp schema={SignUpSchema} fields={fields} initialValues={initialValues} submitBtnText={"Sign Up"} onSubmit={handleSignUp}  />
         <p className=' text-center underline decoration-blue-primary'>Already have an account ? <span className='text-blue-primary cursor-pointer' onClick={()=>navigate("/login")}>log in</span></p>
 
         </div>

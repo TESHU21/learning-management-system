@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import LoginImage from "../../assets/svg/Ellipse 32.svg"
 const Login = () => {
   const navigate=useNavigate()
+
+
+  
   return (
     <div className=' flex justify-center pb-10 md:pb-[300px]'>
         <div className='flex justify-center items-center gap-[49px]'>
