@@ -22,7 +22,7 @@ const OurSolutions = () => {
             <h3 className=' font-lato font-bold text-[40px] leading-12 text-center'>Our solutions</h3>
             <p className=' font-inter md:text-center leading-6 text-center'>Create your account quickly with just your email or social media login, then explore a wide range </p>
         </div>
-        <div className="flex flex-col pt-[56px] md:flex-row gap-7 justify-center items-stretch">
+        <div className="flex flex-col pt-[56px] md:flex-row gap-7 justify-center items-center mb-10 md:mb-0 ">
   {solutions.map((item) => (
     <div key={item.title} className="w-[325px] p-6 border shadow-lg rounded-lg border-t-0 flex flex-col justify-between">
       <div className="flex flex-col gap-4 flex-grow">
@@ -30,7 +30,7 @@ const OurSolutions = () => {
         <p className="font-semibold">{item.title}</p>
         <p className=" text-justify">{item.description}</p>
       </div>
-      <div className="flex justify-between mt-4">
+      <div className="flex items-center justify-between mt-4">
         <p>${item.price}</p>
         <Button className="bg-transparent shadow-none hover:bg-transparent text-blue-primary">
           preview

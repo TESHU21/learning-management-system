@@ -109,7 +109,7 @@ export default function CourseDetail() {
 
       </div>
       {/* Course Detail */}
-      <div className=" absolute top-[60px] left-[836px] w-[402px] bg-white">
+      <div className=" absolute top-[60px] right-[202px] w-[402px] bg-white">
         <div className="mx-[20px] mt-[10px]">        
           <img src={openedCourse.image} alt="" className="w-[363px] h-[298px] object-cover" />
         </div>

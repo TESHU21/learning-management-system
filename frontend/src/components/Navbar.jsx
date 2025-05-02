@@ -62,10 +62,10 @@ const Navbar = () => {
   <div className="md:hidden fixed right-0 top-[56px] z-50 w-[269px] min-h-screen shadow-md bg-white pl-[21px] pt-[25px] flex flex-col">
     <ul className="flex flex-col gap-4">
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/" className={({isActive})=>isActive ? "text-blue-primary":""}>Home</NavLink>
       </li>
       <li>
-        <NavLink to="/courses">Courses</NavLink>
+        <NavLink to="/courses" className={({isActive})=>isActive ? "text-blue-primary":""} >Courses</NavLink>
       </li>
     </ul>
     <div className=" flex flex-col gap-4 mt-6">
