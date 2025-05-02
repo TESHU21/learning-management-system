@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {ChevronRight} from "lucide-react"
 import { forwardRef, useImperativeHandle } from "react";
+import Loader from "./Loader";
 
 
 import {
@@ -191,7 +192,7 @@ const FormComp = forwardRef(({
               type="submit"
               className="w-full h-[48px] px-6 bg-blue-primary hover:bg-blue-primary text-white py-3"
             >
-              {isLoading ? "Loading..." : submitBtnText} <ChevronRight size={22}/>
+              {isLoading ? <Loader/> : submitBtnText} <ChevronRight size={22}/>
             </Button>}
            
           </div>

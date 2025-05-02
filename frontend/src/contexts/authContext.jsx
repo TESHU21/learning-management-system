@@ -21,6 +21,15 @@ export const AuthProvider=({children})=>{
 
 
     }
+    //Learner Signin functions
+    const login=async(data)=>{
+        try{
+            const response=await axiosInstance.post('/admin/auth/login',data)
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
 
     const value={signup}
 
