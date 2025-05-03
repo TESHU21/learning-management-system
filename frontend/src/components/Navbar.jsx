@@ -4,12 +4,14 @@ import { Button } from './ui/button'
 import{LogIn,AlignJustify,X} from "lucide-react"
 import AzubiLogo2 from "../assets/svg/Azubi-Logo 2.svg"
 import { useNavigate,NavLink } from "react-router-dom";
+import ProfileMenu from '@/pages/profile/ProfileMenu'
 
 
 
 const Navbar = () => {
   const navigate=useNavigate();
   const [menuVisiblity,setMenuVisibility]=useState(false)
+  const token=sessionStorage.getItem("Token")
   const menuRef = useRef(null);
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -42,11 +44,19 @@ const Navbar = () => {
             <NavLink to="/" className={({isActive})=>isActive ? "text-blue-primary":""}>Home</NavLink>
             <NavLink to="/courses" className={({isActive})=>isActive ? "text-blue-primary":""}>Courses</NavLink>
         </div>
-        <div className=" flex gap-6">
-            <Button className="py-3 px-6 bg-white  hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary cursor-pointer" onClick={()=>navigate("/login")}>Login <span className='ml-3'><LogIn size={22}/></span></Button>
-            <Button className="py-3 px-6 bg-blue-primary  text-base leading-6 font-semibold text-white border rounded-md border-blue-primary cursor-pointer hover:bg-blue-primary" onClick={()=>navigate("/signup")}>sign up <span className='ml-3'><LogIn size={22}/></span></Button>
+        {
+          token?(
+            <ProfileMenu/>
+          ):(
 
-        </div>
+          <div className=" flex gap-6">
+          <Button className="py-3 px-6 bg-white  hover:bg-white text-base leading-6 font-semibold text-blue-primary border rounded-md border-blue-primary cursor-pointer" onClick={()=>navigate("/login")}>Login <span className='ml-3'><LogIn size={22}/></span></Button>
+          <Button className="py-3 px-6 bg-blue-primary  text-base leading-6 font-semibold text-white border rounded-md border-blue-primary cursor-pointer hover:bg-blue-primary" onClick={()=>navigate("/signup")}>sign up <span className='ml-3'><LogIn size={22}/></span></Button>
+
+      </div>)
+
+        }
+        
         </div>
         {/* Mobile Menu */}
         <div className='md:hidden flex justify-between p-[17px]  items-center'>
