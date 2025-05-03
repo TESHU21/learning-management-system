@@ -5,7 +5,7 @@ import FormComp from '@/components/FormComp'
 import { LockKeyhole } from "lucide-react";
 
 
-const ResetPassword = () => {
+const ResetPassword = ({onNext}) => {
   const PasswordSchema = z .object({
     password: z
       .string()

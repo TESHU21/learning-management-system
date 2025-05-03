@@ -14,6 +14,7 @@ import Checkout from '@/pages/checkout/Checkout';
 import Dashboard from '@/pages/portal/dashboard/Dashboard';
 import Settings from '@/pages/portal/settings/Settings';
 import Portal from '@/pages/portal/Portal';
+import VerifyEmail from '@/pages/registration/VerifyEmail';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -28,6 +29,7 @@ const AppRoutes = () => {
         <Route path='dashboard' element={<Dashboard/>}/>
         <Route path='settings' element={<Settings/>}/>
         <Route path='portal' element={<Portal/>}/>
+        <Route path='verify' element={<VerifyEmail/>}/>
 
       </Route>
 

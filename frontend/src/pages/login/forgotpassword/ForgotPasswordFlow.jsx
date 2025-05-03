@@ -5,11 +5,15 @@ import ResetPassword from './ResetPassword'
 
 const ForgotPasswordFlow = () => {
   const [step,setStep]=useState("forgotpassword")
+
+  const handleChange=(nextstep)=>{
+    setStep(nextstep)
+  }
   return (
     <div>
-      {step==="forgotpassword" && <ForgotPassword/>}
-      {step==="otpverification" && <OtpVerification/>}
-      {step==="resetpassword" && <ResetPassword/>}
+      {step==="forgotpassword" && <ForgotPassword onNext={()=>handleChange("otpverification")}/>}
+      {step==="otpverification" && <OtpVerification onNext={()=>handleChange("resetPassword")}/>}
+      {step==="resetpassword" && <ResetPassword onNext={()=>handleChange("")} />}
     </div>
   )
 }

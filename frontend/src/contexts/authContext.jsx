@@ -55,7 +55,7 @@ const storeUser=(user)=>{
       return response
     }
     catch(error){
-      console.log(error)
+      throw error
     }
 
   }
@@ -66,7 +66,7 @@ const storeUser=(user)=>{
       return response
     }
     catch(error){
-      console.log(error)
+      throw error
     }
 
   }
@@ -77,12 +77,14 @@ const storeUser=(user)=>{
       return response
     }
     catch(error){
-      console.log(error)
+     
+      return error
+
     }
 
   }
 
-  const value = { signup, signin };
+  const value = { signup, signin ,forgotPassword,resetPassword};
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

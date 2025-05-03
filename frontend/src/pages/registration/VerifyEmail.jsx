@@ -1,26 +1,26 @@
 import React from 'react'
-import HeroImage from "../../../assets/svg/Ellipse 32.svg"
-import {z} from "zod"
 import FormComp from '@/components/FormComp'
-
- const OtpVerification = ({onNext}) => {
-    const otpSchema = z.object({
-    otp: z.string()
-      .length(6, "OTP must be exactly 6 digits")
-      .regex(/^\d{6}$/, "OTP must contain only numbers"),
-       });
-  
-        const initialValues = { otp: "" };
-        const fields = [
-          {
-            name: "otp",
-            type: "otp",
-            className: "col-span-2",
-            placeholder: "1234",
-          },
-        ];
+import HeroImage from "../../assets/svg/Ellipse 32.svg"
+import {z} from "zod"
+const VerifyEmail = () => {
+     const otpSchema = z.object({
+        otp: z.string()
+          .length(6, "OTP must be exactly 6 digits")
+          .regex(/^\d{6}$/, "OTP must contain only numbers"),
+           });
+      
+            const initialValues = { otp: "" };
+            const fields = [
+              {
+                name: "otp",
+                type: "otp",
+                className: "col-span-2",
+                placeholder: "1234",
+              },
+            ];
   return (
-      <div className='flex justify-center md:gap-[49px] '>
+    <div>
+        <div className='flex justify-center md:gap-[49px] '>
          <div className='hidden md:flex md:ml-[190px]  '>
          <img src={HeroImage} className='w-[418px] h-[418px] object-cover' alt="Work desk with laptop, documents, coffee, and cactus plant" />
            </div>
@@ -31,6 +31,8 @@ import FormComp from '@/components/FormComp'
            <FormComp schema={otpSchema} initialValues={initialValues} fields={fields} submitBtnText={"Reset password"}/>
            </div>
        </div>
+    </div>
   )
 }
-export default OtpVerification
+
+export default VerifyEmail
