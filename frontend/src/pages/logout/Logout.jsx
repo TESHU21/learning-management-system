@@ -1,6 +1,8 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import {LogIn} from "lucide-react"
+import Login from "../login/Login";
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -16,8 +18,7 @@ const Logout = () => {
         className=" border-none bg-transparent text-black hover:bg-transparent ml-0 p-0 m-0 text-normal"
         onClick={handleLogOut}
       >
-        Log out
-      </Button>
+        <Login/> <span className="ml-[11px]"> Logout</span>      </Button>
     </div>
   );
 };
