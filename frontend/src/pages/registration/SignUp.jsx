@@ -6,16 +6,26 @@ import { Button } from '@/components/ui/button';
 import LoginImage from "../../assets/svg/Ellipse 32.svg"
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/authContext';
+import axiosInstance from '@/lib/axiosInstance';
 
 
 const SignUp = () => {
     const navigate=useNavigate()
-    // const { signup } = useAuth();
+     const { signup } = useAuth();
+
 
     const [isLoading,setIsLoading]=useState(false)
     const [errorMessage, setErrorMessage] = useState("");
-    const handleSignUp=(data)=>{
-      console.log("Sign up Data",data)
+    const handleSignUp=async(data)=>{
+      try{
+        const response=await signup(data)
+        console.log(response)
+
+      }
+      catch(error){
+        console.log(error.response.data)
+      }
+      
     }
 
   return (
