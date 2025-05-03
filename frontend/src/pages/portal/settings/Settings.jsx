@@ -7,12 +7,12 @@ import { Button } from '@/components/ui/button'
 
 const Settings = () => {
   return (
-    <div className=' flex justify-center px-[200px] gap-[49px]'>
-      <div className= ' flex items-center justify-center w-[217px] h-[217px] rounded-full bg-[#F5F5F5]'>
-        {/* <img src=alt="Profile Image"  className=' rounded-full w-10 h-10'/> */}
-        <User className=''/>
+    <div className=' flex justify-center px-[170px] gap-[40px]'>
+      <div className= ' flex  justify-center mt-[65px] '>
+        <img src="" className=' rounded-full   bg-[#F5F5F5] w-[150px] h-[150px]'/>
+       
       </div>
-      <div className=' w-full md:w-[775px]   '>
+      <div className=' w-full md:w-[775px] mt-[65px]  '>
         <div className="">
           <h4 className='mb-4 font-lato text-[32px] leading-8 font-bold'>Profile</h4>
           <div className='bg-[#f0f0f0] px-[52px] pt-[67px] pb-[84px]' >

@@ -1,5 +1,8 @@
 import React from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Dashboard from './dashboard/Dashboard'
+import Settings from './settings/Settings'
+import Invoices from './invoices/Invoices'
 
 const Portal = () => {
   return (
@@ -17,11 +20,11 @@ const Portal = () => {
         </div>
 
         {/* Tabs content below the blue background */}
-        <div className="mt-4">
-          <TabsContent value="dashboard">Make a Dash Board Here.</TabsContent>
-          <TabsContent value="settings">Make Setting .</TabsContent>
+        <div className="mt-4 w-full">
+          <TabsContent value="dashboard"><Dashboard/></TabsContent>
+          <TabsContent value="settings"><Settings/></TabsContent>
           <TabsContent value="message">Make changes Message.</TabsContent>
-          <TabsContent value="invoices">Invoices.</TabsContent>
+          <TabsContent value="invoices"><Invoices/></TabsContent>
         </div>
       </Tabs>
     </div>
