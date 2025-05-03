@@ -25,6 +25,7 @@ const ForgotPassword = ({onNext}) => {
       ];
   const {forgotPassword}=useAuth()
   const handleForgotPassword=async(data)=>{
+    console.log("FFFFFFFFF",data)
     try{
       setIsLoading(true)
     const response =await forgotPassword(data)
@@ -35,7 +36,7 @@ const ForgotPassword = ({onNext}) => {
     }
     }
     catch(error){
-     setErrorMessage(error.response.data.errors[0].message)
+     setErrorMessage(error.response?.data.errors[0].message)
     
     }
     finally{
@@ -53,8 +54,7 @@ const ForgotPassword = ({onNext}) => {
         <div className='md:w-[431px] px-4 md:px-0 py-24 '>
           <h3 className='font-lato text-center font-bold text-[28px] md:text-[40px] leading-12 mb-[15px]'>Forgot password</h3>
           <p className='leading-6  text-base  font-inter mb-6'>Enter your email address to reset your password</p>
-        <FormComp schema={ForgotPasswordSchema} initialValues={initialValues} fields={fields} submitBtnText={"Reset password"}  
-        onSubmit={handleForgotPassword} isLoading={isLoading} successMessage={successMessage} errorMessage={errorMessage}/>
+        <FormComp schema={ForgotPasswordSchema} initialValues={initialValues} fields={fields} submitBtnText={"Reset password"} onSubmit={handleForgotPassword} isLoading={isLoading} successMessage={successMessage} errorMessage={errorMessage}/>
         </div>
     </div>
   )

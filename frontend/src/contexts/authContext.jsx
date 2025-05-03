@@ -51,7 +51,7 @@ const storeUser=(user)=>{
   // Verify Email Function
   const verifyEmail=async(data)=>{
     try{
-      const response=await axiosInstance.post(`auth/verify-email`,data)
+      const response=await axiosInstance.post('auth/verify-email',data)
       return response
     }
     catch(error){
@@ -62,7 +62,7 @@ const storeUser=(user)=>{
   // Resend Verification Token
   const resendVerificationToken=async()=>{
     try{
-      const response=await axiosInstance.post(`/auth/resend-token`)
+      const response=await axiosInstance.post('/auth/resend-token')
       return response
     }
     catch(error){
@@ -106,7 +106,7 @@ const storeUser=(user)=>{
 
   }
 
-  const value = { signup, signin ,forgotPassword,resetPassword};
+  const value = { signup, signin ,forgotPassword,resetPassword,verifyEmail,resendVerificationToken};
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

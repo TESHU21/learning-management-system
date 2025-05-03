@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import ForgotPassword from './ForgotPassword'
-import  OtpVerification  from './OtpVerification'
+// import  OtpVerification  from './OtpVerification'
+import EmailVerification from './OtpVerification'
 import ResetPassword from './ResetPassword'
 
 const ForgotPasswordFlow = () => {
@@ -11,8 +12,8 @@ const ForgotPasswordFlow = () => {
   }
   return (
     <div>
-      {step==="forgotpassword" && <ForgotPassword onNext={()=>handleChange("otpverification")}/>}
-      {step==="otpverification" && <OtpVerification onNext={()=>handleChange("resetPassword")}/>}
+      {step==="forgotpassword" && <ForgotPassword onNext={()=>handleChange("resetPassword")}/>}
+      {step==="otpverification" && <EmailVerification onNext={()=>handleChange("resetPassword")}/>}
       {step==="resetpassword" && <ResetPassword onNext={()=>handleChange("")} />}
     </div>
   )
