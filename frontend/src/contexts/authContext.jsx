@@ -48,6 +48,28 @@ const storeUser=(user)=>{
       throw error;
     }
   };
+  // Verify Email Function
+  const verifyEmail=async(data)=>{
+    try{
+      const response=await axiosInstance.post(`auth/verify-email`,data)
+      return response
+    }
+    catch(error){
+      throw error
+    }
+
+  }
+  // Resend Verification Token
+  const resendVerificationToken=async()=>{
+    try{
+      const response=await axiosInstance.post(`/auth/resend-token`)
+      return response
+    }
+    catch(error){
+      throw error
+    }
+
+  }
   // Forgot password Function
   const forgotPassword=async(data)=>{
     try{
