@@ -187,13 +187,24 @@ const FormComp = forwardRef(({
           )}
 
           <div className="w-full mt-6">
-            { !hideButton && <Button
-              disabled={isLoading}
-              type="submit"
-              className="w-full h-[48px] px-6 bg-blue-primary hover:bg-blue-primary text-white py-3"
-            >
-              {isLoading ? <Loader/> : submitBtnText} <ChevronRight size={22}/>
-            </Button>}
+          {!hideButton && (
+  <Button
+    disabled={isLoading}
+    type="submit"
+    className="w-full h-[48px]  px-6 bg-blue-primary hover:bg-blue-primary text-white py-3 cursor-pointer flex items-center justify-center gap-2"
+  >
+    {isLoading ? (
+      <Loader  />
+
+    ) : (
+      <>
+        {submitBtnText}
+        <ChevronRight size={22} />
+      </>
+    )}
+  </Button>
+)}
+
            
           </div>
         </form>

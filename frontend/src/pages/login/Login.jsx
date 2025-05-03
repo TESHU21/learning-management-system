@@ -1,13 +1,41 @@
-import React from 'react'
+import React,{useState} from 'react'
 import FormComp from '@/components/FormComp'
 import { FcGoogle } from "react-icons/fc"; // "fc" = Flat Color icons
 import { Button } from '@/components/ui/button';
-
 import{SignInSchema,fields,initialValues} from "./components/data"
 import { useNavigate } from 'react-router-dom';
 import LoginImage from "../../assets/svg/Ellipse 32.svg"
+import { useAuth } from '@/contexts/authContext';
 const Login = () => {
   const navigate=useNavigate()
+  const [isLoading,setIsLoading]=useState(false)
+  const [successMessage,setSuccessMessage]=useState("")
+  const [errorMessage,setErrorMessage]=useState("")
+  const {signin}=useAuth()
+  const handleSignIn=async(data)=>{
+    
+    try{
+      setIsLoading(true)
+      const response=await signin(data)
+      if(response.status===200){
+      const token=sessionStorage.getItem("Token")
+      setSuccessMessage (response.data.message)
+      console.log(response.data)
+      navigate("/")
+    }
+
+    
+     
+    }
+    catch(error){
+      console.log(error)
+      setErrorMessage(error)
+    }
+    finally{
+      setIsLoading(false)
+    }
+
+  }
 
 
   
@@ -24,7 +52,7 @@ const Login = () => {
             <span className='h-6 text-center'>or</span>
                
 
-            <FormComp schema={SignInSchema} fields={fields} initialValues={initialValues} submitBtnText={"Login"}  showForgotPassword ={true}/>
+            <FormComp schema={SignInSchema} fields={fields} initialValues={initialValues} submitBtnText={"Login"}  showForgotPassword ={true}  onSubmit={handleSignIn} isLoading={isLoading}/>
             <p className=' text-center underline decoration-blue-primary'>Need to create an account ? <span className='text-blue-primary cursor-pointer' onClick={()=>navigate("/signup")}>signup</span></p>
             </div>
         

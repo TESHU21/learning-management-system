@@ -8,6 +8,21 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
+//  store token in session storage
+const storeToken=(token)=>{
+  sessionStorage.setItem("Token",JSON.stringify(token))
+
+}
+// store user in session storage
+const storeUser=(user)=>{
+  sessionStorage.setItem("User",JSON.stringify(user))
+
+}
+
+
+
+
+
   // Register Learners
   const signup = async (data) => {
     try {
@@ -20,17 +35,21 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Learner Signin
-  const login = async (data) => {
+  const signin = async (data) => {
     try {
-      const response = await axiosInstance.post('/admin/auth/login', data);
-      return response.data;
+      const response = await axiosInstance.post('/auth/login', data);
+      if(response?.status===200){
+        storeToken(response.data.token)
+        storeUser(response.data.user)
+      }
+      return response;
     } catch (error) {
       console.log('Login Failed', error);
       throw error;
     }
   };
 
-  const value = { signup, login };
+  const value = { signup, signin };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
