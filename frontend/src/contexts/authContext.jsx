@@ -48,6 +48,39 @@ const storeUser=(user)=>{
       throw error;
     }
   };
+  // Forgot password Function
+  const forgotPassword=async(data)=>{
+    try{
+      const response= await axiosInstance.post(`/auth/forgot-password`,data)
+      return response
+    }
+    catch(error){
+      console.log(error)
+    }
+
+  }
+  // Reset Password
+  const resetPassword=async(data)=>{
+    try{
+      const response= await axiosInstance.post(`/auth/reset-password`,data)
+      return response
+    }
+    catch(error){
+      console.log(error)
+    }
+
+  }
+  // Confirm OTP
+  const confirmOTP=async(data)=>{
+    try{
+      const response= await axiosInstance.post(`/auth/reset-password`,data)
+      return response
+    }
+    catch(error){
+      console.log(error)
+    }
+
+  }
 
   const value = { signup, signin };
 
