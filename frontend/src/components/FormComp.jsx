@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {ChevronRight} from "lucide-react"
 import { forwardRef, useImperativeHandle } from "react";
 import Loader from "./Loader";
+import { NavLink } from "react-router-dom";
 
 
 import {
@@ -176,13 +177,13 @@ const FormComp = forwardRef(({
 
           {  showForgotPassword && (
             <div className="w-full flex justify-start mt-2 py-6 ">
-              <button
+              <NavLink to="/forgotpassword"
                 type="button"
               
-                className="text-sm text-[#177DDC]  leading-6 hover:underline"
+                className="text-sm text-[#177DDC]  leading-6 hover:underline cursor-pointer"
               >
                 Forgot password?
-              </button>
+              </NavLink>
             </div>
           )}
 

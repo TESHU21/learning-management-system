@@ -4,7 +4,7 @@ import  OtpVerification  from './OtpVerification'
 import ResetPassword from './ResetPassword'
 
 const ForgotPasswordFlow = () => {
-  const [step,setStep]=useState("otpverification")
+  const [step,setStep]=useState("forgotpassword")
   return (
     <div>
       {step==="forgotpassword" && <ForgotPassword/>}
