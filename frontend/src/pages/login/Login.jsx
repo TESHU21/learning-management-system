@@ -1,11 +1,11 @@
 import React,{useState} from 'react'
 import FormComp from '@/components/FormComp'
-import { FcGoogle } from "react-icons/fc"; // "fc" = Flat Color icons
-import { Button } from '@/components/ui/button';
+
 import{SignInSchema,fields,initialValues} from "./components/data"
 import { useNavigate } from 'react-router-dom';
 import LoginImage from "../../assets/svg/Ellipse 32.svg"
 import { useAuth } from '@/contexts/authContext';
+import GoogleLoginButton from '@/components/GoogleLoginButton';
 const Login = () => {
   const navigate=useNavigate()
   const [isLoading,setIsLoading]=useState(false)
@@ -60,7 +60,7 @@ const Login = () => {
         <div className=' w-full md:w-[500px]  p-6'>
             <h3 className='w-full md:w-[419px] text-center font-lato font-bold leading-10 md:leading-12 md:text-[40px] mt-[73px] mb-[49px]'>Log in to continue your learning journey</h3>
             <div className=" flex flex-col  gap-6 md:w-[431px]">
-            <Button className=" flex items-center bg-white hover:bg-white border border-blue-primary  w-full h-12 py-3 px-6"> <FcGoogle className='w-[22px] h-[22px]'/> <span className='text-blue-primary'>Log in using Google</span></Button>
+            <GoogleLoginButton/>
             <span className='h-6 text-center'>or</span>
                
 
