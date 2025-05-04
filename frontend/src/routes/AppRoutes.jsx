@@ -7,14 +7,15 @@ import CourseDetail from '@/pages/courses/components/CourseDetail';
 import Login from '@/pages/login/Login';
 import SignUp from '@/pages/registration/SignUp';
 import ForgotPassword from '@/pages/login/forgotpassword/ForgotPassword';
-import  OtpVerification  from '@/pages/login/forgotpassword/OtpVerification';
+import  OtpVerification  from '@/pages/login/forgotpassword/EmailVerification';
 import ResetPassword from '@/pages/login/forgotpassword/ResetPassword';
-import ForgotPasswordFlow from '@/pages/login/forgotpassword/ForgotPasswordFlow';
 import Checkout from '@/pages/checkout/Checkout';
 import Dashboard from '@/pages/portal/dashboard/Dashboard';
 import Settings from '@/pages/portal/settings/Settings';
 import Portal from '@/pages/portal/Portal';
 import VerifyEmail from '@/pages/registration/VerifyEmail';
+import EmailVerification from '@/pages/login/forgotpassword/EmailVerification';
+import ResetPasswordFlow from '@/pages/login/forgotpassword/ResetPasswordFlow';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -23,13 +24,15 @@ const AppRoutes = () => {
         <Route path="courses" element={<Courses />} />
         <Route path="courses/:id" element={<CourseDetail />} />
         <Route path="login" element={<Login />} /> {/* <-- no slash here */}
-        <Route path='signup' element={<SignUp/>}/>
-        <Route path='forgotpassword' element={<ForgotPasswordFlow/>}/>
+        <Route path='signup' element={<SignUp/>}/>       
+         <Route path="forgotpassword" element={<ForgotPassword />} />
+
         <Route path='checkout' element={<Checkout/>}/>
         <Route path='dashboard' element={<Dashboard/>}/>
         <Route path='settings' element={<Settings/>}/>
         <Route path='portal' element={<Portal/>}/>
-        <Route path='verify' element={<VerifyEmail/>}/>
+        {/* <Route path='verify' element={<VerifyEmail/>}/> */}
+        <Route path="reset-password/:token" element={<EmailVerification/>}/>
 
       </Route>
 

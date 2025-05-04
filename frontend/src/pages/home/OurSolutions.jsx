@@ -8,6 +8,7 @@ import CapIcon from "../../assets/svg/student-cap-svgrepo-com 1.svg"
 import ClockIcon from "../../assets/svg/clock-circle-svgrepo-com 1.svg"
 import StudentPersonIcon from "../../assets/svg/student-person-part-2-svgrepo-com (1) 1.svg"
 import {solutions} from "./components/data"
+import { techStacks } from './components/techStak'
 
 
 
@@ -46,11 +47,26 @@ const OurSolutions = () => {
         <div className='flex px:[-14px] md:px-0 pt-8 bg-blue-primary h-[597px] md:h-[477px] rounded-md'>
             <div className='flex-1 flex flex-col gap-9 md:pl-[199px]'>
                 <div className=' flex flex-col gap-3 px-5 md:px-0 md:w-[539px] text-white'>
-                    <h3 className=' text-[40px] font-lato font-bold  leading-[1.2] text-center'>What will be next step</h3>
-                    <p className='font-inter text-base leading-6 text-center'>Discover our diverse stack of solutions, including software development, data science, and cloud tools. Sign up today and kickstart your journey!</p>
+                    <h3 className=' text-[40px] font-lato font-bold  leading-[1.2] '>What will be next step</h3>
+                    <p className='font-inter text-base leading-6 '>Discover our diverse stack of solutions, including software development, data science, and cloud tools. Sign up today and kickstart your journey!</p>
                 </div>
-                <div className='px-[33px] md:px-[33px]'>
-                    <img src={Buttons} alt="" />
+                <div className='mr-[146px]'>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 bg-blue-primary items-start">
+  {techStacks.map((tech) => (
+    <a
+      key={tech.name}
+      href={tech.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`inline-flex items-center justify-center cursor-pointer text-white border ${tech.color} py-2 px-4 rounded-md hover:bg-blue-primary transition text-base font-inter leading-6`}
+    >
+      {tech.name}
+    </a>
+  ))}
+</div>
+       
+   
+            
                 </div>
             </div>
             {/*  */}

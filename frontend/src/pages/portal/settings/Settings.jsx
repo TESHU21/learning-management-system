@@ -9,7 +9,7 @@ const Settings = () => {
   return (
     <div className=' flex justify-center px-[170px] gap-[40px]'>
       <div className= ' flex  justify-center mt-[65px] '>
-        <img src="" className=' rounded-full   bg-[#F5F5F5] w-[150px] h-[150px]'/>
+        {/* <img src="" className=' rounded-full   bg-[#F5F5F5] w-[150px] h-[150px]'/> */}
        
       </div>
       <div className=' w-full md:w-[775px] mt-[65px]  '>

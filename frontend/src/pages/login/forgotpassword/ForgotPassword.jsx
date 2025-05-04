@@ -1,11 +1,12 @@
 import React,{useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import { z } from "zod";
 import FormComp from '@/components/FormComp';
 import HeroImage from "../../../assets/svg/Ellipse 32.svg"
 import { Mail } from 'lucide-react';
 import { useAuth } from '@/contexts/authContext';
 
-const ForgotPassword = ({onNext}) => {
+const ForgotPassword = () => {
   const [isLoading,setIsLoading]=useState(false)
   const [successMessage,setSuccessMessage]=useState("")
   const [errorMessage,setErrorMessage]=useState("")
@@ -24,14 +25,17 @@ const ForgotPassword = ({onNext}) => {
         },
       ];
   const {forgotPassword}=useAuth()
+  const navigate=useNavigate()
   const handleForgotPassword=async(data)=>{
     console.log("FFFFFFFFF",data)
     try{
       setIsLoading(true)
     const response =await forgotPassword(data)
-    if(response.status===200){
-      setSuccessMessage(response.data.message)
-      onNext();
+    console.log("Response ",response)
+    if(response){
+      // setSuccessMessage(response.data.message)
+      navigate(`/reset-password/${token}`)
+      
 
     }
     }
