@@ -2,7 +2,7 @@ import React, { useContext, createContext } from 'react';
 import axiosInstance from '@/lib/axiosInstance';
 
 const AuthContext = createContext();
-
+// custom hook
 export const useAuth = () => {
   return useContext(AuthContext);
 };
