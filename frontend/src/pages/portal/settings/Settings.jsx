@@ -1,39 +1,74 @@
-import React from 'react'
-import { Power,Plus,User } from 'lucide-react'
-import { profileSchema,passwordSchema,profileInitialValues,passwordInitialValues,profileFields,passwordFields } from './data'
+import React, { useRef } from 'react'
+import { Power, Plus } from 'lucide-react'
+import {
+  profileSchema, passwordSchema,
+  profileInitialValues, passwordInitialValues,
+  profileFields, passwordFields
+} from './data'
 import FormComp from '@/components/FormComp'
 import { Button } from '@/components/ui/button'
 
-
 const Settings = () => {
+  const profileRef = useRef(null)
+  const passwordRef = useRef(null)
+
+  const handleProfileSubmit = async (data) => {
+    // Call your profile update API here
+    console.log("Updating profile:", data)
+  }
+
+  const handlePasswordSubmit = async (data) => {
+    // Call your password update API here
+    console.log("Updating password:", data)
+  }
+
+  const handleSubmitAll = () => {
+    if (profileRef.current) profileRef.current.submit()
+    if (passwordRef.current) passwordRef.current.submit()
+  }
+
   return (
-    <div className=' flex justify-center px-[170px] gap-[40px]'>
-      <div className= ' flex  justify-center mt-[65px] '>
-        {/* <img src="" className=' rounded-full   bg-[#F5F5F5] w-[150px] h-[150px]'/> */}
-       
-      </div>
-      <div className=' w-full md:w-[775px] mt-[65px]  '>
-        <div className="">
+    <div className='flex justify-center px-[170px] gap-[40px]'>
+      <div className='flex justify-center mt-[65px]'></div>
+      <div className='w-full md:w-[775px] mt-[65px]'>
+        <div>
           <h4 className='mb-4 font-lato text-[32px] leading-8 font-bold'>Profile</h4>
-          <div className='bg-[#f0f0f0] px-[52px] pt-[67px] pb-[84px]' >
-          <div className='md:w-[675px] '>
-          <FormComp schema={profileSchema} initialValues={profileInitialValues} fields={profileFields}  hideButton={true} />
+          <div className='bg-[#f0f0f0] px-[52px] pt-[67px] pb-[84px]'>
+            <div className='md:w-[675px]'>
+              <FormComp
+                ref={profileRef}
+                schema={profileSchema}
+                initialValues={profileInitialValues}
+                fields={profileFields}
+                onSubmit={handleProfileSubmit}
+                hideButton={true}
+              />
+            </div>
           </div>
-          </div>
-         
-          
         </div>
         <div className='mt-[39px]'>
           <h4 className='mb-6 font-lato text-[32px] leading-8 font-bold'>Change Password</h4>
           <div className='bg-[#f0f0f0] px-[52px] pt-[67px] pb-[93px]'>
-          <FormComp schema={passwordSchema} initialValues={passwordInitialValues} fields={passwordFields} hideButton={true}/>
+            <FormComp
+              ref={passwordRef}
+              schema={passwordSchema}
+              initialValues={passwordInitialValues}
+              fields={passwordFields}
+              onSubmit={handlePasswordSubmit}
+              hideButton={true}
+            />
           </div>
-          
         </div>
-        <div className=' flex justify-between items-center mt-[49px] mb-[183px]'>
-          <Button className="bg-blue-primary h-[48px] px-6 py-3 ">Save Changes <span><Plus size={22}/></span></Button>
-          <Button className="bg-[#E6E6E6] text-[#404040] h-[48px] w-[137px] px-6 py-3 hover:bg-amber-50 "><Power size={22}/> <span>Logout</span></Button>
-
+        <div className='flex justify-between items-center mt-[49px] mb-[183px]'>
+          <Button
+            className="bg-blue-primary h-[48px] px-6 py-3"
+            onClick={handleSubmitAll}
+          >
+            Save Changes <span><Plus size={22}/></span>
+          </Button>
+          <Button className="bg-[#E6E6E6] text-[#404040] h-[48px] w-[137px] px-6 py-3 hover:bg-amber-50 ">
+            <Power size={22}/> <span>Logout</span>
+          </Button>
         </div>
       </div>
     </div>

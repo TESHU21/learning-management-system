@@ -60,9 +60,9 @@ const storeUser=(user)=>{
 
   }
   // Resend Verification Token
-  const resendVerificationToken=async()=>{
+  const resendVerificationToken=async(data)=>{
     try{
-      const response=await axiosInstance.post('/auth/resend-token')
+      const response=await axiosInstance.post('/auth/resend-token',data)
       return response
     }
     catch(error){
@@ -105,8 +105,18 @@ const storeUser=(user)=>{
     }
 
   }
+  // update Profile
+  const updateLearnerProfile=async(data)=>{
+    try{
+      const response=await axiosInstance.put(`/auth/update`,data)
+      return response
+    }
+    catch(error){
+      throw error
+    }
+  }
 
-  const value = { signup, signin ,forgotPassword,resetPassword,verifyEmail,resendVerificationToken};
+  const value = { signup, signin ,forgotPassword,verifyEmail,resendVerificationToken,resetPassword,updateLearnerProfile};
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

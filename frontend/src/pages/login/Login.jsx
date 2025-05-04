@@ -12,17 +12,28 @@ const Login = () => {
   const [successMessage,setSuccessMessage]=useState("")
   const [errorMessage,setErrorMessage]=useState("")
   const {signin}=useAuth()
+  
+  
   const handleSignIn=async(data)=>{
-    
+   
     try{
       setIsLoading(true)
       const response=await signin(data)
       if(response.status===200){
       const token=sessionStorage.getItem("Token")
+      const user = sessionStorage.getItem("User");
+      const userParsed = JSON.parse(user);
+
       
       setSuccessMessage (response.data.message)
       console.log(response.data)
-      navigate("/")
+      if(userParsed?.isVerified){
+        navigate("/")
+      }
+      else{
+        navigate("/verifyemail")
+      }
+     
     }
 
     

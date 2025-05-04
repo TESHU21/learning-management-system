@@ -164,7 +164,7 @@ const FormComp = forwardRef(({
                         )}
                       </FormControl>
                       {error && (
-                        <FormMessage className="text-xs text-red-600 mt-1">
+                        <FormMessage className="text-xs text-red-600 ">
                           {error.message}
                         </FormMessage>
                       )}

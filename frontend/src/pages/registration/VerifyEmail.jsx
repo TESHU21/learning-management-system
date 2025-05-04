@@ -3,6 +3,7 @@ import FormComp from '@/components/FormComp';
 import HeroImage from '../../assets/svg/Ellipse 32.svg';
 import { z } from 'zod';
 import { useAuth } from '@/contexts/authContext';
+import { useNavigate } from 'react-router-dom';
 
 const VerifyEmail = () => {
   const [timer, setTimer] = useState(0);
@@ -10,6 +11,7 @@ const VerifyEmail = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const { verifyEmail, resendVerificationToken } = useAuth();
+  const navigate=useNavigate()
 
   // Countdown timer
   useEffect(() => {
@@ -44,6 +46,7 @@ const VerifyEmail = () => {
       console.log('OTP verified:', response);
       setSuccessMessage('Email verified successfully!');
       setErrorMessage('');
+      navigate("/")
     } catch (error) {
       console.error(error);
       const msg = error.response?.data?.message || 'Verification failed';
@@ -63,6 +66,7 @@ const VerifyEmail = () => {
       setSuccessMessage('OTP resent successfully!');
       setErrorMessage('');
       setTimer(30); // Start countdown only after successful resend
+     
     } catch (error) {
       console.error(error);
       const msg = error.response?.data?.message || 'Failed to resend OTP';

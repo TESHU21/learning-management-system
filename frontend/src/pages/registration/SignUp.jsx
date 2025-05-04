@@ -18,8 +18,10 @@ const SignUp = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const handleSignUp=async(data)=>{
       try{
+        
         const response=await signup(data)
-        console.log(response)
+        navigate("/verifyemail")
+        
 
       }
       catch(error){
@@ -37,7 +39,7 @@ const SignUp = () => {
     <div className=' w-full md:w-[500px]  p-6'>
         <h3 className='w-full md:w-[419px] text-center font-lato font-bold leading-10 md:leading-12 md:text-[40px] mt-[73px] mb-[49px]'>Sign up to get started</h3>
         <div className=" flex flex-col  gap-6 md:w-[431px]">
-        <Button className=" flex items-center bg-white hover:bg-white border border-blue-primary  w-full h-12 py-3 px-6"> <FcGoogle className='w-[22px] h-[22px]'/> <span className='text-blue-primary'>Sign up using Google</span></Button>
+        <Button className=" flex items-center bg-white hover:bg-white border border-blue-primary  w-full h-12 py-3 px-6"> <FcGoogle className='w-[22px] h-[22px]'/> <span className='text-blue-primary'>Log in using Google</span></Button>
         <span className='h-6 text-center'>or</span>
            
 

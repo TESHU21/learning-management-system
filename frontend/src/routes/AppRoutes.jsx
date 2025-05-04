@@ -31,7 +31,7 @@ const AppRoutes = () => {
         <Route path='dashboard' element={<Dashboard/>}/>
         <Route path='settings' element={<Settings/>}/>
         <Route path='portal' element={<Portal/>}/>
-        {/* <Route path='verify' element={<VerifyEmail/>}/> */}
+        <Route path='verifyemail' element={<VerifyEmail/>}/>
         <Route path="reset-password/:token" element={<EmailVerification/>}/>
 
       </Route>
