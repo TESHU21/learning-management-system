@@ -49,6 +49,8 @@ const FormComp = forwardRef(({
   });
   useImperativeHandle(ref, () => ({
     submit: () => form.handleSubmit(onSubmit)(),
+    getValues: () => form.getValues(), // <-- Add this line
+
   }));
 
   const { setValue, getValues, trigger } = form;
@@ -99,24 +101,27 @@ const FormComp = forwardRef(({
                       <FormLabel>{label}</FormLabel>
                       <FormControl >
                         {type === "select" ? (
-                          <Select
-                            onValueChange={(value) => {
-                              setValue(name, value || "");
-                              trigger(name);
-                            }}
-                            value={getValues(name) || ""}
-                          >
-                            <SelectTrigger id={name} className="w-full bg-[#F5F5F5]">
-                              <SelectValue placeholder={placeholder || "Select"} />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {options?.map((option) => (
-                                <SelectItem key={option.value} value={option.value}>
-                                  {option.value}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
+                     <Select
+                     value={field.value === true ? "true" : field.value === false ? "false" : field.value || ""}
+                     onValueChange={(value) => {
+                       const parsedValue = value === "true" ? true : value === "false" ? false : value;
+                       field.onChange(parsedValue);
+                     }}
+                   >
+                     <SelectTrigger className="w-full bg-[#F5F5F5]">
+                       <SelectValue placeholder={placeholder || "Select"} />
+                     </SelectTrigger>
+                     <SelectContent>
+                       {options.map((option) => (
+                         <SelectItem key={option.value} value={option.value}>
+                           {option.name}
+                         </SelectItem>
+                       ))}
+                     </SelectContent>
+                   </Select>
+                    
+                    
+                        
                         ) : type === "textarea" ? (
                           <Textarea
                             {...field}
