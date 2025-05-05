@@ -5,7 +5,9 @@
     lastName: z.string().min(1, "Last name is required").or(z.literal("")),
     contact: z.string().optional().or(z.literal("")),
     location: z.string().optional().or(z.literal("")),
-    description:z.string().optional().or(z.literal("")),
+    disabled: z.coerce.boolean().optional(),
+
+    description:z.string().optional(),
   });
 
   export const passwordSchema = z.object({
@@ -22,15 +24,36 @@
         lastName: "",
         contact: "",
         location: "",
+        description:"",
+        disabled:"false"
       };
 
-    export const profileFields=[
-         {name: "firstName",placeholder:"First Name",icon:User, type: "text", className: "col-span-1  " ,},
-         {name: "lastName",placeholder:"Last Name",icon:User, type: "text", className: "col-span-1 " ,},
-         {name: "contact",placeholder:"Phone Number",icon:Phone, type: "text", className: "col-span-1  " ,},
-         {name: "location",placeholder:"Location",icon:MapPin, type: "text", className: "col-span-1 " ,}
-         
-    ]
+      export const profileFields = [
+        { name: "firstName", placeholder: "First Name", icon: User, type: "text", className: "col-span-1" },
+        { name: "lastName", placeholder: "Last Name", icon: User, type: "text", className: "col-span-1" },
+        { name: "contact", placeholder: "Phone Number", icon: Phone, type: "text", className: "col-span-1" },
+        { name: "location", placeholder: "Location", icon: MapPin, type: "text", className: "col-span-1" },
+      
+        {
+          name: "disabled",
+          placeholder: "Disabled",
+          type: "select",
+          options: [
+            
+            { name: "true",value: "true" },
+            { name: "false",value: "false"}
+          ],
+          className: "col-span-1",
+        },
+      
+        {
+          name: "description",
+          placeholder: "Description",
+          type: "textarea",
+          className: "col-span-1",
+        }
+      ];
+      
     export const passwordFields=[
          {name: "newPassword",placeholder:"New Password",icon:User, type: "password", className: "col-span-1" ,},
          {name: "confirmPassword",placeholder:"Confirm Password",icon:User, type: "password", className: "col-span-1" ,},

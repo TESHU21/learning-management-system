@@ -112,7 +112,7 @@ const FormComp = forwardRef(({
                             <SelectContent>
                               {options?.map((option) => (
                                 <SelectItem key={option.value} value={option.value}>
-                                  {option.label}
+                                  {option.value}
                                 </SelectItem>
                               ))}
                             </SelectContent>

@@ -50,8 +50,8 @@ const OurSolutions = () => {
                     <h3 className=' text-[40px] font-lato font-bold  leading-[1.2] '>What will be next step</h3>
                     <p className='font-inter text-base leading-6 '>Discover our diverse stack of solutions, including software development, data science, and cloud tools. Sign up today and kickstart your journey!</p>
                 </div>
-                <div className='mr-[146px]'>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 bg-blue-primary items-start">
+                <div className=' flex justify-center md:mr-[146px]'>
+                <div className="grid grid-cols-3 md:grid-cols-4 gap-4 bg-blue-primary  items-start">
   {techStacks.map((tech) => (
     <a
       key={tech.name}

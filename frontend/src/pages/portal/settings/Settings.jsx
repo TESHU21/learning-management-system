@@ -7,12 +7,23 @@ import {
 } from './data'
 import FormComp from '@/components/FormComp'
 import { Button } from '@/components/ui/button'
+import { useAuth } from '@/contexts/authContext'
 
 const Settings = () => {
+  
   const profileRef = useRef(null)
   const passwordRef = useRef(null)
+  const{updateLearnerProfile}=useAuth()
+  const parsedUser=JSON.parse(sessionStorage.getItem("User"))
+  console.log("User from Settings",parsedUser)
 
   const handleProfileSubmit = async (data) => {
+    try{
+      const response=await updateLearnerProfile(data)
+    }
+    catch(error){
+      console.log(error)
+    }
     // Call your profile update API here
     console.log("Updating profile:", data)
   }

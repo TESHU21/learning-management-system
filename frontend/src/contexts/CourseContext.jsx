@@ -52,9 +52,9 @@ export const  CourseProvider=({children})=>{
 
 
     // Rate Tracks
-    const rateTrack=async(trackId)=>{
+    const rateTrack=async(trackId,data)=>{
         try{
-            const response = await axiosInstance.post(`/tracks/${trackId}/ratings`)
+            const response = await axiosInstance.post(`/tracks/${trackId}/ratings`,data)
             return response
         }
         catch(error){
@@ -95,9 +95,9 @@ export const  CourseProvider=({children})=>{
 
     }
     // function to enroll learners by Track
-    const enrollLearnersbyTrack=async()=>{
+    const enrollLearnersbyTrack=async(data)=>{
         try{
-            const response = await axiosInstance.post('/enrollments')
+            const response = await axiosInstance.post('/enrollments',data)
             return response
         }
         catch(error){
@@ -117,9 +117,9 @@ export const  CourseProvider=({children})=>{
 
     }
     // function to enroll learner to a course
-    const enrollToCourse=async()=>{
+    const enrollToCourse=async(data)=>{
         try{
-            const response=await axiosInstance.post('/registrations')
+            const response=await axiosInstance.post('/registrations',data)
             return response
         }
         catch(error){
