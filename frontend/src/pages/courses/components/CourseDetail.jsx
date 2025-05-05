@@ -37,7 +37,7 @@ export default function CourseDetail() {
   return (
     <div className=" relative w-full">
       {/* Header Section */}
-      <div className="w-full h-[427px] bg-blue-primary text-white">
+      <div className="w-full md:h-[427px] bg-blue-primary text-white">
         {/* Breadcrumb Navigation */}
         <nav className="pt-[53px] px-4 md:px-[203px]">
           <Breadcrumb>
@@ -70,19 +70,19 @@ export default function CourseDetail() {
         </nav>
 
         {/* Course Detail Content */}
-        <div className="mt-10 px-4 md:px-[203px]">
-          <h3 className="text-3xl font-bold mb-4">{openedCourse.title}</h3>
-          <p className="mb-6 mt-[21px] w-[556px] text-base font-inter text-">{openedCourse.description}</p>
-          <div className="flex flex-col md:flex-row gap-8 text-base">
-            <div className="flex flex-col w-[74px] gap-1 text-base leading-6  font-inter">
+        <div className=" flex flex-col mt-10 px-4 md:px-[203px]">
+          <h3 className=" text-xl md:text-3xl   font-bold mb-4">{openedCourse.title}</h3>
+          <p className="mb-6 mt-[21px] md:w-[556px] text-base font-inter text-justify ">{openedCourse.description}</p>
+          <div className="flex gap-4 md:gap-8 text-base ">
+            <div className="flex flex-col  md:w-[74px] gap-1 text-base leading-6  font-inter">
               <span className="">Instructor</span>
               <span>{openedCourse.instructor}</span>
             </div>
-            <div className="flex flex-col text-base leading-6  font-inter">
+            <div className=" flex flex-col text-base leading-6  font-inter">
               <span className="">Enrolled Students</span>
-              <span className=" ">{openedCourse.total_enrolled_students}</span>
+              <span className="text-center md:text-start ">{openedCourse.total_enrolled_students}</span>
             </div>
-            <div className="flex flex-col text-base leading-6  font-inter">
+            <div className="flex   flex-col text-base leading-6  font-inter">
             <span className="">1 review</span>
             <div className="flex gap-1"> {[1,2,3,4,5].map((star)=>(
                       <LucideStar key={star} className={`w-6 h-6 cursor-pointer ${openedCourse.rating>=star? "text-yellow-600 fill-current":""} `}/>
@@ -94,22 +94,9 @@ export default function CourseDetail() {
           </div>
         </div>
       </div>
-      <div className=" flex ">
-         {/* What We Learn Section */}
-      <div className="ml-[200px] mt-[30px] py-10 mb-[34px] border border-[#E6E6E6] w-[632px] pl-[11px] pt-[33px]">
-        <p className="font-semibold">What you'll learn</p>
-        <div className="flex flex-col gap-3 pl-5">
-  {openedCourse.core_concepts.map((item, index) => (
-    <p key={index} className="flex gap-[10px]  items-baseline text-base w-[578px] mt-2 leading-6">
-      <span className="h-2 w-2 rounded-full bg-gray-300 flex-shrink-0"></span>
-      {item}
-    </p>
-  ))}
-  </div>
-
-      </div>
-      {/* Course Detail */}
-      <div className=" absolute top-[60px] right-[202px] w-[402px] bg-white">
+      <div className=" flex flex-col md:flex-row">
+         {/* Course Detail */}
+      <div className=" md:absolute md:top-[60px] md:right-[202px] md:w-[402px] bg-white">
         <div className="mx-[20px] mt-[10px]">        
           <img src={openedCourse.image} alt="" className="w-[363px] h-[298px] object-cover" />
         </div>
@@ -144,18 +131,32 @@ export default function CourseDetail() {
          
         </div>
       </div>
+         {/* What We Learn Section */}
+      <div className="md:ml-[200px] px-4 mt-[30px] py-10 mb-[34px] md:border border-[#E6E6E6] w-full md:w-[632px] md:pl-[11px] md:pt-[33px]">
+        <p className="font-semibold">What you'll learn</p>
+        <div className="flex flex-col gap-3 pl-5">
+  {openedCourse.core_concepts.map((item, index) => (
+    <p key={index} className="flex gap-[10px]  items-baseline text-base w-full md:w-[578px] mt-2 leading-6">
+      <span className="h-2 w-2 rounded-full bg-gray-300 flex-shrink-0"></span>
+      {item}
+    </p>
+  ))}
+  </div>
+
+      </div>
+     
 
       </div>
       {/* Explore Related Courses */}
-      <div className="mx-[200px] mb-[187px]">
-        <p className=" font-semibold leading-[32px] text-[20px] font-inter">Explore related courses</p>
-        <div className=" flex  justify-center gap-6  mt-[62px]">
+      <div className="md:mx-[200px] mx-6 mb-10 md:mb-[187px]">
+        <p className=" font-semibold leading-[32px] text-[20px] px-4 text-start font-inter">Explore related courses</p>
+        <div className=" flex  flex-col md:flex-row justify-center  gap-6  md:mt-[62px]">
         {
         relatedCourse.map((item)=>
         
-    <div key={item.id} className=" flex gap-[10px] w-[508px] p-6 shadow-lg shadow-black/15  rounded-lg">
-      <img src={item.image} alt="" className="w-[202px] h-[209.6px] object-cover" />
-      <div className=" flex flex-col gap-4 mt-[40px] ">
+    <div key={item.id} className=" flex items-center gap-[10px] w-full md:w-[508px] p-6 shadow-lg shadow-black/15  rounded-lg">
+      <img src={item.image} alt="" className=" w-[100px] h-[109px] md:w-[202px]  md:h-[209.6px]  object-cover" />
+      <div className=" flex flex-col  gap-4 mt-[40px] ">
         <p className=" font-semibold">{item.name}</p>
         <span className="leading-6 text-base text-justify">{item.description.split('.')[0]}.</span>
       </div>

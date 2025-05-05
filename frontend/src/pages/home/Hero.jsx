@@ -53,8 +53,7 @@ const Hero = () => {
       ></div>
       <div className='flex flex-col gap-3 mt-10 mx-4 w-[200px] h-full justify-around'>
         <h6 className=' font-lato text-[30px] leading-8   font-bold  '>Unlock Your Potential with Industry-Leading Courses!</h6>
-        <Button onClick={handleGetStartedMobile}   style={{ cursor: 'pointer' }}
- className="w-[110px] h-[40px]   rounded-md py-3 px-6 gap-3 bg-blue-primary text-white hover:bg-blue-primary cursor-pointer  z-10 ">Get started</Button>
+        <Button onClick={handleGetStartedMobile}  className="w-[110px] h-[40px]   rounded-md py-3 px-6 gap-3 bg-blue-primary text-white hover:bg-blue-primary cursor-pointer  z-10 ">Get started</Button>
 
       </div>
 
