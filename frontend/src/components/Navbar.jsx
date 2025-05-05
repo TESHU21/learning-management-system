@@ -69,7 +69,7 @@ const Navbar = () => {
         </div>
 
         {menuVisiblity && (
-  <div className="md:hidden fixed right-0 top-[56px] z-50 w-[269px] min-h-screen shadow-md bg-white pl-[21px] pt-[25px] flex flex-col">
+  <div className="md:hidden fixed right-0 md:top-[56px] top-10 z-50 w-[269px] min-h-screen shadow-md bg-white pl-[21px] pt-[25px] flex flex-col">
     <ul className="flex flex-col gap-4">
       <li>
         <NavLink to="/" className={({isActive})=>isActive ? "text-blue-primary":""}>Home</NavLink>

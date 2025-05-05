@@ -29,77 +29,76 @@ const GetStartedSection = () => {
 
     </div>
     {/* Onboarding Process */}
-    
-    <div className='hidden md:flex gap-6 mt-[131px] pb-[254px] mx-[150px] '>
-        {/* Left Side */}
-        <div className="flex flex-col gap-[80px] flex-1">
-  {steps.map((step, index) => (
-    <div key={step.id} className="relative">
-      {/* Step Card */}
-      <div className="p-6 bg-white rounded-lg shadow-lg border w-full">
-        <div className="flex gap-[30px]">
-          <img src={step.icon} alt="" />
-          <div className="flex flex-col gap-3">
-            <h5 className="font-bold font-lato leading-7">{step.title}</h5>
-            <p className="font-inter text-base">
-              {step.description}
-            </p>
+    <div className="grid md:grid-cols-2 gap-6 md:mt-[131px] md:pb-[254px] md:mx-[100px]">
+  {/* Left Side */}
+  <div className="flex flex-col m-6 md:m-0 gap-[80px]">
+    {steps.map((step, index) => (
+      <div key={step.id} className="relative">
+        {/* Step Card */}
+        <div className="p-6 bg-white rounded-lg shadow-lg border">
+          <div className="flex gap-4 md:gap-[30px]">
+            <img src={step.icon} alt="" />
+            <div className="flex flex-col gap-3">
+              <h5 className="font-bold font-lato leading-7">{step.title}</h5>
+              <p className="font-inter text-base">{step.description}</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Arrow (only if not last) */}
-      {index < steps.length - 1 && (
-        <div className="absolute left-1/2 -bottom-[40px] transform -translate-x-1/2 translate-y-1/2 text-blue-primary z-10">
-          <FaArrowDownLong className="w-[38px] h-6" />
-        </div>
-      )}
+        {/* Arrow (only if not last) */}
+        {index < steps.length - 1 && (
+          <div className="absolute left-1/2 -bottom-[40px] transform -translate-x-1/2 translate-y-1/2 text-blue-primary z-10">
+            <FaArrowDownLong className="w-[38px] h-6" />
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+
+  {/* Right Side (Hidden on mobile) */}
+  <div className="hidden md:flex flex-col border shadow-lg rounded-md">
+    <div className="flex pt-[63px] mx-[70px]">
+      <div className="text-center">1 <br /> <span>Secure Login</span></div>
+      <div className="text-center ml-auto">2 <br /> <span>Authentication</span></div>
     </div>
-  ))}
+
+    <div className="flex justify-around ">
+      <img
+        src={SecureLoginImage}
+        alt="Secure Login"
+        className="w-[195.5px] mt-[17px] h-[136.02px]"
+      />
+      <div className=" mt-[30px]">
+        <img src={AuthenticationImage} alt="Authentication" />
+      </div>
+    </div>
+
+    {/* Step 3 */}
+    <div className="w-[140px] h-[45px] ml-[51px] text-base">
+      <p className="text-center">3</p>
+      <p className="text-center">Choose a course</p>
+    </div>
+
+    {/* Solutions */}
+    <div className="mt-6 mx-[51px]">
+      <div className="flex gap-7 justify-center">
+        {solutions.map((item) => (
+          <div key={item.title} className="p-6 border shadow-lg rounded-lg border-t-0">
+            <div className="flex flex-col gap-2 w-[100.8px]">
+              <img src={item.icon} alt="" className="w-[31.8px] h-[31.8px]" />
+              <p className="font-semibold text-[8px]">{item.title}</p>
+              <p className="text-[6.3px] leading-[9.44px]">{item.description}</p>
+              <p className="text-[7px] font-semibold text-center">${item.price}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
 </div>
 
-        {/* Right Side */}
-        <div className=' flex-1 border shadow-lg rounded-md  '>
-         
-          <div className='flex pt-[63px]  pr-[56px] '>
-                <div className='text-center pl-[58px] '>1 <br/> <span>Secure Login</span></div>
-                <div className='text-center ml-[317px]'>2 <br/> <span>Authentication</span></div>
-            </div>
+ 
 
-            <div className=' flex ml-[27px]   '>
-              <img src={SecureLoginImage} alt="Woman standing next to a secure laptop with a lock icon" className=' w-[195.5px] mt-[17px] h-[136.02px]' />
-              <div className='pl-[260px] mt-[30px]   '><img src={AuthenticationImage} alt="Person standing on screen to check autenticity" />
-              </div>
-          
-          </div>
-            {/* step 3 */}
-     <div className=' w-[140px] h-[45px] ml-[51px]  text-base'><
-      p className='text-center'>3</p>
-      <p  className=' text-center'>Choose a course</p>
-      </div>
-      <div className='mt-6 mx-[51px]'>
-          <div className="flex gap-7 justify-center">
-          {solutions.map((item) => (
-            <div key={item.title} className="p-6 border shadow-lg rounded-lg   border-t-0">
-              <div className="flex flex-col gap-2 w-[127.8px]">
-                <img src={item.icon} alt="" className="w-[31.8px] h-[31.8px]" />
-                <p className="font-semibold text-[8px]">{item.title}</p>
-                <p className=' text-[6.3px] leading-[9.44px]'>{item.description}</p>
-                
-                  <p className='text-[7px] font-semibold text-center'>${item.price}</p>
-      
-              
-              </div>
-            </div>
-          ))}
-                  </div>
-
-      </div>
-
-         
-        </div>
-       
-    </div>
    
 
   
