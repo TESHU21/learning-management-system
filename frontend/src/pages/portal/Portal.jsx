@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Dashboard from './dashboard/Dashboard';
 import Settings from './settings/Settings';
 import Invoices from './invoices/Invoices';
+import Messages from './messages/Messages';
 
 const Portal = () => {
   return (
@@ -32,6 +33,7 @@ const Portal = () => {
                   className="data-[state=active]:bg-[#014273] data-[state=active]:text-white text-sm sm:text-base"
                 >
                   Messages
+                  
                 </TabsTrigger>
                 <TabsTrigger
                   value="invoices"
@@ -54,7 +56,7 @@ const Portal = () => {
             <Settings/>
           </TabsContent>
           <TabsContent value="message">
-            Make changes Message.
+            <Messages/>
           </TabsContent>
           <TabsContent value="invoices">
             <Invoices />

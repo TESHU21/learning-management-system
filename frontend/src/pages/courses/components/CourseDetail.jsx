@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { course, coursedetail } from "./data";
+// import { course, coursedetail } from "./data";
 import { LiaCircle } from "react-icons/lia";
 import { Clock, GraduationCap, User, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Loader from "@/components/Loader";
+
 
 import {
   Breadcrumb,
@@ -13,18 +15,61 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import {LucideStar} from 'lucide-react'
+import { useCourse } from "@/contexts/CourseContext";
+import { useNavigate } from "react-router-dom";
 
 export default function CourseDetail() {
-  const { id } = useParams();
-  const [openedCourse, setOpenedCourse] = useState(null);
+  const {id } = useParams();
+
+  const [openedCourse, setOpenedCourse] = useState([]);
   const [relatedCourse,setRelatedCourse]=useState(null)
+  const [isLoading,setIsLoading]=useState(false)
+  const navigate=useNavigate()
+  const {courses, selectedCourse,getSingleCourses,enrollLearnersbyTrack, createInvoices}=useCourse()
+  const paystackCallbackUrl=window.location.href;
+  
+  const handleTrackEnrollment=async(e,data)=>{
+    console.log("Track Data",data)
+    const track=data.track.id;
+    const amount=data.track.amount;
+    const dataToSend={track,amount,paystackCallbackUrl}
+
+
+    
+    try{
+      setIsLoading(true)
+      const response=await enrollLearnersbyTrack(dataToSend)
+
+      // 
+
+      if(response){
+        navigate("/checkout")
+
+      }
+    
+    }
+    catch(error){
+      console.log(error)
+    }
+    finally{
+      setIsLoading(false)
+    }
+
+  }
+
+
+  
 
   useEffect(() => {
-    const foundCourse = coursedetail.find((course) => course.id === +id);
+    const foundCourse = courses.find((course) => course._id ===selectedCourse._id);
     setOpenedCourse(foundCourse);
-    const otherCourse=coursedetail.filter((course)=>course.id!==+id)
+    console.log("Coursesfound",foundCourse)
+    const otherCourse=courses.filter((course)=>course._id!==selectedCourse._id)
+    console.log("Coursesfound",otherCourse)
+
     setRelatedCourse(otherCourse)
-  }, [id]);
+  }, [id,courses]);
+  console.log("opened course",openedCourse)
 
   if (!openedCourse) {
     return (
@@ -76,7 +121,7 @@ export default function CourseDetail() {
           <div className="flex gap-4 md:gap-8 text-base ">
             <div className="flex flex-col  md:w-[74px] gap-1 text-base leading-6  font-inter">
               <span className="">Instructor</span>
-              <span>{openedCourse.instructor}</span>
+              <span>{openedCourse?.track?.instructor}</span>
             </div>
             <div className=" flex flex-col text-base leading-6  font-inter">
               <span className="">Enrolled Students</span>
@@ -127,7 +172,7 @@ export default function CourseDetail() {
             <p className="font-semibold text-center py-[18px]">$350.00</p>
             
           </div>
-          <Button className=" w-full bg-blue-primary py-3 px-6  font-semibold hover:bg-blue-primary">Enroll</Button>
+          <Button className=" w-full bg-blue-primary py-3 px-6  font-semibold hover:bg-blue-primary cursor-pointer"  onClick={(e)=>handleTrackEnrollment(e,openedCourse)}>{isLoading?<Loader/>:"Enroll"}</Button>
          
         </div>
       </div>
@@ -135,12 +180,12 @@ export default function CourseDetail() {
       <div className="md:ml-[200px] px-4 mt-[30px] py-10 mb-[34px] md:border border-[#E6E6E6] w-full md:w-[632px] md:pl-[11px] md:pt-[33px]">
         <p className="font-semibold">What you'll learn</p>
         <div className="flex flex-col gap-3 pl-5">
-  {openedCourse.core_concepts.map((item, index) => (
-    <p key={index} className="flex gap-[10px]  items-baseline text-base w-full md:w-[578px] mt-2 leading-6">
+  {/* {openedCourse.core_concepts.map((item) => (
+    <p key={item._id} className="flex gap-[10px]  items-baseline text-base w-full md:w-[578px] mt-2 leading-6">
       <span className="h-2 w-2 rounded-full bg-gray-300 flex-shrink-0"></span>
       {item}
     </p>
-  ))}
+  ))} */}
   </div>
 
       </div>
@@ -152,9 +197,10 @@ export default function CourseDetail() {
         <p className=" font-semibold leading-[32px] text-[20px] px-4 text-start font-inter">Explore related courses</p>
         <div className=" flex  flex-col md:flex-row justify-center  gap-6  md:mt-[62px]">
         {
-        relatedCourse.map((item)=>
+        relatedCourse?.map((item)=>
         
     <div key={item.id} className=" flex items-center gap-[10px] w-full md:w-[508px] p-6 shadow-lg shadow-black/15  rounded-lg">
+    
       <img src={item.image} alt="" className=" w-[100px] h-[109px] md:w-[202px]  md:h-[209.6px]  object-cover" />
       <div className=" flex flex-col  gap-4 mt-[40px] ">
         <p className=" font-semibold">{item.name}</p>

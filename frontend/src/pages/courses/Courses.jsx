@@ -2,19 +2,23 @@ import React ,{useState,useEffect} from 'react'
 import { Input } from "@/components/ui/input"
 import { LucideSearch,LucideStar } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import { course } from './components/data'
+
 import { useNavigate } from 'react-router-dom'
 import { useCourse } from '@/contexts/CourseContext'
 import {PuffLoader}  from "react-spinners";
+import { couch } from 'globals'
 
 const Courses = () => {
-  const [fetchedCourse,setFetchedCourse]=useState([])
   const [searchValue,setSearchValue]=useState("")
   const [isloading,setIsloading]=useState(false)
-  const{ getCourses}=useCourse()
   const navigate=useNavigate()
+  // import states from course context
+  const{ getCourses,courses,setCourses,setSelectedCourse}=useCourse()
+ 
   const handleNavigate=(item)=>{
-    navigate(`/courses/${item.id}`,{state:{course:item}})
+    console.log("Items Cost",item)
+    navigate(`/courses/${item._id}`)
+    setSelectedCourse(item)
 
   }
   useEffect(()=>{
@@ -24,7 +28,7 @@ const Courses = () => {
         setIsloading(true)
       const response=await getCourses()
 
-      setFetchedCourse(response?.data.courses)
+      setCourses(response?.data.courses)
 
 console.log("Fetched Courses",response)
       }
@@ -40,7 +44,7 @@ console.log("Fetched Courses",response)
 
 
   },[])
-  const filteredCourses = fetchedCourse.filter(course =>
+  const filteredCourses = courses.filter(course =>
     course.title.toLowerCase().includes(searchValue.toLowerCase())
   );
   if(isloading){

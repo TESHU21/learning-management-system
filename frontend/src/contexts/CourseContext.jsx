@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { useContext,createContext } from 'react'
 import axiosInstance from '@/lib/axiosInstance';
 
@@ -7,6 +7,9 @@ export const useCourse=()=>{
     return useContext(CourseContext)
 }
 export const  CourseProvider=({children})=>{
+    const [courses,setCourses]=useState([])
+    const [selectedCourse,setSelectedCourse]=useState([])
+    const [courseInvoices,setCourseInvoices]=useState(null)
 
     // function to fetch all courses
     const getCourses=async()=>{
@@ -83,6 +86,8 @@ export const  CourseProvider=({children})=>{
             throw error
         }
     }
+   
+  
     // function to get singleInvoices
     const getsingleInvoices=async(invoicesId)=>{
         try{
@@ -136,7 +141,10 @@ export const  CourseProvider=({children})=>{
         }
     }
     const values={getCourses,getSingleCourses,getallTracks,getSingleTrack,getTrackRatings,
-        rateTrack,getallInvoices,getsingleInvoices,enrollLearnersbyTrack,getEnrollements,enrollToCourse,getregistrationbyLearner}
+        rateTrack,getallInvoices,getsingleInvoices,enrollLearnersbyTrack,getEnrollements,
+        enrollToCourse,getregistrationbyLearner,courses,setCourses,
+        selectedCourse,setSelectedCourse,courseInvoices,setCourseInvoices, 
+    }
 
 
 

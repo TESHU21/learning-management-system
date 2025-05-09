@@ -10,7 +10,7 @@ const GoogleLoginButton = () => {
     const login=useGoogleLogin({
         flow:'auth-code',
         onSuccess:async(codeResponse)=>{
-            console.log('Authorization code:', codeResponse.code);
+            console.log('Authorization code:', codeResponse);
 
             //  send respond codeResponse.code to backend api
         // store token  from backend response to session storage
