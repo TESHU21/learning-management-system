@@ -4,6 +4,9 @@ import Dashboard from './dashboard/Dashboard';
 import Settings from './settings/Settings';
 import Invoices from './invoices/Invoices';
 import Messages from './messages/Messages';
+import { LayoutDashboard, Mail,Bolt } from 'lucide-react';
+import { TfiReceipt } from "react-icons/tfi";
+
 
 const Portal = () => {
   return (
@@ -20,26 +23,28 @@ const Portal = () => {
                   value="dashboard"
                   className="data-[state=active]:bg-[#014273] data-[state=active]:text-white text-sm sm:text-base"
                 >
-                  Dashboard
+                <LayoutDashboard /> Dashboard
                 </TabsTrigger>
                 <TabsTrigger
                   value="settings"
                   className="data-[state=active]:bg-[#014273] data-[state=active]:text-white text-sm sm:text-base"
                 >
+                      <Bolt/>
+
                   Settings
                 </TabsTrigger>
                 <TabsTrigger
                   value="message"
                   className="data-[state=active]:bg-[#014273] data-[state=active]:text-white text-sm sm:text-base"
                 >
-                  Messages
+                 <span><Mail/></span>Messages
                   
                 </TabsTrigger>
                 <TabsTrigger
                   value="invoices"
                   className="data-[state=active]:bg-[#014273] data-[state=active]:text-white text-sm sm:text-base"
                 >
-                  Invoices
+                  <span><TfiReceipt  size={60}/></span>Invoices
                 </TabsTrigger>
               
               </div>
@@ -56,7 +61,8 @@ const Portal = () => {
             <Settings/>
           </TabsContent>
           <TabsContent value="message">
-            <Messages/>
+            {/* <Messages/> */}
+            Messages Here!
           </TabsContent>
           <TabsContent value="invoices">
             <Invoices />
