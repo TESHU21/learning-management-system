@@ -1,9 +1,27 @@
-import React from 'react'
+import React ,{useState,useEffect} from 'react'
 import { Button } from '@/components/ui/button'
 import LaptopImages from "../../../assets/images/Laptop with Code Screen.png"
 import SoftwareDevImage from "../../../assets/course/Software.svg"
+import { useCourse } from '@/contexts/CourseContext'
 
 const Dashboard = () => {
+  const {getEnrollements}=useCourse()
+
+  useEffect(()=>{
+    const fetchEnrolledCourse=async()=>{
+      try{
+        const response=await getEnrollements()
+        console.log("Dashboard Responses",response)
+      }
+      catch(error){
+        console.log(error)
+      }
+
+    }
+    fetchEnrolledCourse()
+
+
+  },[])
   return (
     <div className='md:px-[200px]'>
         <h3 className=' text-base leading-6 font-bold'>Enrolled courses</h3>

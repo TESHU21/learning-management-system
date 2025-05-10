@@ -115,6 +115,16 @@ const storeUser=(user)=>{
       throw error
     }
   }
+   // update Profile
+  const getUserInfo=async(data)=>{
+    try{
+      const response=await axiosInstance.get(`/auth/check-auth`)
+      return response
+    }
+    catch(error){
+      throw error
+    }
+  }
 
   const value = { signup, signin ,forgotPassword,verifyEmail,resendVerificationToken,resetPassword,updateLearnerProfile};
 

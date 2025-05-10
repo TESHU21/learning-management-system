@@ -15,7 +15,7 @@ const Portal = () => {
         {/* Blue full-width header */}
         <div className="w-full bg-blue-primary h-[135px] relative flex items-end z-10">
           {/* Responsive container */}
-          <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24 md:mx-[200px]">
+          <div className="w-full  md:mx-[200px]">
             {/* Tabs list */}
             <TabsList asChild className="flex justify-between sm:justify-center w-full h-[76px] bg-white mb-[0.5px] shadow-none ring-0 border-0 rounded-none overflow-x-auto">
               <div className="flex w-full gap-2">
@@ -53,7 +53,7 @@ const Portal = () => {
         </div>
 
         {/* Tabs content */}
-        <div className="mt-4 w-full px-4 sm:px-6 md:px-12 lg:px-24">
+        <div className="mt-4 w-full ">
           <TabsContent value="dashboard">
             <Dashboard />
           </TabsContent>

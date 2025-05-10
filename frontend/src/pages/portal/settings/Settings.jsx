@@ -1,4 +1,4 @@
-import React, { useRef,useState } from 'react'
+import React, { useRef,useState,useEffect } from 'react'
 import { Power, Plus } from 'lucide-react'
 import {
   profileSchema, passwordSchema,
@@ -9,12 +9,26 @@ import FormComp from '@/components/FormComp'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/contexts/authContext'
 import Loader from '@/components/Loader'
+import ProfileImage from './ProfileImage'
+import { useCourse } from '@/contexts/CourseContext'
 
 const Settings = () => {
   const [isLoading,setIsLoading]=useState(false)
   const profileRef = useRef(null)
   const passwordRef = useRef(null)
-  const { updateLearnerProfile } = useAuth()
+  const { updateLearnerProfile ,getUserInfo} = useAuth()
+  useEffect(()=>{
+  const fetchUserData=async()=>{
+    try{
+      const response=await getUserInfo()
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
+
+  fetchUserData()
+  },[])
 
   const handleSubmitAll = async () => {
     const profileData = profileRef.current?.getValues()
@@ -42,10 +56,15 @@ const Settings = () => {
   }
 
   return (
-    <div className="flex flex-col md:flex-row md:justify-center md:gap-[40px] sm:px-6 lg:px-[170px]">
-      <div className="w-full md:w-[775px] mt-[40px]">
+    <div className="flex w-full px-[200px] md:gap-[200px]  ">
+      <div className=' mt-[65px]'>
+         <ProfileImage/>
+      </div>
+       
+      <div className="  mt-[40px]">
+      
         {/* Profile Section */}
-        <div>
+        <div flex flex-col>
           <h4 className="mb-4 text-2xl md:text-[32px] font-bold">Profile</h4>
           <div className="bg-[#f0f0f0] px-4 sm:px-6 md:px-[52px] pt-10 pb-12">
             <FormComp
