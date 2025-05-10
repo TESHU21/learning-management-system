@@ -3,6 +3,8 @@ import { useCourse } from '@/contexts/CourseContext'
 import { DataTable } from './components/data-table'
 import {columns} from "./components/columns"
 import { data } from 'react-router-dom'
+import {PuffLoader}  from "react-spinners";
+
 
 const Invoices = () => {
   const {getallInvoices}=useCourse()
@@ -98,6 +100,7 @@ const Invoices = () => {
   useEffect(()=>{
     const fetchInvoices=async()=>{
       try{
+        setIsloading(true)
         const response=await getallInvoices()
         console.log(response)
        
@@ -113,6 +116,9 @@ const Invoices = () => {
       catch(error){
         console.log(error)
       }
+      finally{
+        setIsloading(false)
+      }
     }
     fetchInvoices()
 
@@ -124,6 +130,11 @@ const Invoices = () => {
       [row.id]: !prev[row.id], // Toggle visibility
     }));
   };
+   if(isloading){
+      return <div className='text-center  text-2xl font-lusitana text-gray-600 mt-10 flex justify-center  gap-10 items-center'>
+        <PuffLoader  size={200} color='#25e019'/>
+      </div>
+    }
   return (
     <div className=' flex justify-center'>
       <DataTable 
