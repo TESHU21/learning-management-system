@@ -116,7 +116,7 @@ const storeUser=(user)=>{
     }
   }
    // update Profile
-  const getUserInfo=async(data)=>{
+  const getUserInfo=async()=>{
     try{
       const response=await axiosInstance.get(`/auth/check-auth`)
       return response
@@ -126,7 +126,7 @@ const storeUser=(user)=>{
     }
   }
 
-  const value = { signup, signin ,forgotPassword,verifyEmail,resendVerificationToken,resetPassword,updateLearnerProfile};
+  const value = { signup, signin ,forgotPassword,verifyEmail,resendVerificationToken,resetPassword,updateLearnerProfile,getUserInfo};
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

@@ -11,9 +11,12 @@ import { useAuth } from '@/contexts/authContext'
 import Loader from '@/components/Loader'
 import ProfileImage from './ProfileImage'
 import { useCourse } from '@/contexts/CourseContext'
+import { initialValues } from '@/pages/checkout/components/data'
 
 const Settings = () => {
   const [isLoading,setIsLoading]=useState(false)
+  const [formData,setFormData]=useState(profileInitialValues)
+  const [userData,setUserData]=useState({})
   const profileRef = useRef(null)
   const passwordRef = useRef(null)
   const { updateLearnerProfile ,getUserInfo} = useAuth()
@@ -21,6 +24,21 @@ const Settings = () => {
   const fetchUserData=async()=>{
     try{
       const response=await getUserInfo()
+      const user=response?.data.user
+      setUserData(user)
+
+        // Filteed Form Data
+        const filteredData = {
+          firstName: user.firstName || initialValues.firstName,
+          lastName: user.lastName || initialValues.lastName,
+          contact: user.contact || initialValues.contact,
+          disabled: user.disabled || initialValues.disabled,
+          location: user.location || initialValues.location,
+          description: user.description || initialValues.description,
+          
+        };
+        setFormData(filteredData)
+      console.log("ffffffff",response)
     }
     catch(error){
       console.log(error)
@@ -58,7 +76,7 @@ const Settings = () => {
   return (
     <div className="flex w-full px-[200px] md:gap-[200px]  ">
       <div className=' mt-[65px]'>
-         <ProfileImage/>
+         <ProfileImage user={userData}/>
       </div>
        
       <div className="  mt-[40px]">
@@ -70,7 +88,7 @@ const Settings = () => {
             <FormComp
               ref={profileRef}
               schema={profileSchema}
-              initialValues={profileInitialValues}
+              initialValues={formData}
               fields={profileFields}
               hideButton={true}
             />

@@ -1,12 +1,15 @@
 import React, { useState, useRef } from 'react';
 import { FaEdit, FaTimes } from 'react-icons/fa';
-import axios from 'axios';
+import axios from 'axios'; 
+import axiosInstance from '@/lib/axiosInstance';
+import { useAuth } from '@/contexts/authContext';
 
-const ProfileImage = ({ firstName = 'User', initialPhoto = null }) => {
-  const [photo, setPhoto] = useState(initialPhoto);
+const ProfileImage = ({ user }) => {
+  const [photo, setPhoto] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [percent, setPercent] = useState(0);
   const fileInputRef = useRef(null);
+  const {updateLearnerProfile}=useAuth()
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -19,22 +22,19 @@ const ProfileImage = ({ firstName = 'User', initialPhoto = null }) => {
   const uploadImage = async (file) => {
     const formData = new FormData();
     formData.append('profileImage', file);
+    formData.append('disabled',user.disabled)
+    formData.append('location',user.location)
+    formData.append('contact',user.contact)
+    formData.append('description',user.description)
+    console.log("Form Data",formData)
+    
 
     try {
       setUploading(true);
       setPercent(0);
 
-      const response = await axios.post('/api/upload-profile', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        onUploadProgress: (progressEvent) => {
-          const percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total
-          );
-          setPercent(percentCompleted);
-        },
-      });
+      const response = await updateLearnerProfile(formData) 
+     
 
       if (response.status === 200) {
         console.log('Upload successful!');
@@ -62,7 +62,7 @@ const ProfileImage = ({ firstName = 'User', initialPhoto = null }) => {
     } else if (photo) {
       return URL.createObjectURL(photo);
     } else {
-      return '/default-avatar.png';
+      return ;
     }
   };
 
@@ -114,7 +114,7 @@ const ProfileImage = ({ firstName = 'User', initialPhoto = null }) => {
 
      
       {/* User First Name */}
-      <p className="mt-2 text-xs lowercase text-blue-600">{firstName}</p>
+      <p className="mt-2 text-xs lowercase text-blue-600">{user.firstName}</p>
     </div>
   );
 };
