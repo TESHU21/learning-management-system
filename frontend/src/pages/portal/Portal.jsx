@@ -61,7 +61,7 @@ const Portal = () => {
             <Settings/>
           </TabsContent>
           <TabsContent value="message">
-            {/* <Messages/> */}
+            <Messages/>
             Messages Here!
           </TabsContent>
           <TabsContent value="invoices">

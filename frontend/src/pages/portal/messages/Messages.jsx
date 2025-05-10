@@ -1,64 +1,70 @@
+import React from 'react';
+import { BookOpen, CheckCircle, AlertCircle } from 'lucide-react';
 
-import React, { useState } from 'react';
+const notifications = [
+  {
+    icon: <BookOpen className="w-5 h-5 text-indigo-500" />,
+    title: 'New Course Material Available',
+    time: '2h ago',
+    message: (
+      <>
+        New lecture slides for <strong>Introduction to Data Science</strong> have been uploaded. Check the{' '}
+        <span className="text-indigo-600 font-semibold">Course Materials</span> section.
+      </>
+    ),
+    bg: 'bg-indigo-50',
+  },
+  {
+    icon: <CheckCircle className="w-5 h-5 text-green-500" />,
+    title: 'Assignment Submitted',
+    time: '4h ago',
+    message: (
+      <>
+        You successfully submitted <strong>Assignment 2</strong> for <strong>Web Development</strong>. Good luck!
+      </>
+    ),
+    bg: 'bg-green-50',
+  },
+  {
+    icon: <AlertCircle className="w-5 h-5 text-red-500" />,
+    title: 'Upcoming Quiz Reminder',
+    time: '1d ago',
+    message: (
+      <>
+        A quiz for <strong>Machine Learning</strong> is scheduled for{' '}
+        <span className="text-red-600 font-semibold">Monday at 10:00 AM</span>. Be sure to review the latest topics.
+      </>
+    ),
+    bg: 'bg-red-50',
+  },
+];
 
 export default function Messages() {
-  const [message, setMessage] = useState(null);
-  const [type, setType] = useState('success');
-
-  const showMessage = (text, type = 'success') => {
-    setMessage(text);
-    setType(type);
-    setTimeout(() => setMessage(null), 4000);
-  };
-
   return (
-    <div className="p-6">
-      {/* Notification */}
-      {message && (
-        <div
-          className={`fixed top-4 right-4 px-4 py-3 rounded shadow-lg z-50 transition-all duration-300 
-            ${type === 'success' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`}
-        >
-          {message}
+    <div className="max-w-xl mx-auto p-4">
+      <div className="bg-white rounded-xl shadow-md overflow-hidden">
+        <div className="flex justify-between items-center px-4 py-2 border-b">
+          <h2 className="text-lg font-semibold">Notifications</h2>
+          <button className="text-green-600 text-sm hover:underline">Mark all as read</button>
         </div>
-      )}
-
-      {/* Trigger Buttons */}
-      <div className="flex flex-col gap-4">
-        <button
-          onClick={() => showMessage('Successfully registered!', 'success')}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-        >
-          Simulate Registration
-        </button>
-
-        <button
-          onClick={() => showMessage('Signed in successfully.', 'success')}
-          className="bg-green-600 text-white px-4 py-2 rounded"
-        >
-          Simulate Sign In
-        </button>
-
-        <button
-          onClick={() => showMessage('Track enrolled!', 'success')}
-          className="bg-purple-600 text-white px-4 py-2 rounded"
-        >
-          Simulate Track Enrollment
-        </button>
-
-        <button
-          onClick={() => showMessage('Course registration failed.', 'error')}
-          className="bg-red-600 text-white px-4 py-2 rounded"
-        >
-          Simulate Failed Course Registration
-        </button>
-
-        <button
-          onClick={() => showMessage('Payment processed!', 'success')}
-          className="bg-yellow-600 text-white px-4 py-2 rounded"
-        >
-          Simulate Payment
-        </button>
+        <div className="divide-y">
+          <div className="bg-gray-50 px-4 py-2 text-sm text-gray-600 font-medium">Today</div>
+          {notifications.map((notif, index) => (
+            <div key={index} className={`flex gap-4 p-4 ${notif.bg}`}>
+              <div className="flex-shrink-0 mt-1">{notif.icon}</div>
+              <div className="flex-grow">
+                <div className="flex justify-between items-start">
+                  <h3 className="font-semibold">{notif.title}</h3>
+                  <span className="text-xs text-gray-500">{notif.time}</span>
+                </div>
+                <p className="text-sm mt-1 text-gray-700">{notif.message}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="text-center p-3 border-t text-sm text-blue-600 font-medium hover:underline cursor-pointer">
+          View all notifications
+        </div>
       </div>
     </div>
   );
