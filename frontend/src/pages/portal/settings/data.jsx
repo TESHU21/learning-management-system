@@ -26,7 +26,7 @@
         contact: "",
         location: "",
         description:"",
-        disabled: z.enum(["false", "true"]).optional(),
+        disabled: z.enum([false, true]).optional(),
 
       };
 
@@ -43,8 +43,8 @@
           type: "select",
           options: [
             
-            { name: "True",value: "true" },
-            { name: "False",value: "false"}
+            { name: "True",value: true },
+            { name: "False",value: false}
           ],
           className: "col-span-2 md:col-span-1   ",
         },

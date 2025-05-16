@@ -104,3 +104,49 @@ export const coursedetail=[
 
 
 ]
+export const core_concepts=["Cloud architecture principles and best practices.",
+        "Deploying and managing applications in AWS, Azure, and GCP.",
+        "Infrastructure as Code (Terraform, CloudFormation).",
+        "Serverless computing with AWS Lambda, Azure Functions, and Google Cloud Functions.",
+        "Containerization and orchestration with Docker and Kubernetes.",
+        "CI/CD pipelines and automation for cloud-based applications."
+    
+    
+    
+    ]
+    export const relatedCourseDummy=[
+            {
+    id:1,
+    name:"Software Development",
+    image:SoftwareDevelopmentImage,
+    title:"Software Development Track",
+    description:"Unlock your potential with comprehensive training in modern software development.Become a Full-Stack Web Developer with a single comprehensive course coveringHTML, CSS, JavaScript, Node, React, PostgreSQL, Web3, and DApps.",
+    rating:4,
+    price:350,
+    instructor:"John Doe",
+    total_enrolled_students:50,
+    duration:12,
+    total_courses:5,
+    core_concepts:[
+       "Build 16 web development projects for your portfolio, ready to apply for junior developer jobs.",
+        "After the course you will be able to build ANY website you want.",
+        "Build fully-fledged websites and web apps for your startup or business.",
+        "Master frontend development with React, NextJs, HTML, CSS, Vue and Angular",
+        "Master backend development with Node, PHP, Python etc."
+    
+    
+    ]
+
+
+},
+{
+    id:2,
+    image:DataScienceImage,
+    title:"Data Science Mastery",
+    description:"Equip yourself with the skills to analyze, interpret, and leverage data.",
+    rating:4,
+    price:350,
+
+},
+
+    ]

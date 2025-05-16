@@ -6,7 +6,8 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 export const SignUpSchema = z.object({
     firstName:z.string().min(2, { message: "Name Should be 2 or more characters long" }),
     lastName:z.string().min(2, { message: "Name Should be 2 or more characters long" }),
-  email: z.string().email({ message: "Invalid Email Adress" }),
+    email: z.string().email({ message: "Invalid Email Address" }),
+
   password: z
   .string()
   .min(8, 'Password must be at least 8 characters')
@@ -28,9 +29,9 @@ export const initialValues = {
   confirmPassword:"",
 };
 export const fields = [
-  {  name: "firstName",placeholder:"First Name",icon:CiUser, type: "name", className: "col-span-2" },
-  {  name: "lastName",placeholder:"Last Name",icon:CiUser, type: "name", className: "col-span-2" },
-  {  name: "email",placeholder:"Email",icon:Mail, type: "email", className: "col-span-2" },
+  {  name: "firstName",placeholder:"First Name",icon:CiUser, type: "text", className: "col-span-2" },
+  {  name: "lastName",placeholder:"Last Name",icon:CiUser, type: "text", className: "col-span-2" },
+  {  name: "email",placeholder:"Email",icon:Mail, type: "text", className: "col-span-2" },
  
   {
     

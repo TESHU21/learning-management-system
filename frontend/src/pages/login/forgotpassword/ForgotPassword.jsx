@@ -33,8 +33,8 @@ const ForgotPassword = () => {
     const response =await forgotPassword(data)
     console.log("Response ",response)
     if(response){
-      // setSuccessMessage(response.data.message)
-      navigate(`/reset-password/${token}`)
+      setSuccessMessage("We've sent you a link to reset your password.")
+      
       
 
     }

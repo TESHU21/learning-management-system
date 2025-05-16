@@ -25,6 +25,7 @@ const Settings = () => {
     try{
       const response=await getUserInfo()
       const user=response?.data.user
+      console.log(response)
       setUserData(user)
 
         // Filteed Form Data
@@ -38,7 +39,7 @@ const Settings = () => {
           
         };
         setFormData(filteredData)
-      console.log("ffffffff",response)
+      console.log("ffffffff",filteredData)
     }
     catch(error){
       console.log(error)

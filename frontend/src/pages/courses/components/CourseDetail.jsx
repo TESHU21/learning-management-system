@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-// import { course, coursedetail } from "./data";
+import {  core_concepts ,relatedCourseDummy} from "./data";
 import { LiaCircle } from "react-icons/lia";
 import { Clock, GraduationCap, User, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -180,12 +180,12 @@ export default function CourseDetail() {
       <div className="md:ml-[200px] px-4 mt-[30px] py-10 mb-[34px] md:border border-[#E6E6E6] w-full md:w-[632px] md:pl-[11px] md:pt-[33px]">
         <p className="font-semibold">What you'll learn</p>
         <div className="flex flex-col gap-3 pl-5">
-  {/* {openedCourse.core_concepts.map((item) => (
+  {core_concepts.map((item) => ( 
     <p key={item._id} className="flex gap-[10px]  items-baseline text-base w-full md:w-[578px] mt-2 leading-6">
       <span className="h-2 w-2 rounded-full bg-gray-300 flex-shrink-0"></span>
       {item}
     </p>
-  ))} */}
+  ))} 
   </div>
 
       </div>
@@ -197,7 +197,7 @@ export default function CourseDetail() {
         <p className=" font-semibold leading-[32px] text-[20px] px-4 text-start font-inter">Explore related courses</p>
         <div className=" flex  flex-col md:flex-row justify-center  gap-6  md:mt-[62px]">
         {
-        relatedCourse?.map((item)=>
+        relatedCourseDummy?.map((item)=>
         
     <div key={item.id} className=" flex items-center gap-[10px] w-full md:w-[508px] p-6 shadow-lg shadow-black/15  rounded-lg">
     

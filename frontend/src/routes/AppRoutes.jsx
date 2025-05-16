@@ -32,7 +32,7 @@ const AppRoutes = () => {
         <Route path='settings' element={<Settings/>}/>
         <Route path='portal' element={<Portal/>}/>
         <Route path='verifyemail' element={<VerifyEmail/>}/>
-        <Route path="reset-password/:token" element={<EmailVerification/>}/>
+        <Route path="/reset-password/:token" element={<EmailVerification/>}/>
 
       </Route>
 

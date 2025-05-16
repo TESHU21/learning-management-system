@@ -6,6 +6,7 @@ import {ChevronRight} from "lucide-react"
 import { forwardRef, useImperativeHandle } from "react";
 import Loader from "./Loader";
 import { NavLink } from "react-router-dom";
+import CustomSelect from "./CustomSelect";
 
 
 import {
@@ -101,26 +102,26 @@ const FormComp = forwardRef(({
                       <FormLabel>{label}</FormLabel>
                       <FormControl >
                         {type === "select" ? (
-                     <Select
-                     value={field.value === true ? "true" : field.value === false ? "false" : field.value || ""}
-                     onValueChange={(value) => {
-                       const parsedValue = value === "true" ? true : value === "false" ? false : value;
-                       field.onChange(parsedValue);
-                     }}
-                   >
-                     <SelectTrigger className="w-full bg-[#F5F5F5]">
-                       <SelectValue placeholder={placeholder || "Select"} />
-                     </SelectTrigger>
-                     <SelectContent>
-                       {options.map((option) => (
-                         <SelectItem key={option.value} value={option.value}>
-                           {option.name}
-                         </SelectItem>
-                       ))}
-                     </SelectContent>
-                   </Select>
+                  //    <Select className=" h-[48px] px-3 py-4"
+                  //    value={field.value === true ? "true" : field.value === false ? "false" : field.value || ""}
+                  //    onValueChange={(value) => {
+                  //      const parsedValue = value === "true" ? true : value === "false" ? false : value;
+                  //      field.onChange(parsedValue);
+                  //    }}
+                  //  >
+                  //    <SelectTrigger className="h-[48px] px-3 py-4 w-full bg-[#F5F5F5]">
+                  //      <SelectValue placeholder={placeholder || "Select"} />
+                  //    </SelectTrigger>
+                  //    <SelectContent>
+                  //      {options.map((option) => (
+                  //        <SelectItem key={option.value} value={option.value}>
+                  //          {option.name}
+                  //        </SelectItem>
+                  //      ))}
+                  //    </SelectContent>
+                  //  </Select>
                     
-                    
+                    <CustomSelect field={field} options={options} placeholder={placeholder}/>
                         
                         ) : type === "textarea" ? (
                           <Textarea

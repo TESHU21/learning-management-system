@@ -1,16 +1,34 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useAuth } from "@/contexts/authContext";
 
 const EmailVerification = () => {
-  const { token } = useParams(); // Extracts token from URL
-  const [verificationToken, setVerificationToken] = useState(token);
+  const { token } = useParams(); // Get the token from URL
+  const { verifyEmail } = useAuth();
+
+  const [status, setStatus] = useState("Verifying...");
+  const data={token:JSON.stringify(token)}
+  console.log("Token",token)
 
   useEffect(() => {
-    // Update state whenever the token changes
-    setVerificationToken(token);
-  }, [token]); // This ensures a re-render when the URL changes
+    const verify = async () => {
+      try {
+        await verifyEmail(data); // No need to parse token
+        setStatus("✅ Email verified successfully.");
+      } catch (error) {
+        console.error(error);
+        setStatus("❌ Email verification failed. Please try again.");
+      }
+    };
 
-  return <div>Verifying token: {verificationToken}</div>;
+    if (token) {
+      verify();
+    } else {
+      setStatus("❌ Invalid token.");
+    }
+  }, [token, verifyEmail]);
+
+  return <div>{status}</div>;
 };
 
 export default EmailVerification;
