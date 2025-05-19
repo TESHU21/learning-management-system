@@ -2,11 +2,72 @@ import React,{useState,useRef} from 'react'
 import FormComp from '@/components/FormComp'
 import {CheckoutSchema,fields,initialValues} from "./components/data"
 import {ChevronRight} from "lucide-react"
+import { useLocation } from "react-router-dom";
+import { useCourse } from "@/contexts/CourseContext";
+import Loader from '@/components/Loader';
+import { toast } from "sonner"
+
+
+
+
 
 
 const Checkout = () => {
+  const [isLoading,setIsLoading]=useState(false)
+    const [successMessage,setSuccessMessage]=useState("")
+    const [errorMessage,setErrorMessage]=useState("")
     const formRef=useRef()
-    const [selectedAmount,setSelectedAmount]=useState("350")
+    const amountRef=useRef()
+    const userUnparsed=sessionStorage.getItem("User")
+    const user=JSON.parse(userUnparsed)
+      const { selectedCourse,enrollLearnersbyTrack}=useCourse()
+        const paystackCallbackUrl=window.location.href;
+
+    
+    console.log(user)
+     const location = useLocation();
+  
+  console.log("selectedCourse",selectedCourse)
+    const filterdIntialvlues={
+      fullName:`${user.firstName ||""} ${user.lastName ||""} `,
+      email:user.email ||"",
+      
+      
+    course: selectedCourse.title ||"",
+   
+    gender:"",
+    phoneNumber:user.contact || "",
+    location:user.location||"",
+    disabled:"",
+    description:undefined,
+      
+    }
+    // Extracting Track Id
+        const track=selectedCourse?.track?.id;
+    const handleCheckout=async(data)=>{
+      const currentSelectedAmount=amountRef.current?.value;
+      const updatedData = { ...data, selectedAmount: Number(currentSelectedAmount) ,track:track,paystackCallbackUrl:paystackCallbackUrl};
+
+console.log(updatedData)
+try{
+  setIsLoading(true)
+  const response=await enrollLearnersbyTrack(updatedData)
+  setSuccessMessage(response.data.invoice.message)
+        toast.success('Enrollment successful!');
+
+
+  console.log(response)
+}
+catch(error){
+const firstErrorMessage = error?.response?.data?.errors?.[0]?.message;
+const isCompleteProfile = !!firstErrorMessage?.toLowerCase()?.includes("please complete your profile");
+  if(isCompleteProfile){
+       toast.error('Complete Your Profile Before Payment.');
+
+  }
+}
+
+    }
   return (
     <div>
         <div className=' flex md:h-[175px] w-full bg-blue-primary items-center justify-center font-lato text-[40px] font-bold leading-12'>
@@ -14,7 +75,7 @@ const Checkout = () => {
         </div>
         <div className='flex gap-6 md:mx-[200px] '>
             <div className=' w-1/2 md:mt-[161px]'>
-                <FormComp ref={formRef} schema={CheckoutSchema} fields={fields} initialValues={initialValues} hideButton={true}/>
+                <FormComp ref={formRef} schema={CheckoutSchema} fields={fields} initialValues={filterdIntialvlues} hideButton={true} onSubmit={handleCheckout}     isCheckoutPage ={true}/>
 
             </div>
             <div className=' flex-1 mt-[83px] w-[508px] px-[40px]'>
@@ -28,8 +89,8 @@ const Checkout = () => {
         </label>
         <select
           id="amount"
-          value={selectedAmount}
-          onChange={(e) => setSelectedAmount(e.target.value)}
+          ref={amountRef}
+         
           className="border w-full h-[48px] px-3 py-2 rounded-md bg-[#F5F5F5]"
         >
           <option value="350">100 ETB</option>
@@ -42,7 +103,8 @@ const Checkout = () => {
 
         <button
         className=  " flex  items-center gap-3 w-full h-[48px] rounded-md px-6 bg-blue-primary hover:bg-blue-primary text-white py-3"
-          onClick={() => formRef.current?.submit()}
+          type='submit'
+        onClick={() => formRef.current?.submit()}
         >
           Complete my purchase <ChevronRight size={22}/>
         </button>

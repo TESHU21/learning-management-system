@@ -1,7 +1,7 @@
 import { course } from "@/pages/courses/components/data";
 import { User,Mail,GraduationCap,Phone, MapPin,Users} from "lucide-react";
 import {z} from "zod"
-const phoneRegex = /^(09|07)\d{8}$/;
+const phoneRegex = new RegExp(/^(\+?233)?0?[2345]\d{8}$/);
 export const CheckoutSchema = z.object({
     fullName:z.string().min(2,{message:"Full should be at least two characters"}),
     course:z.string().min(2,{message:"Course name should be at least two characters"}),
@@ -37,18 +37,18 @@ export const CheckoutSchema = z.object({
     {  name: "email",placeholder:"Email",icon:Mail, type: "text", className: "col-span-2" },
     {  name: "course",placeholder:"Course",icon:GraduationCap, type: "text", className: "col-span-2" },
     {  name: "gender",placeholder:"Gender",icon:User, type: "select", className: "col-span-2  " ,
-        options: [
-            { label: "Male", value: "male" },
-            { label: "Female", value: "female" },
-          ],
+       options: [
+      { name: "Male", value: "male" },
+      { name: "Female", value: "female" },
+    ],
     },
     {  name: "phoneNumber",placeholder:"Phone Number",icon:Phone, type: "text", className: "col-span-2" },
     {  name: "location",placeholder:"Location",icon:MapPin, type: "text", className: "col-span-2" },
     {  name: "disabled",placeholder:"Disabled",icon:Users, type: "select", className: "col-span-2" ,
         options: [
-            { label: "Yes", value: "yes" },
-            { label: "No", value: "no" },
-          ],
+      { name: "Yes", value: "yes" },
+      { name: "No", value: "no" },
+    ],
     },
     {  name: "description",placeholder:"Description", type: "textarea", className: "col-span-2" },
 

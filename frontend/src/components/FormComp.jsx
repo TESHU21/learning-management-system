@@ -42,6 +42,7 @@ const FormComp = forwardRef(({
   successMessage,
   showForgotPassword ,
   hideButton,
+    isCheckoutPage = false,
   // optional callback
 },ref) => {
   const form = useForm({
@@ -130,6 +131,8 @@ const FormComp = forwardRef(({
                             id={name}
                             value={field.value || ""}
                             className="bg-[#F5F5F5]"
+                              disabled={isCheckoutPage && initialValues && initialValues[name] !== undefined}
+
                           />
                         ) : type === "file" ? (
                           <Input
@@ -157,6 +160,8 @@ const FormComp = forwardRef(({
                               id={name}
                               placeholder={placeholder}
                               className=" bg-[#F5F5F5] px-10 py-2  h-[48px] w-full border border-[#E6E6E6] focus:outline-none focus:ring-1 focus:ring-indigo-200 focus:border-indigo-500 rounded-md"
+                              disabled={isCheckoutPage && initialValues && initialValues !== undefined ||""}
+
                             />
                             {type === "password" && (
                               <span

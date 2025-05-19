@@ -25,7 +25,7 @@ const CustomSelect = ({ field, options, placeholder }) => {
         field.onChange(parsedValue);
       }}
     >
-      <SelectTrigger className="h-[48px] px-3 py-4 w-full bg-[#F5F5F5]">
+      <SelectTrigger className="h-[48px] px-3 py-0 w-full bg-[#F5F5F5]">
         <SelectValue placeholder={placeholder || 'Select'} />
       </SelectTrigger>
       <SelectContent>

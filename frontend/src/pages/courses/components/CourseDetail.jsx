@@ -26,50 +26,20 @@ export default function CourseDetail() {
   const [isLoading,setIsLoading]=useState(false)
   const navigate=useNavigate()
   const {courses, selectedCourse,getSingleCourses,enrollLearnersbyTrack, createInvoices}=useCourse()
-  const paystackCallbackUrl=window.location.href;
   
-  const handleTrackEnrollment=async(e,data)=>{
-    console.log("Track Data",data)
-    const track=data.track.id;
-    const amount=data.track.amount;
-    const dataToSend={track,amount,paystackCallbackUrl}
-
-
-    
-    try{
-      setIsLoading(true)
-      const response=await enrollLearnersbyTrack(dataToSend)
-
-      // 
-
-      if(response){
-        navigate("/checkout")
-
-      }
-    
-    }
-    catch(error){
-      console.log(error)
-    }
-    finally{
-      setIsLoading(false)
-    }
-
+  const handleTrackEnrollment=async(e)=>{
+    navigate("/checkout")
   }
-
 
   
 
   useEffect(() => {
     const foundCourse = courses.find((course) => course._id ===selectedCourse._id);
     setOpenedCourse(foundCourse);
-    console.log("Coursesfound",foundCourse)
     const otherCourse=courses.filter((course)=>course._id!==selectedCourse._id)
-    console.log("Coursesfound",otherCourse)
 
     setRelatedCourse(otherCourse)
   }, [id,courses]);
-  console.log("opened course",openedCourse)
 
   if (!openedCourse) {
     return (
@@ -172,7 +142,7 @@ export default function CourseDetail() {
             <p className="font-semibold text-center py-[18px]">$350.00</p>
             
           </div>
-          <Button className=" w-full bg-blue-primary py-3 px-6  font-semibold hover:bg-blue-primary cursor-pointer"  onClick={(e)=>handleTrackEnrollment(e,openedCourse)}>{isLoading?<Loader/>:"Enroll"}</Button>
+          <Button className=" w-full bg-blue-primary py-3 px-6  font-semibold hover:bg-blue-primary cursor-pointer"  onClick={handleTrackEnrollment}>{isLoading?<Loader/>:"Enroll"}</Button>
          
         </div>
       </div>
@@ -181,7 +151,7 @@ export default function CourseDetail() {
         <p className="font-semibold">What you'll learn</p>
         <div className="flex flex-col gap-3 pl-5">
   {core_concepts.map((item) => ( 
-    <p key={item._id} className="flex gap-[10px]  items-baseline text-base w-full md:w-[578px] mt-2 leading-6">
+    <p key={item.id} className="flex gap-[10px]  items-baseline text-base w-full md:w-[578px] mt-2 leading-6">
       <span className="h-2 w-2 rounded-full bg-gray-300 flex-shrink-0"></span>
       {item}
     </p>
