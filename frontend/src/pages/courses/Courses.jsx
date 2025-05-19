@@ -32,7 +32,7 @@ const Courses = () => {
   const filteredCourses = courses.filter(course =>
     course.title.toLowerCase().includes(searchValue.toLowerCase())
   );
-
+console.log(filteredCourses)
   const handleNavigate = (item) => {
     setSelectedCourse(item);
     navigate(`/courses/${item._id}`);

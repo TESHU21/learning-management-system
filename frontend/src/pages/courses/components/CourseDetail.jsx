@@ -22,10 +22,10 @@ export default function CourseDetail() {
   const {id } = useParams();
 
   const [openedCourse, setOpenedCourse] = useState([]);
-  const [relatedCourse,setRelatedCourse]=useState(null)
+  const [relatedCourse,setRelatedCourse]=useState([])
   const [isLoading,setIsLoading]=useState(false)
   const navigate=useNavigate()
-  const {courses, selectedCourse,getSingleCourses,enrollLearnersbyTrack, createInvoices}=useCourse()
+  const {courses, selectedCourse, setSelectedCourse,getSingleCourses,enrollLearnersbyTrack, createInvoices}=useCourse()
   
   const handleTrackEnrollment=async(e)=>{
     navigate("/checkout")
@@ -35,11 +35,13 @@ export default function CourseDetail() {
 
   useEffect(() => {
     const foundCourse = courses.find((course) => course._id ===selectedCourse._id);
+    console.log("Found Course",foundCourse)
     setOpenedCourse(foundCourse);
     const otherCourse=courses.filter((course)=>course._id!==selectedCourse._id)
 
     setRelatedCourse(otherCourse)
   }, [id,courses]);
+  console.log("Related Course",relatedCourse)
 
   if (!openedCourse) {
     return (
@@ -48,6 +50,12 @@ export default function CourseDetail() {
       </div>
     );
   }
+  
+  const handleRelatedCourseClick = (item) => {
+    setSelectedCourse(item); // Update the selected course in the context
+    navigate(`/courses/${item._id}`); // Navigate to the detail page of the clicked course
+  };
+
 
   return (
     <div className=" relative w-full">
@@ -167,13 +175,13 @@ export default function CourseDetail() {
         <p className=" font-semibold leading-[32px] text-[20px] px-4 text-start font-inter">Explore related courses</p>
         <div className=" flex  flex-col md:flex-row justify-center  gap-6  md:mt-[62px]">
         {
-        relatedCourseDummy?.map((item)=>
+        relatedCourse.map((item)=>
         
-    <div key={item.id} className=" flex items-center gap-[10px] w-full md:w-[508px] p-6 shadow-lg shadow-black/15  rounded-lg">
+    <div key={item._id} className=" flex items-center gap-[10px] w-full md:w-[508px] p-6 shadow-lg shadow-black/15  rounded-lg cursor-pointer" onClick={()=>handleRelatedCourseClick(item)}>
     
       <img src={item.image} alt="" className=" w-[100px] h-[109px] md:w-[202px]  md:h-[209.6px]  object-cover" />
       <div className=" flex flex-col  gap-4 mt-[40px] ">
-        <p className=" font-semibold">{item.name}</p>
+        <p className=" font-semibold">{item.title}</p>
         <span className="leading-6 text-base text-justify">{item.description.split('.')[0]}.</span>
       </div>
     </div>
