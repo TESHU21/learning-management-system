@@ -9,11 +9,13 @@ import ClockIcon from "../../assets/svg/clock-circle-svgrepo-com 1.svg"
 import StudentPersonIcon from "../../assets/svg/student-person-part-2-svgrepo-com (1) 1.svg"
 import {solutions} from "./components/data"
 import { techStacks } from './components/techStak'
+import { useNavigate } from 'react-router-dom'
 
 
 
 
 const OurSolutions = () => {
+  const navigate=useNavigate()
 
   return (
     <div>
@@ -33,7 +35,7 @@ const OurSolutions = () => {
       </div>
       <div className="flex items-center justify-between mt-4">
         <p>${item.price}</p>
-        <Button className="bg-transparent shadow-none hover:bg-transparent text-blue-primary">
+        <Button className="bg-transparent shadow-none hover:bg-transparent text-blue-primary  cursor-pointer" onClick={()=>navigate("/courses")}>
           preview
         </Button>
       </div>
