@@ -173,7 +173,7 @@ export default function CourseDetail() {
       {/* Explore Related Courses */}
       <div className="md:mx-[200px] mx-6 mb-10 md:mb-[187px]">
         <p className=" font-semibold leading-[32px] text-[20px] px-4 text-start font-inter">Explore related courses</p>
-        <div className=" flex  flex-col md:flex-row justify-center  gap-6  md:mt-[62px]">
+        <div className=" grid grid-cols-1 md:grid-cols-2 justify-center  gap-2  md:mt-[62px]">
         {
         relatedCourse.map((item)=>
         
