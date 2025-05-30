@@ -1,6 +1,7 @@
 import React from 'react'
 import AzubiLogo1 from "../assets/svg/Azubi-Logo1.svg"
 import { Copyright,ArrowUp } from 'lucide-react'
+import { Link, NavLink } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -17,8 +18,12 @@ const Footer = () => {
     <div>
       <ul className=' flex flex-col gap-[14px] '>
         <li className="font-semibold text-[20px] leading-8">Menu</li>
-        <li className="font-base font-inter font-normal">Home</li>
-        <li>Course</li>
+        <li className="font-base font-inter font-normal">
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/courses">Courses</Link>
+        </li>
       </ul>
     </div>
 
@@ -26,8 +31,8 @@ const Footer = () => {
     <div  className='sm:col-span-2 md:col-span-2'>
       <ul className=' flex flex-col gap-[14px]'>
         <li className="font-semibold text-[20px] leading-8" >Contact</li>
-        <li>+23341002000</li>
-        <li>New Reiss ,Ghana, Accra</li>
+        <li>+251921670994</li>
+        <li>Addis Ababa,Ethiopia</li>
       </ul>
     </div>
 
@@ -35,8 +40,13 @@ const Footer = () => {
     <div>
       <ul className='  flex flex-col gap-[14px]' >
         <li className="font-semibold text-[20px] leading-8">Social</li>
-        <li>LinkedIn</li>
-        <li>Facebook</li>
+       <li>
+  <a href="https://www.linkedin.com/in/teshome-mosneh-21240519a/" target="_blank" rel="noopener noreferrer">
+    LinkedIn
+  </a>
+</li>
+<li>Facebook</li>
+
       </ul>
     </div>
   </div>
