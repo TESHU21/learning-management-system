@@ -55,7 +55,7 @@ export const  CourseProvider=({children})=>{
 
 
     // Rate Tracks
-    const rateTrack=async(trackId,data)=>{
+    const rateTrack=async(trackId,data)=>{ 
         try{
             const response = await axiosInstance.post(`/tracks/${trackId}/ratings`,data)
             return response

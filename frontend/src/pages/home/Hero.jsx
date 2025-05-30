@@ -7,13 +7,27 @@ import { useNavigate } from 'react-router-dom';
 const Hero = () => {
   const navigate=useNavigate()
   const handleGetStarted=()=>{
-    navigate('/courses')
-    console.log("Get Started")
+      if(token){
+          navigate('/courses')
+
+
+    }
+    else{
+      navigate("/login")
+    }
 
   }
+  const token=sessionStorage.getItem("Token");
+  console.log(token)
   const handleGetStartedMobile=()=>{
-    navigate('/courses')
-    console.log("Get Started")
+    if(token){
+          navigate('/courses')
+
+
+    }
+    else{
+      navigate("/login")
+    }
 
   }
   return (

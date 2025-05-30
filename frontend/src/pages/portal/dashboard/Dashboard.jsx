@@ -5,13 +5,14 @@ import SoftwareDevImage from "../../../assets/course/Software.svg"
 import { useCourse } from '@/contexts/CourseContext'
 
 const Dashboard = () => {
-  const {getEnrollements}=useCourse()
+  const [tracks,setTracks]=useState([])
+  const {getallTracks}=useCourse()
 
   useEffect(()=>{
     const fetchEnrolledCourse=async()=>{
       try{
-        const response=await getEnrollements()
-        console.log("Dashboard Responses",response)
+        const response=await getallTracks()
+        setTracks(response.data.tracks)
       }
       catch(error){
         console.log(error)
@@ -25,16 +26,30 @@ const Dashboard = () => {
   return (
     <div className='md:px-[200px]'>
         <h3 className=' text-base leading-6 font-bold'>Enrolled courses</h3>
-        <div className='md:mt-[64px]'> 
-            <h3 className='font-inter font-semibold md:text-[20px] text-base leading-4 md:leading-8 mt-6'>Software Development Track</h3>
-            <div className=' flex flex-col items-start  mt-[59px] shadow-md  w-full md:w-[242px] rounded-lg'>
-                <img src={LaptopImages} alt="Course Image" className='w-[242px] h-[174px] rounded-t-lg' />
-                <p className='leading-4 text-[12px] mt-[19px] text-[#404040] ml-[11px]'>React Js</p>
-                <h3 className='font-semibold leading-6 text-base md:w-[148px] pt-3 space-y-3 ml-[11px]'>Quick Introduction to ReactJs</h3>
-                <Button className=" bg-white hover:bg-white text-blue-primary mt-[54px] mb-[16px] border-0 ">Registered</Button>
+ {/* <h3 className='font-inter font-semibold md:text-[20px] text-base leading-4 md:leading-8 mt-6'>All Tracks</h3> */}
+
+        <div className=' grid grid-cols-1 md:grid-cols-3 items-stretch'>
+          {tracks.map((track)=>(
+           <div className='flex' key={track.id}> 
+            <div className=' flex flex-col justify-center py-6  mt-[59px] shadow-md  w-full md:w-[350px] rounded-lg'>
+              <div className=' flex justify-center'>
+                                <img src={track.image} alt="Course Image" className='w-[242px]  h-[174px] rounded-t-lg' />
+
+              </div>
+                <p className=' font-bold font-lato text-center leading-4 text-[12px] mt-[19px] text-[#404040] ml-[11px]'>{track.name}</p>
+                <h3 className=' leading-6 text-base  pt-3 space-y-3 text-gray-600 ml-[11px]'>{track.description.split('.')[0]}
+                       ...</h3>
+                    <Button className=" bg-inherit hover:bg-green-50 cursor-pointer border-0 text-black mt-[54px] mb-[16px] shadow-none text-start ">Registered</Button>
+
                 
             </div>
+
         </div>
+
+        ))}
+        </div>
+        
+       
         {/* Rate Us */}
         <div className=' mt-8 md:mt-[83px]'>
             <h3 className=' font-bold text-[20px] leading-8'>Rate us</h3>

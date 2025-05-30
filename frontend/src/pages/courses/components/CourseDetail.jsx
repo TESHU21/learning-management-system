@@ -35,13 +35,13 @@ export default function CourseDetail() {
 
   useEffect(() => {
     const foundCourse = courses.find((course) => course._id ===selectedCourse._id);
-    console.log("Found Course",foundCourse)
+    // console.log("Found Course",foundCourse)
     setOpenedCourse(foundCourse);
     const otherCourse=courses.filter((course)=>course._id!==selectedCourse._id)
 
     setRelatedCourse(otherCourse)
   }, [id,courses]);
-  console.log("Related Course",relatedCourse)
+  // console.log("Related Course",relatedCourse)
 
   if (!openedCourse) {
     return (
@@ -106,11 +106,11 @@ export default function CourseDetail() {
               <span className="text-center md:text-start ">{openedCourse.total_enrolled_students}</span>
             </div>
             <div className="flex   flex-col text-base leading-6  font-inter">
-            <span className="">1 review</span>
-            <div className="flex gap-1"> {[1,2,3,4,5].map((star)=>(
+            {/* <span className="">1 review</span> */}
+            {/* <div className="flex gap-1"> {[1,2,3,4,5].map((star)=>(
                       <LucideStar key={star} className={`w-6 h-6 cursor-pointer ${openedCourse.rating>=star? "text-yellow-600 fill-current":""} `}/>
                     ))}
-            </div>
+            </div> */}
 
                
             </div>
