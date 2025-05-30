@@ -5,22 +5,36 @@ import { Button } from '@/components/ui/button'
 import AuthenticationImage from "../../assets/svg/authentication.svg"
 import SecureLoginImage from "../../assets/svg/secure-login.svg"
 import { FaArrowDownLong } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom'
 
 
 
 
 const GetStartedSection = () => {
+  const navigate=useNavigate()
+  const token=sessionStorage.getItem("Token")
+    const handlegetStarted=()=>{
+      if(token){
+          navigate('/courses')
+
+
+    }
+    else{
+      navigate("/login")
+    }
+
+  }
   return (
     <div>
     {/* time to invet section */}
            <div className='  hidden md:flex relative  md:h-[222px] bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url(${LaptopWithCodeImage})` }}>
         {/* Over Lay */}
-        <div className=' flex absolute inset-0  bg-[rgba(1,88,154,0.8)]'>
+        <div className=' flex absolute inset-0 pointer-events-none bg-[rgba(1,88,154,0.8)]'>
             <div className='flex flex-col gap-2 ml-[198px] mt-[43px] text-white'>
                 <h3  className="font-lato font-bold text-[40px] leading-12">It’s time to start investing in yourself</h3>
                 <p className=' text-base font-inter leading-6'>Online courses open the opportunity for learning to almost anyone, regardless of their scheduling commitments.</p>
             </div>
-            <Button className=" w-[137px]h-[137px] mt-[82px] ml-[37px] py-3 px-6 border border-white !bg-blue-primary hover:opacity-40">Get started</Button>
+            <Button className=" w-[137px]h-[137px] mt-[82px] ml-[37px] py-3 px-6 border border-white !bg-blue-primary hover:opacity-40 cursor-pointer pointer-events-auto" onClick={handlegetStarted}>Get started</Button>
 
             
         </div>
