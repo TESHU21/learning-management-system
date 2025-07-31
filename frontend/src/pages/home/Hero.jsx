@@ -51,7 +51,6 @@ const Hero = () => {
           Unlock Your Potential with <br />
           Industry-Leading Courses!
         </h3>
-        <p className='hidden md:flex w-full md:w-[427px] '>"Join thousands of learners gaining real-world skills and advancing their careers. Our expert-led courses are designed to empower you to succeed."</p>
         <Button onClick={handleGetStarted} className="md:w-[137px] md:h-[48px]  cursor-pointer rounded-md py-3 px-6 gap-3 bg-blue-primary text-white hover:bg-blue-primary ">Get started</Button>
 
       </div>
@@ -62,12 +61,12 @@ const Hero = () => {
       <div
         className="absolute inset-0 opacity-40 z-0"
         style={{
-          background: 'linear-gradient(to right, #01589A, rgba(1, 88, 154, 0))',
+          background: 'linear-gradient(to right,rgb(15, 15, 48), rgba(19, 20, 20, 0))',
         }}
       ></div>
       <div className='flex flex-col gap-3 mt-10 mx-4 w-[200px] h-full justify-around'>
         <h6 className=' font-lato text-[30px] leading-8   font-bold  '>Unlock Your Potential with Industry-Leading Courses!</h6>
-        <Button onClick={handleGetStartedMobile}  className="w-[110px] h-[40px]   rounded-md py-3 px-6 gap-3 bg-blue-primary text-white hover:bg-blue-primary cursor-pointer  z-10 ">Get started</Button>
+        <Button onClick={handleGetStartedMobile}  className="w-[110px] h-[40px]   rounded-md py-3 px-6 gap-3 bg-blue-primary text-white hover:bg-blue-primary cursor-pointer  z-10 ">Discover</Button>
 
       </div>
 

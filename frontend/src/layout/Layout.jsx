@@ -6,16 +6,20 @@ import { Toaster } from "@/components/ui/sonner"
 
 const Layout = () => {
   return (
-    <div className=' flex flex-col min-h-screen'>
-    <Navbar/>
-    <main className='  flex-grow'>
-        <Outlet/>
-        <Toaster position="top-right" className="px-2 py-2" />
+    <div className='flex flex-col min-h-screen'>
+      <Navbar />
 
-        
-    </main>
-    <Footer/>
+      <main className='flex-grow'>
+        <Outlet />
+      </main>
 
+      <Toaster 
+        position="top-right" 
+        richColors 
+        offset={300} // <-- This pushes toast below navbar
+      />
+
+      <Footer />
     </div>
   )
 }

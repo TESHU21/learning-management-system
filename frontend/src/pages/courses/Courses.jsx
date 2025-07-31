@@ -89,12 +89,12 @@ console.log(filteredCourses)
                   {[1, 2, 3, 4, 5].map((star) => (
                     <LucideStar
                       key={star}
-                      className={`w-5 h-5 ${item.rating >= star ? "text-yellow-600 fill-current" : ""}`}
+                      className={`w-5 h-5 ${item?.rating >= star ? "text-yellow-600 fill-current" : ""}`}
                     />
                   ))}
-                  <span className="text-[16px] ml-2 font-semibold">{item.track.rating}</span>
+                  <span className="text-[16px] ml-2 font-semibold">{item?.track?.rating}</span>
                 </div>
-                <p className="font-inter text-base font-semibold">Price: ${item.track.price}</p>
+                <p className="font-inter text-base font-semibold">Price: ${item?.track?.price}</p>
               </div>
 
               {/* Push button to bottom */}
