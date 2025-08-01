@@ -16,7 +16,7 @@ export const sendVerificationEmail = async (
   const msg = {
     to: toEmail, // Recipient's email address
 
-    from: "hello@scalework.com", // Your verified sender email
+    from: "teshome.mosneh@gmail.com", // Your verified sender email
 
     subject: "G-Client", // Subject line
 
@@ -68,7 +68,7 @@ export const sendResetSuccessEmail = async (toEmail, templates) => {
   const msg = {
     to: toEmail, // Recipient's email address
 
-    from: "hello@scalework.com", // Your verified sender email
+    from: "teshome.mosneh@gmail.com", // Your verified sender email
 
     subject: "G-client", // Subject line
 
@@ -92,7 +92,7 @@ export const sendWelcomeEmail = async (toEmail, name, templates) => {
   const msg = {
     to: toEmail, // Recipient's email address
 
-    from: "hello@scalework.com", // Your verified sender email
+    from: "teshome.mosneh@gmail.com", // Your verified sender email
 
     subject: "G-Client", // Subject line
 
@@ -116,7 +116,7 @@ export const sendLearnerCredentials = async (toEmail, password, templates) => {
   const msg = {
     to: toEmail, // Recipient's email address
 
-    from: "hello@scalework.com", // Your verified sender email
+    from: "teshome.mosneh@gmail.com", // Your verified sender email
 
     subject: "Static Email Subject", // Subject line
 
@@ -139,7 +139,7 @@ export const sendLearnerCredentials = async (toEmail, password, templates) => {
 export const sendLearnerPendingInvoice = async (toEmail, templates) => {
   const msg = {
     to: toEmail,
-    from: "hello@scalework.com",
+    from: "teshome.mosneh@gmail.com",
     subject: "Your Pending Invoice",
     html: templates,
   };
