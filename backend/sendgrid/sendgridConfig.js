@@ -44,7 +44,7 @@ export const sendPasswordResetEmail = async (toEmail, resetURL, templates) => {
   const msg = {
     to: toEmail, // Recipient's email address
 
-    from: "hello@scalework.com", // Your verified sender email
+    from: "teshome.mosneh@gmail.com", // Your verified sender email
 
     subject: "Reset your password", // Subject line
 
