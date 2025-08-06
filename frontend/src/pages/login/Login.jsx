@@ -40,7 +40,7 @@ const Login = () => {
      
     }
     catch(error){
-      console.log(error)
+      console.log("My Error",error)
       setErrorMessage(error)
     }
     finally{
@@ -64,7 +64,8 @@ const Login = () => {
             <span className='h-6 text-center'>or</span>
                
 
-            <FormComp schema={SignInSchema} fields={fields} initialValues={initialValues} submitBtnText={"Login"}  showForgotPassword ={true}  onSubmit={handleSignIn} isLoading={isLoading}/>
+            <FormComp schema={SignInSchema} fields={fields} initialValues={initialValues} submitBtnText={"Login"}
+              showForgotPassword ={true}  onSubmit={handleSignIn} isLoading={isLoading} successMessage={successMessage} errorMessage={errorMessage}/>
             <p className=' text-center underline decoration-blue-primary'>Need to create an account ? <span className='text-blue-primary cursor-pointer' onClick={()=>navigate("/signup")}>signup</span></p>
             </div>
         

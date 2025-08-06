@@ -13,7 +13,9 @@ app.use(express.urlencoded({ extended: true }));
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://tmp-se-project.azurewebsites.net",
+    "https://learningmanagmentsys.netlify.app", // ✅ Add this
+
+  
 ];
 
 app.use(
