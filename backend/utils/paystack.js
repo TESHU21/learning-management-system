@@ -15,7 +15,7 @@ export const initializePaystackTransaction = async ({
   const body = {
     email,
     amount: amount * 100, // Paystack expects the amount in should be in the subunit of the currency i.e 1 GHS = 100 pesewas
-    currency: "GHS",
+    currency: "ZAR",
     callback_url,
   };
 
