@@ -106,6 +106,7 @@ export const  CourseProvider=({children})=>{
             return response
         }
         catch(error){
+            console.log("ERRor",error.data)
             throw error
         }
 
@@ -117,6 +118,18 @@ export const  CourseProvider=({children})=>{
             return response
         }
         catch(error){
+            throw error
+        }
+
+    }
+      // function to mark  invoices as paid
+    const markInvoicesAsPaid=async(data)=>{
+        try{
+            const response = await axiosInstance.post('/webhooks/paystack',data)
+            return response
+        }
+        catch(error){
+            console.log("ERRor",error)
             throw error
         }
 
@@ -143,7 +156,7 @@ export const  CourseProvider=({children})=>{
     const values={getCourses,getSingleCourses,getallTracks,getSingleTrack,getTrackRatings,
         rateTrack,getallInvoices,getsingleInvoices,enrollLearnersbyTrack,getEnrollements,
         enrollToCourse,getregistrationbyLearner,courses,setCourses,
-        selectedCourse,setSelectedCourse,courseInvoices,setCourseInvoices, 
+        selectedCourse,setSelectedCourse,courseInvoices,setCourseInvoices, markInvoicesAsPaid
     }
 
 

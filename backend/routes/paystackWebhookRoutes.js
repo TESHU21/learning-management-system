@@ -4,7 +4,12 @@ import crypto from "crypto";
 import { Invoice } from "../models/invoiceModel.js";
 import { Enrollment } from "../models/enrollmentModel.js";
 
-// make invoice as paid on charge.success
+const router = express.Router();
+
+/**
+ * Mark invoice as paid and enroll learner
+ * @param {Object} paymentData - Paystack payment data from webhook
+ */
 const markInvoiceAsPaid = async ({
   amount,
   status,
@@ -13,18 +18,18 @@ const markInvoiceAsPaid = async ({
   id: paystackTransactionId,
 }) => {
   try {
-    const invoice = await Invoice.findOne({ paystackReference });
+    // Adjust 'reference' below if your DB field is different
+    const invoice = await Invoice.findOne({ reference: paystackReference });
 
     if (!invoice) {
       throw new Error("Invoice not found");
     }
 
-    // This may never occur, just an extra check. We'll be listening to a 'charge.success' event
-    if (invoice.status === "paid") return;
-
-    if (status !== "success" || paidAt === null || amount === invoice.amount) {
+    if (status !== "success" || paidAt === null || amount !== invoice.amount) {
       throw new Error("Invalid payment status or amount");
     }
+
+    if (invoice.status === "paid") return; // Already paid
 
     invoice.status = "paid";
     invoice.paidAt = paidAt;
@@ -32,6 +37,7 @@ const markInvoiceAsPaid = async ({
 
     await invoice.save();
 
+    // Enroll learner if not already enrolled
     const isAlreadyEnrolled = await Enrollment.findOne({
       learner: invoice.learner,
       track: invoice.track,
@@ -45,39 +51,40 @@ const markInvoiceAsPaid = async ({
     }
   } catch (error) {
     console.error("Error marking invoice as paid:", error);
+    throw error; // Let the route handler catch it
   }
 };
 
-const router = express.Router();
-
-router.route("/").post(async (req, res) => {
+// Webhook route to listen for Paystack events
+router.post("/", async (req, res) => {
   try {
-    // validate event
+    // Verify Paystack signature for security
     const hash = crypto
       .createHmac("sha512", process.env.PAYSTACK_SECRET_KEY)
       .update(JSON.stringify(req.body))
       .digest("hex");
 
-    if (hash == req.headers["x-paystack-signature"]) {
-      switch (req.body.event) {
-        case "charge.success":
-          // mark invoice as paid
-          await markInvoiceAsPaid(req.body.data);
-
-          break;
-
-        default:
-          console.log(`Unhandled event type ${req.body.event}`);
-      }
+    if (hash !== req.headers["x-paystack-signature"]) {
+      return res.status(400).json({ error: "Invalid signature" });
     }
-  } catch (error) {
-    console.error(error);
-    return res.status(400).json({
-      error: `Webhook error: ${error.message}`,
-    });
-  }
 
-  return res.sendStatus(200);
+    const event = req.body.event;
+
+    switch (event) {
+      case "charge.success":
+        await markInvoiceAsPaid(req.body.data);
+        break;
+
+      default:
+        console.log(`Unhandled event type: ${event}`);
+    }
+
+    // Send 200 OK to acknowledge receipt
+    res.sendStatus(200);
+  } catch (error) {
+    console.error("Webhook processing error:", error);
+    res.status(500).json({ error: "Webhook processing failed" });
+  }
 });
 
 export default router;

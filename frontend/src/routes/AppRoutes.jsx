@@ -16,6 +16,7 @@ import Portal from '@/pages/portal/Portal';
 import VerifyEmail from '@/pages/registration/VerifyEmail';
 import EmailVerification from '@/pages/login/forgotpassword/EmailVerification';
 import ResetPasswordFlow from '@/pages/login/forgotpassword/ResetPasswordFlow';
+import PaymentSuccess from '@/pages/checkout/PaymentSuccess';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -32,6 +33,7 @@ const AppRoutes = () => {
         <Route path='settings' element={<Settings/>}/>
         <Route path='portal' element={<Portal/>}/>
         <Route path='verifyemail' element={<VerifyEmail/>}/>
+        <Route path="/payment-success" element={<PaymentSuccess/>}/>
         <Route path="/reset-password/:token" element={<EmailVerification/>}/>
 
       </Route>

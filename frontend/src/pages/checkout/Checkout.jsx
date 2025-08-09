@@ -21,53 +21,67 @@ const Checkout = () => {
     const userUnparsed=sessionStorage.getItem("User")
     const user=JSON.parse(userUnparsed)
       const { selectedCourse,enrollLearnersbyTrack}=useCourse()
-        const paystackCallbackUrl=window.location.href;
+        const paystackCallbackUrl= `${window.location.origin}/payment-success` ;
 
     
-    console.log(user)
+    console.log("User",user._id)
      const location = useLocation();
   
   console.log("selectedCourse",selectedCourse)
     const filterdIntialvlues={
-      fullName:`${user.firstName ||""} ${user.lastName ||""} `,
+      // fullName:`${user.firstName ||""} ${user.lastName ||""} `,
       email:user.email ||"",
+
+
       
       
     course: selectedCourse.name ||"",
    
     gender:"",
-    phoneNumber:user.contact || "",
+    contact:user.contact || "",
     location:user.location||"",
     disabled:"",
     description:undefined,
       
     }
     // Extracting Track Id
-        const track=selectedCourse?.track?.id;
-    const handleCheckout=async(data)=>{
-      const currentSelectedAmount=amountRef.current?.value;
-      const updatedData = { ...data, selectedAmount: Number(currentSelectedAmount) ,track:track,paystackCallbackUrl:paystackCallbackUrl};
+        const track=selectedCourse?._id
+      
+  const handleCheckout = async (data) => {
+  const currentSelectedAmount = amountRef.current?.value;
+  const updatedData = {
+    ...data,
+    learner:user._id,
+    amount: Number(currentSelectedAmount),
+    track: track,
+    paystackCallbackUrl: paystackCallbackUrl,
+  };
 
-console.log(updatedData)
-try{
-  setIsLoading(true)
-  const response=await enrollLearnersbyTrack(updatedData)
-  setSuccessMessage(response.data.invoice.message)
-        toast.success('Enrollment successful!');
+  try {
+    setIsLoading(true);
+    const response = await enrollLearnersbyTrack(updatedData);
 
-
-  console.log(response)
-}
-catch(error){
-const firstErrorMessage = error?.response?.data?.errors?.[0]?.message;
-const isCompleteProfile = !!firstErrorMessage?.toLowerCase()?.includes("please complete your profile");
-  if(isCompleteProfile){
-       toast.error('Complete Your Profile Before Payment.');
-
-  }
-}
-
+    // Redirect user to Paystack checkout page:
+    if (response.data.transactionUrl) {
+      window.location.href = response.data.transactionUrl;
+    } else {
+      toast.error("Failed to get payment URL.");
     }
+  } catch (error) {
+    const firstErrorMessage = error?.response?.data?.errors?.[0]?.message;
+    const isCompleteProfile = !!firstErrorMessage?.toLowerCase()?.includes(
+      "please complete your profile"
+    );
+    if (isCompleteProfile) {
+      toast.error("Complete Your Profile Before Payment.");
+    } else {
+      toast.error("Payment initialization failed.");
+    }
+  } finally {
+    setIsLoading(false);
+  }
+};
+
   return (
     <div>
         <div className=' flex md:h-[175px] w-full bg-blue-primary items-center justify-center font-lato text-[40px] font-bold leading-12'>
