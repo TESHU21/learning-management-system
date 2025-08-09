@@ -14,161 +14,121 @@ import { Invoice } from "../models/invoiceModel.js";
 import { Track } from "../models/trackModel.js";
 
 export const enrollTrack = asyncHandler(async (req, res, next) => {
-  const user = req.user;
-  const authUserId = req.user.id;
+  try {
+    const user = req.user;
+    if (!user) {
+      return next(new ErrorResponse("Authentication required", UNAUTHORIZED));
+    }
 
-  const { track: trackId, learner, amount, paystackCallbackUrl } = req.body;
+    const authUserId = user.id;
+    const { track: trackId, learner, amount, paystackCallbackUrl } = req.body;
 
-  // Check if track exists and get track info
-  const track = await Track.findById(trackId);
-  if (!track) {
-    return next(new ErrorResponse("Track not found", NOT_FOUND));
-  }
+    // Validate ObjectIds (simple regex)
+    const objectIdRegex = /^[0-9a-fA-F]{24}$/;
+    if (!objectIdRegex.test(trackId)) {
+      return next(new ErrorResponse("Invalid track ID format", BAD_REQUEST));
+    }
+    if (learner && !objectIdRegex.test(learner)) {
+      return next(new ErrorResponse("Invalid learner ID format", BAD_REQUEST));
+    }
 
-  // Only user with the role of Learner can enroll in a track
-  if (user.role === "Admin" && !learner) {
-    return next(
-      new ErrorResponse("Learner is required for enrollment", BAD_REQUEST)
-    );
-  }
+    // Check track existence
+    const track = await Track.findById(trackId);
+    if (!track) {
+      return next(new ErrorResponse("Track not found", NOT_FOUND));
+    }
 
-  const learnerId = user.role === "Learner" ? authUserId : learner;
-
-  const authUserIsLearner = user.role === "Learner";
-
-  // check if amount is provided and is greater than track price
-  if (amount && amount > track.price) {
-    return next(
-      new ErrorResponse(
-        "Amount cannot be greater than track price",
-        BAD_REQUEST
-      )
-    );
-  }
-
-  // Check if learner is already enrolled in a track
-  const existingEnrollment = await Enrollment.findOne({
-    learner: learnerId,
-  });
-
-  if (existingEnrollment) {
-    return next(
-      new ErrorResponse(
-        authUserIsLearner
-          ? "You are already enrolled into a track, you are not allowed to enroll in another track"
-          : "Learner is already enrolled into a track, they are not allowed to enroll in another track",
-        BAD_REQUEST
-      )
-    );
-  }
-
-  // Handle learner payment process
-  if (authUserIsLearner) {
-    if (!paystackCallbackUrl) {
+    // Role check
+    if (user.role === "Admin" && !learner) {
       return next(
-        new ErrorResponse("paystackCallbackUrl is required", BAD_REQUEST)
+        new ErrorResponse("Learner ID is required for admin enrollment", BAD_REQUEST)
       );
     }
 
-    // initialize a paystack transaction
-    const transaction = await initializePaystackTransaction({
-      amount: amount || track.price,
-      email: user.email,
-      callback_url: paystackCallbackUrl,
-    });
+    const learnerId = user.role === "Learner" ? authUserId : learner;
+    const authUserIsLearner = user.role === "Learner";
 
-    if (!transaction) {
+    // Amount validation
+    if (amount && amount > track.price) {
+      return next(
+        new ErrorResponse("Amount cannot be greater than track price", BAD_REQUEST)
+      );
+    }
+
+    // Check existing enrollment for learner
+    const existingEnrollment = await Enrollment.findOne({ learner: learnerId });
+    if (existingEnrollment) {
       return next(
         new ErrorResponse(
-          "Paystack transaction initialization failed",
+          authUserIsLearner
+            ? "You are already enrolled in a track and cannot enroll in another."
+            : "Learner is already enrolled in a track and cannot enroll in another.",
           BAD_REQUEST
         )
       );
     }
 
-    // Check/update existing invoice or create new one
-    let invoice = await Invoice.findOne({
-      learner: authUserId,
-      track: trackId,
-    });
+    if (authUserIsLearner) {
+      // paystackCallbackUrl is mandatory for learners
+      if (!paystackCallbackUrl) {
+        return next(
+          new ErrorResponse("paystackCallbackUrl is required for payment", BAD_REQUEST)
+        );
+      }
 
-    if (invoice) {
-      invoice.amount = amount || track.price;
-      invoice.paystackReference = transaction.reference;
-      await invoice.save();
-    } else {
-      invoice = await Invoice.create({
-        learner: authUserId,
-        track: trackId,
+      // Initialize Paystack transaction
+      const transaction = await initializePaystackTransaction({
         amount: amount || track.price,
-        paystackReference: transaction.reference,
+        email: user.email,
+        callback_url: paystackCallbackUrl,
+      });
+
+      if (!transaction) {
+        return next(
+          new ErrorResponse("Failed to initialize Paystack transaction", BAD_REQUEST)
+        );
+      }
+
+      // Create or update invoice
+      let invoice = await Invoice.findOne({ learner: authUserId, track: trackId });
+      if (invoice) {
+        invoice.amount = amount || track.price;
+        invoice.paystackReference = transaction.reference;
+        await invoice.save();
+      } else {
+        invoice = await Invoice.create({
+          learner: authUserId,
+          track: trackId,
+          amount: amount || track.price,
+          paystackReference: transaction.reference,
+        });
+      }
+
+      return res.status(CREATED).json({
+        success: true,
+        message: "Transaction initialized successfully",
+        transactionUrl: transaction.authorization_url,
+        invoice,
       });
     }
 
-    return res.status(CREATED).json({
-      success: true,
-      message: "Transaction initialized successfully",
-      transactionUrl: transaction.authorization_url,
-      invoice,
+    // Admin initiated enrollment (without payment)
+    const enrollment = await Enrollment.create({
+      learner: learnerId,
+      track: trackId,
     });
+
+    const populatedEnrollment = await Enrollment.findById(enrollment._id)
+      .populate("learner")
+      .populate("track");
+
+    res.status(CREATED).json({
+      success: true,
+      message: "Track enrolled successfully",
+      enrollment: populatedEnrollment,
+    });
+  } catch (error) {
+    console.error("EnrollTrack error:", error);
+    return next(new ErrorResponse("Internal server error", 500));
   }
-
-  // Create enrollment for admin-initiated enrollment
-  const enrollment = await Enrollment.create({
-    learner: learnerId,
-    track: trackId,
-  });
-
-  const populatedEnrollment = await Enrollment.findById(enrollment._id)
-    .populate("learner")
-    .populate("track");
-
-  res.status(CREATED).json({
-    success: true,
-    message: "Track enrolled successfully",
-    enrollment: populatedEnrollment,
-  });
-});
-
-export const getEnrollments = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.userId);
-
-  if (!user) {
-    return next(new ErrorResponse("Access denied", UNAUTHORIZED));
-  }
-
-  const query = {};
-
-  // Check if the user is a learner, and get only their enrollments
-  if (user.role === "Learner") {
-    query.learner = req.userId;
-  }
-
-  const enrollments = await Enrollment.find(query)
-    .populate("track")
-    .sort("-createdAt");
-
-  res.status(OK_S).json({
-    success: true,
-    count: enrollments.length,
-    enrollments,
-  });
-});
-
-export const cancelEnrollment = asyncHandler(async (req, res, next) => {
-  const enrollment = await Enrollment.findOne({
-    _id: req.params.id,
-    learner: req.userId,
-  });
-
-  if (!enrollment) {
-    return next(new ErrorResponse("Enrollment not found", NOT_FOUND));
-  }
-
-  await enrollment.deleteOne();
-
-  res.status(OK_S).json({
-    success: true,
-    message: "Enrollment cancelled successfully",
-  });
 });
