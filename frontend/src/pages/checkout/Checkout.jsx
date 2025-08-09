@@ -33,7 +33,7 @@ const Checkout = () => {
       email:user.email ||"",
       
       
-    course: selectedCourse.title ||"",
+    course: selectedCourse.name ||"",
    
     gender:"",
     phoneNumber:user.contact || "",

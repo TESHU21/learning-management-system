@@ -11,14 +11,15 @@ const Courses = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const { getCourses, courses, setCourses, setSelectedCourse } = useCourse();
+  const { getCourses,getallTracks, courses, setCourses, setSelectedCourse } = useCourse();
 
   useEffect(() => {
     const fetchCourses = async () => {
       try {
         setIsLoading(true);
-        const response = await getCourses();
-        setCourses(response?.data.courses || []);
+        const response = await getallTracks();
+        setCourses(response?.data.tracks);
+        console.log(response)
       } catch (error) {
         console.error("Error fetching courses:", error);
       } finally {
@@ -29,8 +30,8 @@ const Courses = () => {
     fetchCourses();
   }, []);
 
-  const filteredCourses = courses.filter(course =>
-    course.title.toLowerCase().includes(searchValue.toLowerCase())
+  const filteredCourses = courses?.filter(course =>
+    course?.name.toLowerCase().includes(searchValue.toLowerCase())
   );
 console.log(filteredCourses)
   const handleNavigate = (item) => {
@@ -73,15 +74,15 @@ console.log(filteredCourses)
 
       {/* Courses with Flexbox */}
       <div className="flex flex-wrap justify-center md:justify-start gap-[19px] mt-4 md:mt-[38px] md:px-[197px]">
-        {filteredCourses.map((item) => (
+        {filteredCourses?.map((item) => (
           <div
             key={item._id}
             className="flex flex-col w-full sm:w-[300px] md:w-[310px] lg:w-[334px] bg-white shadow-md rounded-md overflow-hidden"
           >
-            <img src={item.image} alt={item.title} className="w-full h-[225px] object-cover" />
+            <img src={item.image} alt={item.name} className="w-full h-[225px] object-cover" />
 
             <div className="flex flex-col flex-1 p-4">
-              <p className="font-inter font-semibold text-[20px] leading-8 text-center">{item.title}</p>
+              <p className="font-inter font-semibold text-[20px] leading-8 text-center">{item.name}</p>
               <p className="font-inter text-base leading-6 text-center line-clamp-3 mt-2">{item.description}</p>
 
               <div className="flex justify-between items-center px-3 mt-6">

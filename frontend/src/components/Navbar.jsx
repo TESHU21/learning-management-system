@@ -42,7 +42,7 @@ const Navbar = () => {
                 <span className="font-lusitana text-[19px] font-bold leading-[100%] text-blue-primary ">CLient</span>
             </div>
             <NavLink to="/" className={({isActive})=>isActive ? "text-blue-primary":""}>Home</NavLink>
-            <NavLink to="/courses" className={({isActive})=>isActive ? "text-blue-primary":""}>Courses</NavLink>
+            <NavLink to="/courses" className={({isActive})=>isActive ? "text-blue-primary":""}>Tracks</NavLink>
         </div>
         {
           token?(
@@ -75,7 +75,7 @@ const Navbar = () => {
         <NavLink to="/" className={({isActive})=>isActive ? "text-blue-primary":""}>Home</NavLink>
       </li>
       <li>
-        <NavLink to="/courses" className={({isActive})=>isActive ? "text-blue-primary":""} >Courses</NavLink>
+        <NavLink to="/courses" className={({isActive})=>isActive ? "text-blue-primary":""} >Tracks</NavLink>
       </li>
     </ul>
     <div className=" flex flex-col gap-4 mt-6">

@@ -94,16 +94,17 @@ export default function CourseDetail() {
 
         {/* Course Detail Content */}
         <div className=" flex flex-col mt-10 px-4 md:px-[203px]">
-          <h3 className=" text-xl md:text-3xl   font-bold mb-4">{openedCourse.title}</h3>
+          <h3 className=" text-xl md:text-3xl   font-bold mb-4">{openedCourse.name}</h3>
           <p className="mb-6 mt-[21px] md:w-[556px] text-base font-inter text-justify ">{openedCourse.description}</p>
           <div className="flex gap-4 md:gap-8 text-base ">
-            <div className="flex flex-col  md:w-[74px] gap-1 text-base leading-6  font-inter">
+            <div className="flex flex-col  md:w-[94px] gap-1 text-base leading-6  font-inter">
               <span className="">Instructor</span>
-              <span>{openedCourse?.track?.instructor}</span>
+              <span>{openedCourse?.instructor}</span>
             </div>
             <div className=" flex flex-col text-base leading-6  font-inter">
               <span className="">Enrolled Students</span>
-              <span className="text-center md:text-start ">{openedCourse.total_enrolled_students}</span>
+              {/* <span className="text-center md:text-start ">{openedCourse.total_enrolled_students}</span> */}
+               <span className="text-center md:text-start ">60</span> 
             </div>
             <div className="flex   flex-col text-base leading-6  font-inter">
             {/* <span className="">1 review</span> */}
@@ -158,8 +159,8 @@ export default function CourseDetail() {
       <div className="md:ml-[200px] px-4 mt-[30px] py-10 mb-[34px] md:border border-[#E6E6E6] w-full md:w-[632px] md:pl-[11px] md:pt-[33px]">
         <p className="font-semibold">What you'll learn</p>
         <div className="flex flex-col gap-3 pl-5">
-  {core_concepts.map((item) => ( 
-    <p key={item.id} className="flex gap-[10px]  items-baseline text-base w-full md:w-[578px] mt-2 leading-6">
+  {core_concepts.map((item,index) => ( 
+    <p key={index} className="flex gap-[10px]  items-baseline text-base w-full md:w-[578px] mt-2 leading-6">
       <span className="h-2 w-2 rounded-full bg-gray-300 flex-shrink-0"></span>
       {item}
     </p>

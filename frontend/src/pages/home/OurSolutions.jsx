@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useEffect ,useState} from 'react'
 
 import { Button } from '@/components/ui/button'
 import Buttons from "../../assets/images/Frame 169157.png"
@@ -10,12 +10,34 @@ import StudentPersonIcon from "../../assets/svg/student-person-part-2-svgrepo-co
 import {solutions} from "./components/data"
 import { techStacks } from './components/techStak'
 import { useNavigate } from 'react-router-dom'
+import { useCourse } from '@/contexts/CourseContext';
 
 
 
 
 const OurSolutions = () => {
+  const [isLoading,setIsLoading]=useState(false)
+  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+
   const navigate=useNavigate()
+  const {getallTracks, setCourses,courses,}=useCourse()
+   useEffect(() => {
+     const fetchCourses = async () => {
+       try {
+         setIsLoading(true);
+         const response = await getallTracks();
+         setCourses(response?.data.tracks);
+         console.log(response)
+       } catch (error) {
+         console.error("Error fetching courses:", error);
+       } finally {
+         setIsLoading(false);
+       }
+     };
+ 
+     fetchCourses();
+   }, []);
 
   return (
     <div>
@@ -25,13 +47,15 @@ const OurSolutions = () => {
             <h3 className=' font-lato font-bold text-[40px] leading-12 text-center'>Our solutions</h3>
             <p className=' font-inter md:text-center leading-6 text-center'>Create your account quickly with just your email or social media login, then explore a wide range </p>
         </div>
-        <div className="flex flex-col pt-[56px] md:flex-row gap-7 justify-center items-center mb-10 md:mb-0 ">
-  {solutions.map((item) => (
-    <div key={item.title} className="w-[325px] p-6 border shadow-lg rounded-lg border-t-0 flex flex-col justify-between">
+        <div className="flex flex-col pt-[56px] md:flex-row gap-7 justify-center  items-stretch mb-10 md:mb-0 ">
+  {courses?.map((item) => (
+    <div key={item.name} className="w-[325px] p-6 border shadow-lg rounded-lg border-t-0 flex flex-col justify-between">
       <div className="flex flex-col gap-4 flex-grow">
-        <img src={item.icon} alt="" className="w-[86px] h-[86px] md:w-[81px] md:h-[81px]" />
-        <p className="font-semibold">{item.title}</p>
-        <p className=" text-justify">{item.description}</p>
+        <img src={item?.image} alt="" className="w-[86px] h-[86px] md:w-[81px] md:h-[81px]" />
+        <p className="font-semibold">{capitalize(item.name)}</p>
+
+        <p className=" text-justify">  {item.description.split('.')[0] + '.'}
+</p>
       </div>
       <div className="flex items-center justify-between mt-4">
         <p>${item.price}</p>
