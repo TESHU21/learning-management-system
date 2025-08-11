@@ -5,7 +5,7 @@ import { markInvoiceAsPaid } from "./webhookRoute.js"; // reuse your existing fu
 
 const router = express.Router();
 
-router.post("/payment", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { reference } = req.body;
     if (!reference) {
