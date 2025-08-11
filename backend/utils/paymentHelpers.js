@@ -1,33 +1,29 @@
-import { Invoice } from "../models/invoiceModel.js";
-import { Enrollment } from "../models/enrollmentModel.js";
-
-export const markInvoiceAsPaid = async ({
-  amount,
-  status,
-  paid_at: paidAt,
-  reference: paystackReference,
-  id: paystackTransactionId,
-}) => {
+export const markInvoiceAsPaid = async (paymentData) => {
   try {
-    const invoice = await Invoice.findOne({ reference: paystackReference });
+    console.log("markInvoiceAsPaid input:", paymentData);
 
+    const invoice = await Invoice.findOne({ reference: paymentData.reference });
     if (!invoice) {
+      console.error("Invoice not found for reference:", paymentData.reference);
       throw new Error("Invoice not found");
     }
 
-    if (status !== "success" || paidAt === null || amount !== invoice.amount) {
+    if (paymentData.status !== "success" || !paymentData.paid_at || paymentData.amount !== invoice.amount) {
+      console.error("Invalid payment data:", paymentData, "Invoice:", invoice);
       throw new Error("Invalid payment status or amount");
     }
 
-    if (invoice.status === "paid") return; // Already paid
+    if (invoice.status === "paid") {
+      console.log("Invoice already marked as paid");
+      return;
+    }
 
     invoice.status = "paid";
-    invoice.paidAt = paidAt;
-    invoice.paystackTransactionId = paystackTransactionId;
+    invoice.paidAt = paymentData.paid_at;
+    invoice.paystackTransactionId = paymentData.id;
 
     await invoice.save();
 
-    // Enroll learner if not already enrolled
     const isAlreadyEnrolled = await Enrollment.findOne({
       learner: invoice.learner,
       track: invoice.track,
@@ -40,7 +36,7 @@ export const markInvoiceAsPaid = async ({
       });
     }
   } catch (error) {
-    console.error("Error marking invoice as paid:", error);
+    console.error("Error in markInvoiceAsPaid:", error);
     throw error;
   }
 };
