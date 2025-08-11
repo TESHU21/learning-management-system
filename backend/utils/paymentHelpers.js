@@ -1,3 +1,6 @@
+import { Invoice } from "../models/invoiceModel.js";
+import { Enrollment } from "../models/enrollmentModel.js";
+
 export const markInvoiceAsPaid = async (paymentData) => {
   try {
     console.log("markInvoiceAsPaid input:", paymentData);
