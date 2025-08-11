@@ -1,7 +1,7 @@
 // routes/paymentVerifyRoutes.js
 import express from "express";
 import axios from "axios";
-import { markInvoiceAsPaid } from "./webhookRoute.js"; // reuse your existing function
+import {markInvoiceAsPaid } from "./paystackWebhookRoutes"; // reuse your existing function
 
 const router = express.Router();
 
