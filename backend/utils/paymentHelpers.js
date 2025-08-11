@@ -5,13 +5,17 @@ export const markInvoiceAsPaid = async (paymentData) => {
   try {
     console.log("markInvoiceAsPaid input:", paymentData);
 
-    const invoice = await Invoice.findOne({ reference: paymentData.reference });
+    const invoice = await Invoice.findOne({ paystackReference: paymentData.reference });
     if (!invoice) {
       console.error("Invoice not found for reference:", paymentData.reference);
       throw new Error("Invoice not found");
     }
 
-    if (paymentData.status !== "success" || !paymentData.paid_at || paymentData.amount !== invoice.amount) {
+    if (
+      paymentData.status !== "success" ||
+      !paymentData.paid_at ||
+      paymentData.amount !== invoice.amount * 100 // adjust if needed
+    ) {
       console.error("Invalid payment data:", paymentData, "Invoice:", invoice);
       throw new Error("Invalid payment status or amount");
     }
