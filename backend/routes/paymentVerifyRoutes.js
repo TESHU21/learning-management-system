@@ -1,18 +1,17 @@
-// routes/paymentVerifyRoutes.js
 import express from "express";
 import axios from "axios";
-import {markInvoiceAsPaid } from "./paystackWebhookRoutes"; // reuse your existing function
+import { markInvoiceAsPaid } from "../utils/paymentHelpers.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/payment", async (req, res) => {
   try {
     const { reference } = req.body;
+
     if (!reference) {
       return res.status(400).json({ success: false, message: "Reference required" });
     }
 
-    // Verify with Paystack API
     const { data } = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`, {
       headers: { Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}` },
     });
@@ -21,7 +20,6 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ success: false, message: "Payment not successful" });
     }
 
-    // Reuse your DB update logic
     await markInvoiceAsPaid(data.data);
 
     res.json({ success: true, message: "Payment verified" });
