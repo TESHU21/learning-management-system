@@ -21,6 +21,6 @@ router.use("/invoices", invoiceRoutes);
 router.use("/enrollments", enrollmentRoutes);
 router.use("/tracks", trackRoutes);
 router.use("/registrations", courseRegistrationRoutes);
-router.use("/verify",paymentVerifyRoutes)
+router.use("/markaspaid",paymentVerifyRoutes)
 
 export default router;
