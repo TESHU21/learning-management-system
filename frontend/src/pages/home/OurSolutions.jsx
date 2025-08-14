@@ -44,10 +44,10 @@ const OurSolutions = () => {
         {/* Our Solutions */}
            <div className=' flex flex-col px-[33px] pt-5 md:pt-[94px]  md:pb-[133px] md:px-[190px]  md:gap-14'>
         <div className=' flex flex-col gap-3'>
-            <h3 className=' font-lato font-bold text-[40px] leading-12 text-center'>Our solutions</h3>
+            <h3 className=' font-lato font-bold text-[24px] md:text-[40px] leading-12 text-center'>Our solutions</h3>
             <p className=' font-inter md:text-center leading-6 text-center'>Create your account quickly with just your email or social media login, then explore a wide range </p>
         </div>
-        <div className="flex flex-col pt-[56px] md:flex-row gap-7 justify-center  items-stretch mb-10 md:mb-0 ">
+        <div className="flex flex-col pt-[56px] md:flex-row gap-7 justify-center items-center  md:items-stretch mb-10 md:mb-0 ">
   {courses?.map((item) => (
     <div key={item.name} className="w-[325px] p-6 border shadow-lg rounded-lg border-t-0 flex flex-col justify-between">
       <div className="flex flex-col gap-4 flex-grow">

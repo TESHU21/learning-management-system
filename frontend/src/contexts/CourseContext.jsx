@@ -125,7 +125,7 @@ export const  CourseProvider=({children})=>{
       // function to mark  invoices as paid
     const markInvoicesAsPaid=async(data)=>{
         try{
-            const response = await axiosInstance.post('/webhooks/paystack',data)
+            const response = await axiosInstance.post('/markaspaid/payment',data)
             return response
         }
         catch(error){

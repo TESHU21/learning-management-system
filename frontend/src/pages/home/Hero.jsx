@@ -47,7 +47,7 @@ const Hero = () => {
 
       {/* Content */}
       <div className=" flex flex-col gap-3 relative  md:mt-[146px] md:ml-[202px] text-white md:w-[474px]">
-        <h3 className="text-4xl font-bold leading-8 font-lato">
+        <h3 className=" text-2xl md:text-4xl font-bold md:leading-8 font-lato">
           Unlock Your Potential with <br />
           Industry-Leading Courses!
         </h3>
@@ -65,7 +65,7 @@ const Hero = () => {
         }}
       ></div>
       <div className='flex flex-col gap-3 mt-10 mx-4 w-[200px] h-full justify-around'>
-        <h6 className=' font-lato text-[30px] leading-8   font-bold  '>Unlock Your Potential with Industry-Leading Courses!</h6>
+        <h6 className=' font-lato text-[16px] leading-6 px-8   font-bold  '>Unlock Your Potential with Industry-Leading Courses!</h6>
         <Button onClick={handleGetStartedMobile}  className="w-[110px] h-[40px]   rounded-md py-3 px-6 gap-3 bg-blue-primary text-white hover:bg-blue-primary cursor-pointer  z-10 ">Discover</Button>
 
       </div>
