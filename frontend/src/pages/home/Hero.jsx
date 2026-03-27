@@ -16,10 +16,14 @@ const Hero = () => {
   return (
     <div>
       {/* Desktop */}
-      <div
-        className="relative hidden  md:flex h-[600px] w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${HeroImage})` }}
-      >
+      <div className="relative hidden md:flex h-[600px] w-full overflow-hidden">
+        <img
+          src={HeroImage}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+          fetchpriority="high"
+          decoding="async"
+        />
         {/* Overlay */}
         <div
           className="absolute inset-0 opacity-40"
@@ -30,7 +34,7 @@ const Hero = () => {
         ></div>
 
         {/* Content */}
-        <div className=" flex flex-col gap-3 relative  md:mt-[146px] md:ml-[202px] text-white md:w-[474px]">
+        <div className=" flex flex-col gap-3 relative md:mt-[146px] md:ml-[202px] text-white md:w-[474px]">
           <h3 className=" text-2xl md:text-4xl font-bold md:leading-8 font-lato">
             Unlock Your Potential with <br />
             Industry-Leading Courses!
@@ -44,10 +48,14 @@ const Hero = () => {
         </div>
       </div>
       {/* Mobile */}
-      <div
-        className=" relative flex flex-col md:hidden  h-[400px] bg-cover bg-center  "
-        style={{ backgroundImage: `url(${HeroImage})` }}
-      >
+      <div className="relative flex flex-col md:hidden h-[400px] overflow-hidden">
+        <img
+          src={HeroImage}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+          fetchpriority="high"
+          decoding="async"
+        />
         {/* Overlay */}
         <div
           className="absolute inset-0 opacity-40 z-0"
