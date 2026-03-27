@@ -2,6 +2,14 @@ import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "@/layout/Layout";
 
+const RouteFallback = () => {
+  return (
+    <div className="min-h-[40vh] w-full flex items-center justify-center">
+      <div className="h-10 w-10 rounded-full border-4 border-blue-primary/20 border-t-blue-primary animate-spin" />
+    </div>
+  );
+};
+
 const Home = lazy(() => import("@/pages/home/Home"));
 const Courses = lazy(() => import("@/pages/courses/Courses"));
 const CourseDetail = lazy(
@@ -24,7 +32,7 @@ const PaymentSuccess = lazy(() => import("@/pages/checkout/PaymentSuccess"));
 
 const AppRoutes = () => {
   return (
-    <Suspense fallback={<div />}>
+    <Suspense fallback={<RouteFallback />}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

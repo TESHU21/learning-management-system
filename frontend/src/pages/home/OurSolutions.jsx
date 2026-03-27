@@ -15,8 +15,10 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 const OurSolutions = () => {
   const navigate = useNavigate();
   const { getallTracks, setCourses, courses } = useCourse();
+  const hasCourses = (courses?.length ?? 0) > 0;
 
   useEffect(() => {
+    if (hasCourses) return;
     const fetchCourses = async () => {
       try {
         const response = await getallTracks();
@@ -27,7 +29,7 @@ const OurSolutions = () => {
     };
 
     fetchCourses();
-  }, [getallTracks, setCourses]);
+  }, [getallTracks, hasCourses, setCourses]);
 
   return (
     <div>
@@ -109,11 +111,15 @@ const OurSolutions = () => {
             src={IphoneImage}
             alt="Iphone Having Coding Background Image"
             className="md:mt-[182px] z-10"
+            loading="lazy"
+            decoding="async"
           />
           <img
             src={MicrosoftSurface}
             alt="Microsoft Surface Desktop Screen"
             className="absolute left-[47px] mt-[30px]"
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
