@@ -16,3 +16,18 @@ export const uploadToCloudinary = async (path) => {
   };
   return await cloudinary.uploader.upload(path, options);
 };
+
+export const getOptimizedCloudinaryUrl = (publicId, { width } = {}) => {
+  if (!publicId) return "";
+
+  return cloudinary.url(publicId, {
+    secure: true,
+    transformation: [
+      {
+        fetch_format: "auto",
+        quality: "auto",
+        ...(width ? { width, crop: "limit" } : {}),
+      },
+    ],
+  });
+};

@@ -3,7 +3,10 @@ import { Track } from "../models/trackModel.js";
 import { BAD_REQUEST, CREATED, NOT_FOUND, OK_S } from "../constant/http.js";
 import asyncHandler from "../middlewares/asyncMiddleware.js";
 import { ErrorResponse } from "../utils/error.js";
-import { uploadToCloudinary } from "../utils/cloudinary.js";
+import {
+  getOptimizedCloudinaryUrl,
+  uploadToCloudinary,
+} from "../utils/cloudinary.js";
 
 export const createCourse = asyncHandler(async (req, res, next) => {
   const { track: trackId } = req.body;
@@ -18,7 +21,10 @@ export const createCourse = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse("Track not found", NOT_FOUND));
   }
 
-  const { secure_url: image } = await uploadToCloudinary(req.file.path);
+  const uploadResult = await uploadToCloudinary(req.file.path);
+  const image = getOptimizedCloudinaryUrl(uploadResult?.public_id, {
+    width: 600,
+  });
 
   if (!image) {
     return next(new ErrorResponse("Image upload failed", BAD_REQUEST));
@@ -85,7 +91,10 @@ export const updateCourse = asyncHandler(async (req, res, next) => {
   }
 
   if (req.file) {
-    const { secure_url: image } = await uploadToCloudinary(req.file.path);
+    const uploadResult = await uploadToCloudinary(req.file.path);
+    const image = getOptimizedCloudinaryUrl(uploadResult?.public_id, {
+      width: 800,
+    });
 
     if (!image) {
       return next(new ErrorResponse("Image upload failed", BAD_REQUEST));

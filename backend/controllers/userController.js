@@ -18,7 +18,10 @@ import {
 } from "../sendgrid/emailTemplates.js";
 import asyncHandler from "../middlewares/asyncMiddleware.js";
 import { ErrorResponse } from "../utils/error.js";
-import { uploadToCloudinary } from "../utils/cloudinary.js";
+import {
+  getOptimizedCloudinaryUrl,
+  uploadToCloudinary,
+} from "../utils/cloudinary.js";
 
 // ========== user  controllers ===========
 
@@ -47,7 +50,7 @@ const userSignup = async (userData, res) => {
   await sendVerificationEmail(
     user.email,
     verificationToken,
-    VERIFICATION_EMAIL_TEMPLATE
+    VERIFICATION_EMAIL_TEMPLATE,
   );
 
   return { user, token };
@@ -67,7 +70,7 @@ export const adminSignup = asyncHandler(async (req, res, next) => {
 export const learnerSignup = asyncHandler(async (req, res, next) => {
   const { token, user } = await userSignup(
     { ...req.body, role: "Learner" },
-    res
+    res,
   );
 
   res.status(CREATED).json({
@@ -125,7 +128,7 @@ export const userLogin = asyncHandler(async (req, res, next) => {
     { lastLogin: Date.now() },
     {
       new: true,
-    }
+    },
   );
 
   if (!updatedUser) {
@@ -168,7 +171,7 @@ export const forgotPassword = asyncHandler(async (req, res, next) => {
   await sendPasswordResetEmail(
     user.email,
     `${process.env.CLIENT_URL}/reset-password/${resetToken}`,
-    PASSWORD_RESET_REQUEST_TEMPLATE
+    PASSWORD_RESET_REQUEST_TEMPLATE,
   );
 
   res.status(OK_S).json({
@@ -188,7 +191,7 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
 
   if (!user) {
     return next(
-      new ErrorResponse("Invalid or expired reset token", BAD_REQUEST)
+      new ErrorResponse("Invalid or expired reset token", BAD_REQUEST),
     );
   }
 
@@ -217,13 +220,14 @@ export const updateUser = asyncHandler(async (req, res, next) => {
   const userId = req.user.id;
 
   if (req.file) {
-    const { secure_url: profileImage } = await uploadToCloudinary(
-      req.file.path
-    );
+    const uploadResult = await uploadToCloudinary(req.file.path);
+    const profileImage = getOptimizedCloudinaryUrl(uploadResult?.public_id, {
+      width: 400,
+    });
 
     if (!profileImage) {
       return next(
-        new ErrorResponse("Profile Image upload failed", BAD_REQUEST)
+        new ErrorResponse("Profile Image upload failed", BAD_REQUEST),
       );
     }
 
@@ -262,7 +266,7 @@ export const resendVerificationToken = asyncHandler(async (req, res) => {
   await sendVerificationEmail(
     user.email,
     verificationToken,
-    VERIFICATION_EMAIL_TEMPLATE
+    VERIFICATION_EMAIL_TEMPLATE,
   );
 
   res.status(OK_S).json({ success: true, message: "Verification email sent" });
