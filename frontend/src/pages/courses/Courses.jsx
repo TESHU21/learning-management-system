@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useCourse } from "@/contexts/CourseContext";
 import { PuffLoader } from "react-spinners";
+import Seo from "@/components/Seo";
 
 const Courses = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -35,7 +36,6 @@ const Courses = () => {
   const filteredCourses = courses?.filter((course) =>
     course?.name.toLowerCase().includes(searchValue.toLowerCase()),
   );
-  console.log("filteredCourses", filteredCourses);
   if (import.meta.env.DEV) console.log(filteredCourses);
   const handleNavigate = (item) => {
     setSelectedCourse(item);
@@ -53,6 +53,11 @@ const Courses = () => {
 
   return (
     <div className="mb-[200px]">
+      <Seo
+        title="Learning Management System | Courses"
+        description="Explore available tracks and courses. Search, preview, and enroll."
+        canonicalPath="/courses"
+      />
       {/* Header */}
       <div className="h-[80px] flex items-center justify-center w-full bg-blue-primary">
         <h3 className="font-lato text-[30px] md:text-[40px] font-bold text-white">
