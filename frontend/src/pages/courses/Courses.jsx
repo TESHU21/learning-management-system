@@ -35,6 +35,7 @@ const Courses = () => {
   const filteredCourses = courses?.filter((course) =>
     course?.name.toLowerCase().includes(searchValue.toLowerCase()),
   );
+  console.log("filteredCourses", filteredCourses);
   if (import.meta.env.DEV) console.log(filteredCourses);
   const handleNavigate = (item) => {
     setSelectedCourse(item);
@@ -88,6 +89,8 @@ const Courses = () => {
             <img
               src={item.image}
               alt={item.name}
+              width={600}
+              height={225}
               className="w-full h-[225px] object-cover"
               loading="lazy"
               decoding="async"

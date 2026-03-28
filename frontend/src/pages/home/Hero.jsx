@@ -20,6 +20,7 @@ const Hero = () => {
         <img
           src={HeroImage}
           alt=""
+          loading="eager"
           className="absolute inset-0 h-full w-full object-cover"
           fetchpriority="high"
           decoding="async"
