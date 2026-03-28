@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "./ui/button";
-import { Chrome } from "lucide-react";
+import GoogleIcon from "@/components/GoogleIcon";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 
@@ -40,7 +40,7 @@ const GoogleLoginButton = () => {
       onClick={() => login()}
       className="flex items-center bg-white hover:bg-white border border-blue-primary w-full h-12 py-3 px-6 cursor-pointer"
     >
-      <Chrome className="w-[22px] h-[22px] text-blue-primary" />
+      <GoogleIcon size={22} />
       <span className="text-blue-primary">Log in using Google</span>
     </Button>
   );
