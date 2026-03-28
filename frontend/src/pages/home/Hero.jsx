@@ -22,7 +22,7 @@ const Hero = () => {
           alt=""
           loading="eager"
           className="absolute inset-0 h-full w-full object-cover"
-          fetchpriority="high"
+          fetchPriority="high"
           decoding="async"
         />
         {/* Overlay */}
