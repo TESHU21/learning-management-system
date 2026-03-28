@@ -4,7 +4,7 @@ import LaptopWithCodeImage from "../../assets/images/Laptop with Code Screen.png
 import { Button } from "@/components/ui/button";
 import AuthenticationImage from "../../assets/svg/authentication.svg";
 import SecureLoginImage from "../../assets/svg/secure-login.svg";
-import { FaArrowDownLong } from "react-icons/fa6";
+import { ArrowDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const GetStartedSection = () => {
@@ -69,7 +69,7 @@ const GetStartedSection = () => {
               {/* Arrow (only if not last) */}
               {index < steps.length - 1 && (
                 <div className="absolute left-1/2 -bottom-[40px] transform -translate-x-1/2 translate-y-1/2 text-blue-primary z-10">
-                  <FaArrowDownLong className="w-[38px] h-6" />
+                  <ArrowDown className="w-[38px] h-6" />
                 </div>
               )}
             </div>
