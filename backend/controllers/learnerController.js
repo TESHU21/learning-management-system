@@ -38,6 +38,16 @@ export const createLearner = async (req, res) => {
     // Step 2: Sanitize and prepare payload for validation
     const payload = { ...req.body };
     if (imageUrl) payload.image = imageUrl;
+    if (
+      payload.amount !== undefined &&
+      payload.amount !== null &&
+      payload.amount !== ""
+    ) {
+      const parsedAmount = Number(payload.amount);
+      payload.amount = Number.isFinite(parsedAmount)
+        ? parsedAmount
+        : payload.amount;
+    }
 
     // Step 3: Validate the sanitized payload
     const validatedData = validateLearner(payload);
