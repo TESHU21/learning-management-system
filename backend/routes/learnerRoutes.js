@@ -12,7 +12,7 @@ import { uploadSingleImageFile } from "../middlewares/uploadMIddleware.js";
 const router = express.Router();
 
 // Create a new learner (protected route)
-router.post("/", uploadSingleImageFile("image"), createLearner);
+router.post("/", verifyToken, uploadSingleImageFile("image"), createLearner);
 
 // Get all learners (protected route)
 router.get("/", verifyToken, getLearners);
