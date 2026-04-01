@@ -17,6 +17,8 @@ import {
 // Create a new learner
 export const createLearner = async (req, res) => {
   try {
+    const isDev = process.env.NODE_ENV !== "production";
+
     // Step 1: Handle image upload first (if present)
     let imageUrl = null;
     if (req.file) {
@@ -55,7 +57,7 @@ export const createLearner = async (req, res) => {
     // Step 4: Check for existing learner/user
     const learner = await Learner.findOne({ email: validatedData.email });
     const user = await User.findOne({ email: validatedData.email });
-    if (import.meta.env.DEV) console.log(user);
+    if (isDev) console.log(user);
     if (learner) {
       return res
         .status(BAD_REQUEST)
@@ -77,7 +79,7 @@ export const createLearner = async (req, res) => {
       },
     });
     // Step 7: Create user account if needed (admin only)
-    if (import.meta.env.DEV) console.log(req.role);
+    if (isDev) console.log(req.role);
     if (req.role === "Admin" && !user) {
       const newUser = new User({
         email: validatedData.email,
@@ -107,7 +109,12 @@ export const createLearner = async (req, res) => {
       return res.status(400).json({ message: error.errors });
     }
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({
+      message: "Internal server error",
+      ...(process.env.NODE_ENV !== "production" && {
+        error: error?.message,
+      }),
+    });
   }
 };
 
