@@ -1,16 +1,6 @@
 import multer from "multer";
 import { ErrorResponse } from "../utils/error.js";
 
-const storage = multer.diskStorage({
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(
-      null,
-      `${file.fieldname}-${uniqueSuffix}.${file.mimetype.split("/")[1]}`
-    );
-  },
-});
-
 const imageExtensions = ["png", "jpeg", "jpg"];
 
 const verifyImageFile = (file) =>
@@ -29,7 +19,7 @@ const onlyImage = (req, file, cb) => {
 };
 
 const uploadImage = multer({
-  storage: storage,
+  storage: multer.memoryStorage(),
   fileFilter: onlyImage,
   limits: { fileSize: 1 * 1024 * 1024 }, // 1MB file size limit
 });

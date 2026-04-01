@@ -17,6 +17,26 @@ export const uploadToCloudinary = async (path) => {
   return await cloudinary.uploader.upload(path, options);
 };
 
+export const uploadBufferToCloudinary = async (buffer, filename) => {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader
+      .upload_stream(
+        {
+          use_filename: true,
+          unique_filename: true,
+          overwrite: false,
+          resource_type: "auto",
+          public_id: filename,
+        },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        },
+      )
+      .end(buffer);
+  });
+};
+
 export const getOptimizedCloudinaryUrl = (publicId, { width } = {}) => {
   if (!publicId) return "";
 

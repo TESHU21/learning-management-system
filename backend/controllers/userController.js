@@ -20,7 +20,7 @@ import asyncHandler from "../middlewares/asyncMiddleware.js";
 import { ErrorResponse } from "../utils/error.js";
 import {
   getOptimizedCloudinaryUrl,
-  uploadToCloudinary,
+  uploadBufferToCloudinary,
 } from "../utils/cloudinary.js";
 
 // ========== user  controllers ===========
@@ -220,7 +220,11 @@ export const updateUser = asyncHandler(async (req, res, next) => {
   const userId = req.user.id;
 
   if (req.file) {
-    const uploadResult = await uploadToCloudinary(req.file.path);
+    const filename = `${req.file.fieldname}-${Date.now()}-${Math.round(Math.random() * 1e9)}.${req.file.mimetype.split("/")[1]}`;
+    const uploadResult = await uploadBufferToCloudinary(
+      req.file.buffer,
+      filename,
+    );
     const profileImage = getOptimizedCloudinaryUrl(uploadResult?.public_id, {
       width: 400,
     });

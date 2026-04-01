@@ -26,7 +26,7 @@ const userSchema = z.object({
     })
     .regex(
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
-      "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character"
+      "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
     ),
   confirmPassword: z.string({
     message: "Confirm password is required",
@@ -56,7 +56,7 @@ export const learnerSchema = userSchema.refine(
   {
     message: "Passwords don't match",
     path: ["confirmPassword"],
-  }
+  },
 );
 
 export const verifyEmailSchema = z.object({

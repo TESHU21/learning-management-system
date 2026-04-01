@@ -9,7 +9,7 @@ import enrollmentRoutes from "./enrollmentRoutes.js";
 import paystackWebhookRoutes from "./paystackWebhookRoutes.js";
 import trackRoutes from "./trackRoutes.js";
 import courseRegistrationRoutes from "./courseRegistrationRoutes.js";
-import paymentVerifyRoutes from "./paymentVerifyRoutes.js"
+import paymentVerifyRoutes from "./paymentVerifyRoutes.js";
 
 const router = express.Router();
 
@@ -21,6 +21,6 @@ router.use("/invoices", invoiceRoutes);
 router.use("/enrollments", enrollmentRoutes);
 router.use("/tracks", trackRoutes);
 router.use("/registrations", courseRegistrationRoutes);
-router.use("/markaspaid",paymentVerifyRoutes)
+router.use("/markaspaid", paymentVerifyRoutes);
 
 export default router;

@@ -5,7 +5,7 @@ import asyncHandler from "../middlewares/asyncMiddleware.js";
 import { ErrorResponse } from "../utils/error.js";
 import {
   getOptimizedCloudinaryUrl,
-  uploadToCloudinary,
+  uploadBufferToCloudinary,
 } from "../utils/cloudinary.js";
 
 export const createCourse = asyncHandler(async (req, res, next) => {
@@ -21,7 +21,11 @@ export const createCourse = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse("Track not found", NOT_FOUND));
   }
 
-  const uploadResult = await uploadToCloudinary(req.file.path);
+  const filename = `${req.file.fieldname}-${Date.now()}-${Math.round(Math.random() * 1e9)}.${req.file.mimetype.split("/")[1]}`;
+  const uploadResult = await uploadBufferToCloudinary(
+    req.file.buffer,
+    filename,
+  );
   const image = getOptimizedCloudinaryUrl(uploadResult?.public_id, {
     width: 600,
   });
@@ -91,7 +95,11 @@ export const updateCourse = asyncHandler(async (req, res, next) => {
   }
 
   if (req.file) {
-    const uploadResult = await uploadToCloudinary(req.file.path);
+    const filename = `${req.file.fieldname}-${Date.now()}-${Math.round(Math.random() * 1e9)}.${req.file.mimetype.split("/")[1]}`;
+    const uploadResult = await uploadBufferToCloudinary(
+      req.file.buffer,
+      filename,
+    );
     const image = getOptimizedCloudinaryUrl(uploadResult?.public_id, {
       width: 800,
     });
