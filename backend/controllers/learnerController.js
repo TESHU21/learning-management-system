@@ -17,55 +17,58 @@ import {
 // Create a new learner
 export const createLearner = async (req, res) => {
   try {
-    const validatedData = validateLearner(req.body);
-    // Check if the learner exists
-    const learner = await Learner.findOne({ email: validatedData.email });
-    const user = await User.findOne({ email: validatedData.email });
-    if (import.meta.env.DEV) console.log(user);
-    if (learner) {
-      return res
-        .status(BAD_REQUEST)
-        .json({ success: false, message: "Learner already exist" });
-    }
-
-    let image = null;
+    // Step 1: Handle image upload first (if present)
+    let imageUrl = null;
     if (req.file) {
       const filename = `${req.file.fieldname}-${Date.now()}-${Math.round(Math.random() * 1e9)}.${req.file.mimetype.split("/")[1]}`;
       const uploadResult = await uploadBufferToCloudinary(
         req.file.buffer,
         filename,
       );
-      image = getOptimizedCloudinaryUrl(uploadResult?.public_id, {
+      imageUrl = getOptimizedCloudinaryUrl(uploadResult?.public_id, {
         width: 400,
       });
-      if (!profileImage) {
+      if (!imageUrl) {
         return res
           .status(BAD_REQUEST)
           .json({ success: false, message: "Profile image upload failed" });
       }
     }
+
+    // Step 2: Sanitize and prepare payload for validation
+    const payload = { ...req.body };
+    if (imageUrl) payload.image = imageUrl;
+
+    // Step 3: Validate the sanitized payload
+    const validatedData = validateLearner(payload);
+
+    // Step 4: Check for existing learner/user
+    const learner = await Learner.findOne({ email: validatedData.email });
+    const user = await User.findOne({ email: validatedData.email });
+    if (import.meta.env.DEV) console.log(user);
+    if (learner) {
+      return res
+        .status(BAD_REQUEST)
+        .json({ success: false, message: "Learner already exists" });
+    }
+    // Step 5: Generate password and hash
     const password = generateRandomPassword();
     let hashedPassword = "";
     if (password) {
       hashedPassword = await bcrypt.hash(password, 10);
     }
-    // const hashedPassword = await bcrypt.hash(validatedData.password, 10);
-    // Generate a 6-digit verification code
-    // const verificationToken = generateVerificationToken();
-    //create new Learner
+
+    // Step 6: Create learner record with validated data (image already included)
     const newLearner = new Learner({
       ...validatedData,
-      image,
       created_by: {
         role: req.role,
         user_id: req.userId,
       },
     });
-    //create new user if doesn't exist
+    // Step 7: Create user account if needed (admin only)
     if (import.meta.env.DEV) console.log(req.role);
-    // If the user is an admin and the user does not exist, create a new user
     if (req.role === "Admin" && !user) {
-      // console.log(user)
       const newUser = new User({
         email: validatedData.email,
         password: hashedPassword,
@@ -73,13 +76,11 @@ export const createLearner = async (req, res) => {
         verificationToken: undefined,
         verificationTokenExpiresAt: undefined,
       });
-      //save new user
       await newUser.save();
     }
-    //save new learner
-    await newLearner.save();
 
-    // Send verification email
+    // Step 8: Save learner and send credentials
+    await newLearner.save();
     await sendLearnerCredentials(
       newLearner.email,
       password,
