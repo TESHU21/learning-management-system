@@ -220,10 +220,12 @@ export const updateUser = asyncHandler(async (req, res, next) => {
   const userId = req.user.id;
 
   if (req.file) {
-    const filename = `${req.file.fieldname}-${Date.now()}-${Math.round(Math.random() * 1e9)}.${req.file.mimetype.split("/")[1]}`;
+    const publicId = `${req.file.fieldname}-${Date.now()}-${Math.round(
+      Math.random() * 1e9,
+    )}`;
     const uploadResult = await uploadBufferToCloudinary(
       req.file.buffer,
-      filename,
+      publicId,
     );
     const profileImage = getOptimizedCloudinaryUrl(uploadResult?.public_id, {
       width: 400,

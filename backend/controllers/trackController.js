@@ -12,10 +12,12 @@ export const createTrack = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse("Image is required", BAD_REQUEST));
   }
 
-  const filename = `${req.file.fieldname}-${Date.now()}-${Math.round(Math.random() * 1e9)}.${req.file.mimetype.split("/")[1]}`;
+  const publicId = `${req.file.fieldname}-${Date.now()}-${Math.round(
+    Math.random() * 1e9,
+  )}`;
   const uploadResult = await uploadBufferToCloudinary(
     req.file.buffer,
-    filename,
+    publicId,
   );
   const image = getOptimizedCloudinaryUrl(uploadResult?.public_id, {
     width: 800,
@@ -79,10 +81,12 @@ export const updateTrack = asyncHandler(async (req, res, next) => {
   }
 
   if (req.file) {
-    const filename = `${req.file.fieldname}-${Date.now()}-${Math.round(Math.random() * 1e9)}.${req.file.mimetype.split("/")[1]}`;
+    const publicId = `${req.file.fieldname}-${Date.now()}-${Math.round(
+      Math.random() * 1e9,
+    )}`;
     const uploadResult = await uploadBufferToCloudinary(
       req.file.buffer,
-      filename,
+      publicId,
     );
     const image = getOptimizedCloudinaryUrl(uploadResult?.public_id, {
       width: 800,
