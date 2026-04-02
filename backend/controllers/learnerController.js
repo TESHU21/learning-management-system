@@ -22,10 +22,12 @@ export const createLearner = async (req, res) => {
     // Step 1: Handle image upload first (if present)
     let imageUrl = null;
     if (req.file) {
-      const filename = `${req.file.fieldname}-${Date.now()}-${Math.round(Math.random() * 1e9)}.${req.file.mimetype.split("/")[1]}`;
+      const publicId = `${req.file.fieldname}-${Date.now()}-${Math.round(
+        Math.random() * 1e9,
+      )}`;
       const uploadResult = await uploadBufferToCloudinary(
         req.file.buffer,
-        filename,
+        publicId,
       );
       imageUrl = getOptimizedCloudinaryUrl(uploadResult?.public_id, {
         width: 400,
