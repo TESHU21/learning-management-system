@@ -18,8 +18,8 @@ export const createInvoice = asyncHandler(async (req, res, next) => {
     return next(
       new ErrorResponse(
         "Learner does not exist or is not enrolled in any track",
-        BAD_REQUEST
-      )
+        BAD_REQUEST,
+      ),
     );
   }
 
@@ -41,8 +41,8 @@ export const createInvoice = asyncHandler(async (req, res, next) => {
     return next(
       new ErrorResponse(
         "Learner has no outstanding balance, they cannot be invoiced",
-        BAD_REQUEST
-      )
+        BAD_REQUEST,
+      ),
     );
   }
 
@@ -57,8 +57,8 @@ export const createInvoice = asyncHandler(async (req, res, next) => {
     return next(
       new ErrorResponse(
         "Invoice amount cannot be greater than the outstanding balance",
-        BAD_REQUEST
-      )
+        BAD_REQUEST,
+      ),
     );
   }
 
@@ -73,8 +73,8 @@ export const createInvoice = asyncHandler(async (req, res, next) => {
     return next(
       new ErrorResponse(
         "Paystack transaction initialization failed",
-        BAD_REQUEST
-      )
+        BAD_REQUEST,
+      ),
     );
   }
 
@@ -90,7 +90,7 @@ export const createInvoice = asyncHandler(async (req, res, next) => {
       status: "pending",
       _id: { $ne: invoice._id }, // Exclude the newly created invoice
     },
-    { status: "cancelled" }
+    { status: "cancelled" },
   );
 
   const populatedInvoice = await Invoice.findById(invoice._id)
@@ -106,7 +106,7 @@ export const createInvoice = asyncHandler(async (req, res, next) => {
   // Send email to learner
   await sendLearnerPendingInvoice(
     populatedInvoice.learner.email,
-    emailTemplates
+    emailTemplates,
   );
 
   res.status(CREATED).json({
@@ -156,8 +156,8 @@ export const getInvoiceById = asyncHandler(async (req, res, next) => {
     return next(
       new ErrorResponse(
         "You are not authorized to view this invoice",
-        BAD_REQUEST
-      )
+        BAD_REQUEST,
+      ),
     );
   }
 
@@ -214,17 +214,30 @@ export const updateInvoiceStatus = asyncHandler(async (req, res, next) => {
   });
 });
 
-export const deleteInvoice = asyncHandler(async (req, res, next) => {
+export const cancelInvoice = asyncHandler(async (req, res, next) => {
   const invoice = await Invoice.findById(req.params.id);
 
   if (!invoice) {
     return next(new ErrorResponse("Invoice not found", NOT_FOUND));
   }
 
-  await invoice.deleteOne();
+  if (invoice.status === "paid") {
+    return next(
+      new ErrorResponse("Paid invoice cannot be cancelled", BAD_REQUEST),
+    );
+  }
+
+  invoice.status = "cancelled";
+  invoice.cancelledAt = new Date();
+  await invoice.save();
+
+  const populatedInvoice = await Invoice.findById(invoice._id)
+    .populate("learner")
+    .populate("track");
 
   res.status(OK_S).json({
     success: true,
-    message: "Invoice deleted successfully",
+    message: "Invoice cancelled successfully",
+    invoice: populatedInvoice,
   });
 });

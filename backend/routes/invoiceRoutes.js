@@ -4,7 +4,7 @@ import {
   getInvoices,
   getInvoiceById,
   updateInvoice,
-  deleteInvoice,
+  cancelInvoice,
 } from "../controllers/invoiceController.js";
 import validateRequestBody from "../middlewares/validationMiddleware.js";
 import { invoiceSchema } from "../schemas/invoiceSchemas.js";
@@ -26,7 +26,8 @@ router
 router
   .route("/:id")
   .get(getInvoiceById)
-  .put(isAdminMiddleware, validateRequestBody(invoiceSchema), updateInvoice)
-  .delete(isAdminMiddleware, deleteInvoice);
+  .put(isAdminMiddleware, validateRequestBody(invoiceSchema), updateInvoice);
+
+router.patch("/:id/cancel", isAdminMiddleware, cancelInvoice);
 
 export default router;
