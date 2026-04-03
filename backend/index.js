@@ -13,19 +13,17 @@ app.use(express.urlencoded({ extended: true }));
 
 const allowedOrigins = [
   "http://localhost:5173",
-    "https://learningmanagmentsys.netlify.app",
-    "https://lmsdashboard1.netlify.app",
-    // ✅ Add this
-
-  
+  "https://learningmanagmentsys.netlify.app",
+  "https://lmsdashboard1.netlify.app",
+  // ✅ Add this
 ];
 
 app.use(
   cors({
     origin: allowedOrigins, // Allow specific origins
     credentials: true, // Allow cookies if needed
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allow specific HTTP methods
-  })
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"], // Allow specific HTTP methods
+  }),
 );
 
 app.use(cookieParser());
